@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MinesweeperGame.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -9,9 +10,9 @@ using Wintellect.PowerCollections;
 
 namespace MinesweeperGame
 {
-    public class Repository
+    public class Repository : IRepository
     {
-        internal static OrderedMultiDictionary<int, string> GetPlayers(string playerStoreDocumentPath)
+        public  OrderedMultiDictionary<int, string> GetPlayers(string playerStoreDocumentPath)
         {
             var savedPlayers = new OrderedMultiDictionary<int, string>(true);
             var playerDocumentRoot = XDocument.Load(playerStoreDocumentPath).Root;
@@ -34,7 +35,7 @@ namespace MinesweeperGame
             return savedPlayers;
         }
 
-        internal static void AddPlayer(string documenPath, string name, int points)
+        public void AddPlayer(string documenPath, string name, int points)
         {
             var root = XDocument.Load(documenPath).Root;
             root.Add(new XElement("player",
