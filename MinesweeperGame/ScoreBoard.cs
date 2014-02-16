@@ -11,7 +11,7 @@ namespace MinesweeperGame
     using Wintellect.PowerCollections;
 
     /// <summary>
-    /// Represents the results history of the current set of games
+    /// Represents the results history of the current set of games.
     /// </summary>
     public class ScoreBoard
     {

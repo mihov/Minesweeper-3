@@ -19,7 +19,7 @@ namespace MinesweeperGame.UnitTests
         [TestMethod]
         public void TestMethod1()
         {
-            // TODO -> to be implemented
+            // TODO -> to be implemented.
         }
     }
 }
