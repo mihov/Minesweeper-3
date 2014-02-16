@@ -11,9 +11,7 @@ namespace MinesweeperGame
 
     public class MinesInitializer
     {
-        private const int NUMBER_OF_MINES = 15;
-        private const int MINES_FIELD_ROWS = 5;
-        private const int MINES_FIELD_COLS = 10;
+        private ScoreBoard scoreBoard;
 
         private static void Display(string[,] matricaNaMinite, bool boomed)
         {
@@ -108,7 +106,7 @@ namespace MinesweeperGame
             minesCounter = 0;
             revealedCellsCounter = 0;
             isBoomed = false;
-            mines = new string[MINES_FIELD_ROWS, MINES_FIELD_COLS];
+            mines = new string[Extensions.MINES_FIELD_ROWS, Extensions.MINES_FIELD_COLS];
 
             for (int i = 0; i < mines.GetLength(0); i++)
             {
@@ -125,9 +123,8 @@ namespace MinesweeperGame
             Console.WriteLine(startMessage + "\n");
         }
 
-        public void PlayMines()
+        private void StartPlayCycle()
         {
-            ScoreBoard scoreBoard = new ScoreBoard();
             Random randomMines;
             string[,] minichki;
             int row;
@@ -135,132 +132,105 @@ namespace MinesweeperGame
             int minesCounter;
             int revealedCellsCounter;
             bool isBoomed;
-        // oxo glei glei
-        // i go to si imam :)
-        start:
-            Zapochni(out minichki, out row, out col,
-                out isBoomed, out minesCounter, out randomMines, out revealedCellsCounter);
 
-            FillWithRandomMines(minichki, randomMines);
+
+            Zapochni(out minichki, out row, out col, out isBoomed, out minesCounter, out randomMines, out revealedCellsCounter);
+
+            Extensions.FillWithRandomMines(minichki, randomMines);
 
             PrintInitialMessage();
 
             while (true)
             {
                 Display(minichki, isBoomed);
-            enterRowCol:
-                Console.Write("Enter row and column: ");
-                string line = Console.ReadLine();
-                line = line.Trim();
+                enterRowColInput(ref randomMines, ref minichki, ref row, ref col, ref minesCounter, ref revealedCellsCounter, ref isBoomed);
+                 
+            }
+        }
 
-                if (IsMoveEntered(line))
+        private void enterRowColInput(ref Random randomMines, ref string[,] minichki, ref int row, ref int col, ref int minesCounter, ref int revealedCellsCounter, ref bool isBoomed)
+        {
+            Console.Write("Enter row and column: ");
+            string line = Console.ReadLine();
+            line = line.Trim();
+
+            if (Extensions.IsMoveEntered(line))
+            {
+                string[] inputParams = line.Split();
+                row = int.Parse(inputParams[0]);
+                col = int.Parse(inputParams[1]);
+
+                if ((row >= 0) && (row < minichki.GetLength(0)) && (col >= 0) && (col < minichki.GetLength(1)))
                 {
-                    string[] inputParams = line.Split();
-                    row = int.Parse(inputParams[0]);
-                    col = int.Parse(inputParams[1]);
-
-                    if ((row >= 0) && (row < minichki.GetLength(0)) && (col >= 0) && (col < minichki.GetLength(1)))
+                    bool hasBoomedMine = Boom(minichki, row, col);
+                    if (hasBoomedMine)
                     {
-                        bool hasBoomedMine = Boom(minichki, row, col);
-                        if (hasBoomedMine)
-                        {
-                            isBoomed = true;
-                            Display(minichki, isBoomed);
-                            Console.Write("\nBooom! You are killed by a mine! ");
-                            Console.WriteLine("You revealed {0} cells without mines.", revealedCellsCounter);
+                        isBoomed = true;
+                        Display(minichki, isBoomed);
+                        Console.Write("\nBooom! You are killed by a mine! ");
+                        Console.WriteLine("You revealed {0} cells without mines.", revealedCellsCounter);
 
-                            Console.Write("Please enter your name for the top scoreboard: ");
-                            string currentPlayerName = Console.ReadLine();
-                            scoreBoard.AddPlayer(currentPlayerName, revealedCellsCounter);
+                        Console.Write("Please enter your name for the top scoreboard: ");
+                        string currentPlayerName = Console.ReadLine();
+                        scoreBoard.AddPlayer(currentPlayerName, revealedCellsCounter);
 
-                            Console.WriteLine();
-                            goto start;
-                        }
-                        bool winner = PichLiSi(minichki, minesCounter);
-                        if (winner)
-                        {
-                            Console.WriteLine("Congratulations! You are the WINNER!\n");
-
-                            Console.Write("Please enter your name for the top scoreboard: ");
-                            string currentPlayerName = Console.ReadLine();
-                            scoreBoard.AddPlayer(currentPlayerName, revealedCellsCounter);
-
-                            Console.WriteLine();
-                            goto start;
-                        }
-                        revealedCellsCounter++;
+                        Console.WriteLine();
+                        StartPlayCycle();
                     }
-                    else
+                    bool winner = PichLiSi(minichki, minesCounter);
+                    if (winner)
                     {
-                        Console.WriteLine("Enter valid Row/Col!\n");
+                        Console.WriteLine("Congratulations! You are the WINNER!\n");
+
+                        Console.Write("Please enter your name for the top scoreboard: ");
+                        string currentPlayerName = Console.ReadLine();
+                        scoreBoard.AddPlayer(currentPlayerName, revealedCellsCounter);
+
+                        Console.WriteLine();
+                        StartPlayCycle();
                     }
-                }
-                else if (proverka(line))
-                {
-                    switch (line)
-                    {
-                        case "top":
-                            {
-                                scoreBoard.PrintScoreBoard();
-                                goto enterRowCol;
-                            }
-                        case "exit":
-                            {
-                                Console.WriteLine("\nGood bye!\n");
-                                Environment.Exit(0);
-                                break;
-                            }
-                        case "restart":
-                            {
-                                Console.WriteLine();
-                                goto start;
-                            }
-                    }
+                    revealedCellsCounter++;
                 }
                 else
                 {
-                    Console.WriteLine("Invalid Command!");
+                    Console.WriteLine("Enter valid Row/Col!\n");
                 }
             }
-        }
-        private static bool proverka(string line)
-        {
-            if (line.Equals("top") || line.Equals("restart") || line.Equals("exit"))
+            else if (Extensions.proverka(line))
             {
-                return true;
+                if (line == "top")
+                {
+                    scoreBoard.PrintScoreBoard();
+                    enterRowColInput(ref randomMines, ref minichki, ref row, ref col, ref minesCounter, ref revealedCellsCounter, ref isBoomed);
+                }
+                else if (line == "exit")
+                {
+                    Console.WriteLine("\nGood bye!\n");
+                    Environment.Exit(0);
+                }
+                else if (line == "restart")
+                {
+                    Console.WriteLine();
+                    StartPlayCycle();
+                }
+                else
+                {
+                    // TODO exception can be catched here or in the aboce check
+                    throw new IndexOutOfRangeException();
+                }
             }
             else
-                return false;
+            {
+                Console.WriteLine("Invalid Command!");
+            }
         }
-        private static bool IsMoveEntered(string line)
+
+        public void PlayMines()
         {
-            bool validMove = false;
-            try
-            {
-                string[] inputParams = line.Split();
-                int row = int.Parse(inputParams[0]);
-                int col = int.Parse(inputParams[1]);
-                validMove = true;
-            }
-            catch
-            {
-                validMove = false;
-            }
-            return validMove;
+            scoreBoard = new ScoreBoard();
+
+            StartPlayCycle();            
         }
-        private static void FillWithRandomMines(string[,] mines, Random randomMines)
-        {
-            int minesCounter = 0;
-            while (minesCounter < NUMBER_OF_MINES)
-            {
-                int randomRow = randomMines.Next(0, 5);
-                int randomCol = randomMines.Next(0, 10);
-                if (mines[randomRow, randomCol] == "")
-                {
-                    mines[randomRow, randomCol] += "*";
-                    minesCounter++;
-                }
-            }
-        }
+      
     }
 }

@@ -47,18 +47,17 @@ namespace MinesweeperGame
         /// <param name="playerName">The player name</param>
         /// <param name="playerScore">The player current score</param>
         /// <exception cref="System.ArgumentNullException">Thrown when <paramref name="playerName"/> is null.</exception>
-        /// <exception cref="System.ArgumentNullException">Thrown when <paramref name="playerScore"/> is null.</exception>
+        /// <exception cref="System.ArgumentException">Thrown when <paramref name="playerScore"/> less than zerol.</exception>
         public void AddPlayer(string playerName, int playerScore)
         {
             if (playerName == null)
             {
                 throw new ArgumentNullException("playerName", "The player name cannot be null.");
             }
-            if (playerScore == null)
+            if (playerScore < 0)
             {
-                throw new ArgumentNullException("playerScore", "The player score cannot be null.");
+                throw new ArgumentException("playerScore", "The player score cannot ness than zero.");
             }
-            // TODO can be added more exception handling
 
             if (!scoreBoard.ContainsKey(playerScore))
             {

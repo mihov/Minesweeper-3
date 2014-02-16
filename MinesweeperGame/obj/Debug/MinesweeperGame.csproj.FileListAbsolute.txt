@@ -1,7 +1,7 @@
-C:\Users\Plamen\Documents\GitHub\Minesweeper-3\MinesweeperGame\bin\Debug\MinesweeperGame.dll
-C:\Users\Plamen\Documents\GitHub\Minesweeper-3\MinesweeperGame\bin\Debug\MinesweeperGame.pdb
-C:\Users\Plamen\Documents\GitHub\Minesweeper-3\MinesweeperGame\bin\Debug\PowerCollections.dll
-C:\Users\Plamen\Documents\GitHub\Minesweeper-3\MinesweeperGame\bin\Debug\PowerCollections.xml
-C:\Users\Plamen\Documents\GitHub\Minesweeper-3\MinesweeperGame\obj\Debug\MinesweeperGame.csprojResolveAssemblyReference.cache
-C:\Users\Plamen\Documents\GitHub\Minesweeper-3\MinesweeperGame\obj\Debug\MinesweeperGame.dll
-C:\Users\Plamen\Documents\GitHub\Minesweeper-3\MinesweeperGame\obj\Debug\MinesweeperGame.pdb
+c:\users\plamen\documents\visual studio 2013\Projects\WindowsMinesweeper\MinesweeperGame\bin\Debug\MinesweeperGame.dll
+c:\users\plamen\documents\visual studio 2013\Projects\WindowsMinesweeper\MinesweeperGame\bin\Debug\MinesweeperGame.pdb
+c:\users\plamen\documents\visual studio 2013\Projects\WindowsMinesweeper\MinesweeperGame\bin\Debug\PowerCollections.dll
+c:\users\plamen\documents\visual studio 2013\Projects\WindowsMinesweeper\MinesweeperGame\bin\Debug\PowerCollections.xml
+c:\users\plamen\documents\visual studio 2013\Projects\WindowsMinesweeper\MinesweeperGame\obj\Debug\MinesweeperGame.csprojResolveAssemblyReference.cache
+c:\users\plamen\documents\visual studio 2013\Projects\WindowsMinesweeper\MinesweeperGame\obj\Debug\MinesweeperGame.dll
+c:\users\plamen\documents\visual studio 2013\Projects\WindowsMinesweeper\MinesweeperGame\obj\Debug\MinesweeperGame.pdb

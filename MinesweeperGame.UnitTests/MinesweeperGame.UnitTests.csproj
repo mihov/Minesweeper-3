@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{65EA9C5D-3ECC-4FA1-9BB2-8131549A5B0A}</ProjectGuid>
+    <ProjectGuid>{BA3316A0-CC34-4842-B619-94B88CA06678}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MinesweeperGame.UnitTests</RootNamespace>
@@ -50,12 +50,13 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="MinesInitializerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScoreBoardTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MinesweeperGame\MinesweeperGame.csproj">
-      <Project>{93048154-c058-45dc-a299-a18069afbb1a}</Project>
+    <ProjectReference Include="..\MinesweeperGame\MinesweeperGame.csproj">
+      <Project>{175f7803-074d-4ec7-b77c-708b75ce8bc1}</Project>
       <Name>MinesweeperGame</Name>
     </ProjectReference>
   </ItemGroup>

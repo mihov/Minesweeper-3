@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MinesweeperGame.UnitTests")]
+[assembly: AssemblyTitle("MinesweeperGame.Demo")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MinesweeperGame.UnitTests")]
+[assembly: AssemblyProduct("MinesweeperGame.Demo")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("a53a5d84-2132-4eca-9f44-9ec316185993")]
+[assembly: Guid("36a84acb-5055-4426-b1fd-cf9479a76209")]
 
 // Version information for an assembly consists of the following four values:
 //
