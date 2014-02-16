@@ -44,7 +44,6 @@
   <ItemGroup>
     <Compile Include="ConsoleDrawer\ConsoleDrawer.cs" />
     <Compile Include="ConsoleInput\ConsoleInput.cs" />
-    <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="MediatorExtensions.cs" />
     <Compile Include="Interfaces\IUserInput.cs" />
     <Compile Include="Interfaces\IDrawer.cs" />
