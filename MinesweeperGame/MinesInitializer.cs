@@ -1,11 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿// ********************************
+// <copyright file="MinesInitializer.cs" company="Telerik Academy">
+// Copyright (©) 2014 Telerik Academy. All rights reserved.
+// </copyright>
+//
+// ********************************
 namespace MinesweeperGame
 {
+    using System;
+    using System.Text;
+
     public class MinesInitializer
     {
         private const int NUMBER_OF_MINES = 15;

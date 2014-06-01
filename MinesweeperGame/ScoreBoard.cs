@@ -1,24 +1,65 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Wintellect.PowerCollections;
-
+﻿// ********************************
+// <copyright file="ScoreBoard.cs" company="Telerik Academy">
+// Copyright (©) 2014 Telerik Academy. All rights reserved.
+// </copyright>
+//
+// ********************************
 namespace MinesweeperGame
 {
-    class ScoreBoard
+    using System;
+    using System.Linq;
+    using Wintellect.PowerCollections;
+
+    /// <summary>
+    /// Represents the results history of the current set of games
+    /// </summary>
+    public class ScoreBoard
     {
-        // - moga da izpolzvam OrderedMultiDictionary!
-        // - xaxax ne sym li gyzar? a?
+        #region Private Fields
+
+        /// <summary>
+        /// The main container of the results rank list
+        /// </summary>
+        /// <param type="int">Score</param>
+        /// <param type="string">Player name</param>
         private OrderedMultiDictionary<int, string> scoreBoard;
 
+        #endregion Private Fields
+
+        #region Constructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ScoreBoard"/> class.
+        /// Initializes a new instance of the <see cref="scoreBoard"/> OrderedMultiDictionary.
+        /// </summary>
         public ScoreBoard()
         {
             this.scoreBoard = new OrderedMultiDictionary<int, string>(true);
         }
+
+        #endregion Constructors
+
+        #region Public Methods
+
+        /// <summary>
+        /// Adds a player to the score list.
+        /// </summary>
+        /// <param name="playerName">The player name</param>
+        /// <param name="playerScore">The player current score</param>
+        /// <exception cref="System.ArgumentNullException">Thrown when <paramref name="playerName"/> is null.</exception>
+        /// <exception cref="System.ArgumentNullException">Thrown when <paramref name="playerScore"/> is null.</exception>
         public void AddPlayer(string playerName, int playerScore)
         {
+            if (playerName == null)
+            {
+                throw new ArgumentNullException("playerName", "The player name cannot be null.");
+            }
+            if (playerScore == null)
+            {
+                throw new ArgumentNullException("playerScore", "The player score cannot be null.");
+            }
+            // TODO can be added more exception handling
+
             if (!scoreBoard.ContainsKey(playerScore))
             {
                 scoreBoard.Add(playerScore, playerName);
@@ -28,6 +69,10 @@ namespace MinesweeperGame
                 scoreBoard[playerScore].Add(playerName);
             }
         }
+
+        /// <summary>
+        /// Prints the score to the console
+        /// </summary>
         public void PrintScoreBoard()
         {
             bool FirstFive = false;
@@ -41,18 +86,13 @@ namespace MinesweeperGame
             else
             {
                 Console.WriteLine("Scoreboard:");
-                //tui e magiq!
-                //kvo da se prai - pone bachka
+
                 foreach (int key in this.scoreBoard.Keys.OrderByDescending(obj => obj))
                 {
-
-
                     foreach (string person in this.scoreBoard[key])
                     {
                         if (currentCounter < 6)
-                        //nedei se zamislq za tui 6!
-                        //vqrno e i nqma kak da stane inache
-                        //moje da go priemesh kato vid kod
+
                         {
                             Console.WriteLine("{0}. {1} --> {2} cells", currentCounter, person, key);
                             currentCounter++;
@@ -68,12 +108,10 @@ namespace MinesweeperGame
                         break;
                     }
                 }
-
-
             }
             Console.WriteLine();
         }
 
-
+        #endregion Public Methods
     }
 }
