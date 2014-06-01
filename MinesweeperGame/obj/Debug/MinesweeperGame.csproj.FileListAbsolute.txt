@@ -1,0 +1,7 @@
+C:\Users\Plamen\Documents\GitHub\Minesweeper-3\MinesweeperGame\bin\Debug\MinesweeperGame.dll
+C:\Users\Plamen\Documents\GitHub\Minesweeper-3\MinesweeperGame\bin\Debug\MinesweeperGame.pdb
+C:\Users\Plamen\Documents\GitHub\Minesweeper-3\MinesweeperGame\bin\Debug\PowerCollections.dll
+C:\Users\Plamen\Documents\GitHub\Minesweeper-3\MinesweeperGame\bin\Debug\PowerCollections.xml
+C:\Users\Plamen\Documents\GitHub\Minesweeper-3\MinesweeperGame\obj\Debug\MinesweeperGame.csprojResolveAssemblyReference.cache
+C:\Users\Plamen\Documents\GitHub\Minesweeper-3\MinesweeperGame\obj\Debug\MinesweeperGame.dll
+C:\Users\Plamen\Documents\GitHub\Minesweeper-3\MinesweeperGame\obj\Debug\MinesweeperGame.pdb

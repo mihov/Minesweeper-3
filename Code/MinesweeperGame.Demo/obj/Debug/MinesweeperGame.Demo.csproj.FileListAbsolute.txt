@@ -1,0 +1,10 @@
+C:\Users\Plamen\Documents\GitHub\Minesweeper-3\Code\MinesweeperGame.Demo\bin\Debug\MinesweeperGame.Demo.exe.config
+C:\Users\Plamen\Documents\GitHub\Minesweeper-3\Code\MinesweeperGame.Demo\bin\Debug\MinesweeperGame.Demo.exe
+C:\Users\Plamen\Documents\GitHub\Minesweeper-3\Code\MinesweeperGame.Demo\bin\Debug\MinesweeperGame.Demo.pdb
+C:\Users\Plamen\Documents\GitHub\Minesweeper-3\Code\MinesweeperGame.Demo\bin\Debug\MinesweeperGame.dll
+C:\Users\Plamen\Documents\GitHub\Minesweeper-3\Code\MinesweeperGame.Demo\bin\Debug\PowerCollections.dll
+C:\Users\Plamen\Documents\GitHub\Minesweeper-3\Code\MinesweeperGame.Demo\bin\Debug\MinesweeperGame.pdb
+C:\Users\Plamen\Documents\GitHub\Minesweeper-3\Code\MinesweeperGame.Demo\bin\Debug\PowerCollections.xml
+C:\Users\Plamen\Documents\GitHub\Minesweeper-3\Code\MinesweeperGame.Demo\obj\Debug\MinesweeperGame.Demo.csprojResolveAssemblyReference.cache
+C:\Users\Plamen\Documents\GitHub\Minesweeper-3\Code\MinesweeperGame.Demo\obj\Debug\MinesweeperGame.Demo.exe
+C:\Users\Plamen\Documents\GitHub\Minesweeper-3\Code\MinesweeperGame.Demo\obj\Debug\MinesweeperGame.Demo.pdb

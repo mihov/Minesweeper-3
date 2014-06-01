@@ -1,0 +1,6 @@
+C:\Users\Plamen\Documents\GitHub\Minesweeper-3\Code\bin\Debug\Minesweeper.exe
+C:\Users\Plamen\Documents\GitHub\Minesweeper-3\Code\bin\Debug\Minesweeper.pdb
+C:\Users\Plamen\Documents\GitHub\Minesweeper-3\Code\bin\Debug\PowerCollections.dll
+C:\Users\Plamen\Documents\GitHub\Minesweeper-3\Code\obj\x86\Debug\KPKProekt.csprojResolveAssemblyReference.cache
+C:\Users\Plamen\Documents\GitHub\Minesweeper-3\Code\obj\x86\Debug\Minesweeper.exe
+C:\Users\Plamen\Documents\GitHub\Minesweeper-3\Code\obj\x86\Debug\Minesweeper.pdb
