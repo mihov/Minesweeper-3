@@ -10,7 +10,7 @@ namespace MinesweeperGame.Demo
     using MinesweeperGame;
 
     /// <summary>
-    /// Used to start the Minesweeper 3 Game.
+    /// Used to start the Minesweeper 3 Game
     /// </summary>
     public class MainDemo
     {

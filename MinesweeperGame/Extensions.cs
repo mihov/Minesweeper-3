@@ -1,4 +1,11 @@
-﻿using System;
+﻿// ********************************
+// <copyright file="Extensions.cs" company="Telerik Academy">
+// Copyright (©) 2014 Telerik Academy. All rights reserved.
+// </copyright>
+//
+// ********************************
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
