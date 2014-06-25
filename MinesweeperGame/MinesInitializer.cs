@@ -38,7 +38,7 @@ namespace MinesweeperGame
             bool isBoomed;
 
 
-            InitializerExtensions.Zapochni(out minichki, out row, out col, out isBoomed, out minesCounter, out randomMines, out revealedCellsCounter);
+            InitializerExtensions.StartGame(out minichki, out row, out col, out isBoomed, out minesCounter, out randomMines, out revealedCellsCounter);
 
             InitializerExtensions.FillWithRandomMines(minichki, randomMines);
 
@@ -69,7 +69,7 @@ namespace MinesweeperGame
 
                 if ((row >= 0) && (row < minichki.GetLength(0)) && (col >= 0) && (col < minichki.GetLength(1)))
                 {
-                    bool hasBoomedMine = InitializerExtensions.Boom(minichki, row, col);
+                    bool hasBoomedMine = InitializerExtensions.HasExploded(minichki, row, col);
                     if (hasBoomedMine)
                     {
                         isBoomed = true;
@@ -84,7 +84,7 @@ namespace MinesweeperGame
                         Console.WriteLine();
                         StartPlayCycle();
                     }
-                    bool winner = InitializerExtensions.PichLiSi(minichki, minesCounter);
+                    bool winner = InitializerExtensions.IsWinner(minichki, minesCounter);
                     if (winner)
                     {
                         Console.WriteLine("Congratulations! You are the WINNER!\n");
@@ -103,7 +103,7 @@ namespace MinesweeperGame
                     Console.WriteLine("Enter valid Row/Col!\n");
                 }
             }
-            else if (InitializerExtensions.proverka(line))
+            else if (InitializerExtensions.CheckForGameEnd(line))
             {
                 if (line == "top")
                 {

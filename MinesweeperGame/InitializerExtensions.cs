@@ -21,15 +21,18 @@ namespace MinesweeperGame
         internal static int MINES_FIELD_ROWS = 5;
         internal static int MINES_FIELD_COLS = 10;
 
-        internal static bool proverka(string line)
+        internal static bool CheckForGameEnd(string line)
         {
             if (line.Equals("top") || line.Equals("restart") || line.Equals("exit"))
             {
                 return true;
             }
             else
+            {
                 return false;
+            }
         }
+
         internal static bool IsMoveEntered(string line)
         {
             bool validMove = false;
@@ -44,8 +47,10 @@ namespace MinesweeperGame
             {
                 validMove = false;
             }
+
             return validMove;
         }
+
         internal static void FillWithRandomMines(string[,] mines, Random randomMines)
         {
             int minesCounter = 0;
@@ -61,70 +66,75 @@ namespace MinesweeperGame
             }
         }
 
-        internal static void Display(string[,] matricaNaMinite, bool boomed)
+        internal static void Display(string[,] minesMatrix, bool boomed)
         {
             Console.WriteLine();
             Console.WriteLine("     0 1 2 3 4 5 6 7 8 9");
             Console.WriteLine("   ---------------------");
-            for (int i = 0; i < matricaNaMinite.GetLength(0); i++)
+            for (int i = 0; i < minesMatrix.GetLength(0); i++)
             {
                 Console.Write("{0} | ", i);
-                for (int j = 0; j < matricaNaMinite.GetLength(1); j++)
+                for (int j = 0; j < minesMatrix.GetLength(1); j++)
                 {
-                    if (!(boomed) && ((matricaNaMinite[i, j] == "") || (matricaNaMinite[i, j] == "*")))
+                    if (!(boomed) && ((minesMatrix[i, j] == "") || (minesMatrix[i, j] == "*")))
                     {
                         Console.Write(" ?");
                     }
-                    if (!(boomed) && (matricaNaMinite[i, j] != "") && (matricaNaMinite[i, j] != "*"))
+                    if (!(boomed) && (minesMatrix[i, j] != "") && (minesMatrix[i, j] != "*"))
                     {
-                        Console.Write(" {0}", matricaNaMinite[i, j]);
+                        Console.Write(" {0}", minesMatrix[i, j]);
                     }
-                    if ((boomed) && (matricaNaMinite[i, j] == ""))
+                    if ((boomed) && (minesMatrix[i, j] == ""))
                     {
                         Console.Write(" -");
                     }
-                    if ((boomed) && (matricaNaMinite[i, j] != ""))
+                    if ((boomed) && (minesMatrix[i, j] != ""))
                     {
-                        Console.Write(" {0}", matricaNaMinite[i, j]);
+                        Console.Write(" {0}", minesMatrix[i, j]);
                     }
 
                 }
                 Console.WriteLine("|");
             }
+
             Console.WriteLine("   ---------------------");
         }
-        internal static bool Boom(string[,] matrica, int minesRow, int minesCol)
+
+        internal static bool HasExploded(string[,] matrix, int minesRow, int minesCol)
         {
             bool isKilled = false;
             int[] dRow = { 1, 1, 1, 0, -1, -1, -1, 0 };
             int[] dCol = { 1, 0, -1, -1, -1, 0, 1, 1 };
             int minesCounter = 0;
-            if (matrica[minesRow, minesCol] == "*")
+            if (matrix[minesRow, minesCol] == "*")
             {
                 isKilled = true;
             }
-            if ((matrica[minesRow, minesCol] != "") && (matrica[minesRow, minesCol] != "*"))
+            if ((matrix[minesRow, minesCol] != "") && (matrix[minesRow, minesCol] != "*"))
             {
                 Console.WriteLine("Illegal Move!");
             }
-            if (matrica[minesRow, minesCol] == "")
+            if (matrix[minesRow, minesCol] == "")
             {
                 for (int direction = 0; direction < 8; direction++)
                 {
                     int newRow = dRow[direction] + minesRow;
                     int newCol = dCol[direction] + minesCol;
-                    if ((newRow >= 0) && (newRow < matrica.GetLength(0)) &&
-                        (newCol >= 0) && (newCol < matrica.GetLength(1)) &&
-                        (matrica[newRow, newCol] == "*"))
+                    if ((newRow >= 0) && (newRow < matrix.GetLength(0)) &&
+                        (newCol >= 0) && (newCol < matrix.GetLength(1)) &&
+                        (matrix[newRow, newCol] == "*"))
                     {
                         minesCounter++;
                     }
                 }
-                matrica[minesRow, minesCol] += Convert.ToString(minesCounter);
+
+                matrix[minesRow, minesCol] += Convert.ToString(minesCounter);
             }
+
             return isKilled;
         }
-        internal static bool PichLiSi(string[,] matrix, int cntMines)
+
+        internal static bool IsWinner(string[,] matrix, int minesCount)
         {
             bool isWinner = false;
             int counter = 0;
@@ -137,15 +147,17 @@ namespace MinesweeperGame
                         counter++;
                     }
                 }
-
             }
-            if (counter == matrix.Length - cntMines)
+
+            if (counter == matrix.Length - minesCount)
             {
                 isWinner = true;
             }
+
             return isWinner;
         }
-        internal static void Zapochni(out string[,] mines, out int row,
+
+        internal static void StartGame(out string[,] mines, out int row,
             out int col, out bool isBoomed, out int minesCounter, out Random randomMines, out int revealedCellsCounter)
         {
             randomMines = new Random();
