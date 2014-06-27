@@ -30,7 +30,7 @@ namespace MinesweeperGame
         private void StartPlayCycle()
         {
             Random randomMines;
-            string[,] minichki;
+            string[,] mines;
             int row;
             int col;
             int minesCounter;
@@ -38,16 +38,16 @@ namespace MinesweeperGame
             bool isBoomed;
 
 
-            InitializerExtensions.StartGame(out minichki, out row, out col, out isBoomed, out minesCounter, out randomMines, out revealedCellsCounter);
+            InitializerExtensions.StartGame(out mines, out row, out col, out isBoomed, out minesCounter, out randomMines, out revealedCellsCounter);
 
-            InitializerExtensions.FillWithRandomMines(minichki, randomMines);
+            InitializerExtensions.FillWithRandomMines(mines, randomMines);
 
             InitializerExtensions.PrintInitialMessage();
 
             while (true)
             {
-                InitializerExtensions.Display(minichki, isBoomed);
-                enterRowColInput(ref randomMines, ref minichki, ref row, ref col, ref minesCounter, ref revealedCellsCounter, ref isBoomed);              
+                InitializerExtensions.Display(mines, isBoomed);
+                enterRowColInput(ref randomMines, ref mines, ref row, ref col, ref minesCounter, ref revealedCellsCounter, ref isBoomed);              
             }
         }
 
@@ -55,7 +55,7 @@ namespace MinesweeperGame
         /// Called by <see cref="StartPlayCycle"/> method
         /// Checks the current field cell, valud invalid, bomb or empty field
         /// </summary>
-        private void enterRowColInput(ref Random randomMines, ref string[,] minichki, ref int row, ref int col, ref int minesCounter, ref int revealedCellsCounter, ref bool isBoomed)
+        private void enterRowColInput(ref Random randomMines, ref string[,] mines, ref int row, ref int col, ref int minesCounter, ref int revealedCellsCounter, ref bool isBoomed)
         {
             Console.Write("Enter row and column: ");
             string line = Console.ReadLine();
@@ -67,13 +67,13 @@ namespace MinesweeperGame
                 row = int.Parse(inputParams[0]);
                 col = int.Parse(inputParams[1]);
 
-                if ((row >= 0) && (row < minichki.GetLength(0)) && (col >= 0) && (col < minichki.GetLength(1)))
+                if ((row >= 0) && (row < mines.GetLength(0)) && (col >= 0) && (col < mines.GetLength(1)))
                 {
-                    bool hasBoomedMine = InitializerExtensions.HasExploded(minichki, row, col);
+                    bool hasBoomedMine = InitializerExtensions.HasExploded(mines, row, col);
                     if (hasBoomedMine)
                     {
                         isBoomed = true;
-                        InitializerExtensions.Display(minichki, isBoomed);
+                        InitializerExtensions.Display(mines, isBoomed);
                         Console.Write("\nBooom! You are killed by a mine! ");
                         Console.WriteLine("You revealed {0} cells without mines.", revealedCellsCounter);
 
@@ -84,7 +84,7 @@ namespace MinesweeperGame
                         Console.WriteLine();
                         StartPlayCycle();
                     }
-                    bool winner = InitializerExtensions.IsWinner(minichki, minesCounter);
+                    bool winner = InitializerExtensions.IsWinner(mines, minesCounter);
                     if (winner)
                     {
                         Console.WriteLine("Congratulations! You are the WINNER!\n");
@@ -108,7 +108,7 @@ namespace MinesweeperGame
                 if (line == "top")
                 {
                     scoreBoard.PrintScoreBoard();
-                    enterRowColInput(ref randomMines, ref minichki, ref row, ref col, ref minesCounter, ref revealedCellsCounter, ref isBoomed);
+                    enterRowColInput(ref randomMines, ref mines, ref row, ref col, ref minesCounter, ref revealedCellsCounter, ref isBoomed);
                 }
                 else if (line == "exit")
                 {
@@ -122,7 +122,7 @@ namespace MinesweeperGame
                 }
                 else
                 {
-                    // TODO exception can be catched here or in the aboce check
+                    // TODO exception can be catched here or in the above check
                     throw new IndexOutOfRangeException();
                 }
             }

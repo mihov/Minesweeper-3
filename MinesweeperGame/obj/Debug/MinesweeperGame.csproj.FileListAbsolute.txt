@@ -12,3 +12,10 @@ C:\Users\Plamen\Documents\GitHub\Minesweeper-3\MinesweeperGame\bin\Debug\Mineswe
 C:\Users\Plamen\Documents\GitHub\Minesweeper-3\MinesweeperGame\bin\Debug\PowerCollections.dll
 C:\Users\Plamen\Documents\GitHub\Minesweeper-3\MinesweeperGame\bin\Debug\PowerCollections.xml
 C:\Users\Plamen\Documents\GitHub\Minesweeper-3\MinesweeperGame\obj\Debug\MinesweeperGame.pdb
+D:\Telerik\TeamWorks\KPKTeamWork\MinesweeperGame\bin\Debug\MinesweeperGame.dll
+D:\Telerik\TeamWorks\KPKTeamWork\MinesweeperGame\bin\Debug\MinesweeperGame.pdb
+D:\Telerik\TeamWorks\KPKTeamWork\MinesweeperGame\bin\Debug\PowerCollections.dll
+D:\Telerik\TeamWorks\KPKTeamWork\MinesweeperGame\bin\Debug\PowerCollections.xml
+D:\Telerik\TeamWorks\KPKTeamWork\MinesweeperGame\obj\Debug\MinesweeperGame.csprojResolveAssemblyReference.cache
+D:\Telerik\TeamWorks\KPKTeamWork\MinesweeperGame\obj\Debug\MinesweeperGame.dll
+D:\Telerik\TeamWorks\KPKTeamWork\MinesweeperGame\obj\Debug\MinesweeperGame.pdb
