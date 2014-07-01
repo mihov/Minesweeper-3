@@ -34,21 +34,28 @@ namespace MinesweeperGame
 
         public static bool IsMoveEntered(string line)
         {
-            bool validMove = false;
-            try
+            if (string.IsNullOrWhiteSpace(line))
             {
-                // TODO: Check line correctly row >= 0, col >= 0. Remove try...catch block.
-                string[] inputParams = line.Split();
-                int row = int.Parse(inputParams[0]);
-                int col = int.Parse(inputParams[1]);
-                validMove = true;
-            }
-            catch
-            {
-                validMove = false;
+                return false;
             }
 
-            return validMove;
+            string[] inputParams = line.Split();
+            if (inputParams.Length != 2)
+            {
+                return false;
+            }
+
+            int row;
+            bool isRowParsed = int.TryParse(inputParams[0], out row);
+            int col;
+            bool isColParsed = int.TryParse(inputParams[1], out col);
+            if (isRowParsed && row >= 0 &&
+                isColParsed && col >= 0)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public static void FillWithRandomMines(string[,] mines, Random randomMines)
