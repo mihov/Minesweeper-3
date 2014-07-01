@@ -12,16 +12,15 @@ namespace MinesweeperGame
     /// <summary>
     /// Represents the static methods, variables and constants which support the work of <see cref="MinesInitializer"/> class
     /// </summary>
-    
-    // TODO change variables names
-    // TODO provide comments
     public static class InitializerExtensions
     {
-        internal static int NUMBER_OF_MINES = 15;
-        internal static int MINES_FIELD_ROWS = 5;
-        internal static int MINES_FIELD_COLS = 10;
+        // TODO change variables names
+        // TODO provide comments
+        private const int NumberOFMines = 15;
+        private const int MinesFieldRows = 5;
+        private const int MinesFieldCols = 10;
 
-        internal static bool CheckForGameEnd(string line)
+        public static bool CheckForGameEnd(string line)
         {
             if (line.Equals("top") || line.Equals("restart") || line.Equals("exit"))
             {
@@ -33,11 +32,12 @@ namespace MinesweeperGame
             }
         }
 
-        internal static bool IsMoveEntered(string line)
+        public static bool IsMoveEntered(string line)
         {
             bool validMove = false;
             try
             {
+                // TODO: Check line correctly
                 string[] inputParams = line.Split();
                 int row = int.Parse(inputParams[0]);
                 int col = int.Parse(inputParams[1]);
@@ -51,14 +51,14 @@ namespace MinesweeperGame
             return validMove;
         }
 
-        internal static void FillWithRandomMines(string[,] mines, Random randomMines)
+        public static void FillWithRandomMines(string[,] mines, Random randomMines)
         {
             int minesCounter = 0;
-            while (minesCounter < NUMBER_OF_MINES)
+            while (minesCounter < NumberOFMines)
             {
                 int randomRow = randomMines.Next(0, 5);
                 int randomCol = randomMines.Next(0, 10);
-                if (mines[randomRow, randomCol] == "")
+                if (mines[randomRow, randomCol] == string.Empty)
                 {
                     mines[randomRow, randomCol] += "*";
                     minesCounter++;
@@ -66,7 +66,7 @@ namespace MinesweeperGame
             }
         }
 
-        internal static void Display(string[,] minesMatrix, bool boomed)
+        public static void Display(string[,] minesMatrix, bool boomed)
         {
             Console.WriteLine();
             Console.WriteLine("     0 1 2 3 4 5 6 7 8 9");
@@ -76,50 +76,55 @@ namespace MinesweeperGame
                 Console.Write("{0} | ", i);
                 for (int j = 0; j < minesMatrix.GetLength(1); j++)
                 {
-                    if (!(boomed) && ((minesMatrix[i, j] == "") || (minesMatrix[i, j] == "*")))
+                    if (!boomed && ((minesMatrix[i, j] == string.Empty) || (minesMatrix[i, j] == "*")))
                     {
                         Console.Write(" ?");
                     }
-                    if (!(boomed) && (minesMatrix[i, j] != "") && (minesMatrix[i, j] != "*"))
-                    {
-                        Console.Write(" {0}", minesMatrix[i, j]);
-                    }
-                    if ((boomed) && (minesMatrix[i, j] == ""))
-                    {
-                        Console.Write(" -");
-                    }
-                    if ((boomed) && (minesMatrix[i, j] != ""))
+
+                    if (!boomed && (minesMatrix[i, j] != string.Empty) && (minesMatrix[i, j] != "*"))
                     {
                         Console.Write(" {0}", minesMatrix[i, j]);
                     }
 
+                    if (boomed && (minesMatrix[i, j] == string.Empty))
+                    {
+                        Console.Write(" -");
+                    }
+
+                    if (boomed && (minesMatrix[i, j] != string.Empty))
+                    {
+                        Console.Write(" {0}", minesMatrix[i, j]);
+                    }
                 }
+
                 Console.WriteLine("|");
             }
 
             Console.WriteLine("   ---------------------");
         }
 
-        internal static bool HasExploded(string[,] matrix, int minesRow, int minesCol)
+        public static bool HasExploded(string[,] matrix, int minesRow, int minesCol)
         {
             bool isKilled = false;
-            int[] dRow = { 1, 1, 1, 0, -1, -1, -1, 0 };
-            int[] dCol = { 1, 0, -1, -1, -1, 0, 1, 1 };
+            int[] directionByRow = { 1, 1, 1, 0, -1, -1, -1, 0 };
+            int[] directionByCol = { 1, 0, -1, -1, -1, 0, 1, 1 };
             int minesCounter = 0;
             if (matrix[minesRow, minesCol] == "*")
             {
                 isKilled = true;
             }
-            if ((matrix[minesRow, minesCol] != "") && (matrix[minesRow, minesCol] != "*"))
+
+            if ((matrix[minesRow, minesCol] != string.Empty) && (matrix[minesRow, minesCol] != "*"))
             {
                 Console.WriteLine("Illegal Move!");
             }
-            if (matrix[minesRow, minesCol] == "")
+
+            if (matrix[minesRow, minesCol] == string.Empty)
             {
                 for (int direction = 0; direction < 8; direction++)
                 {
-                    int newRow = dRow[direction] + minesRow;
-                    int newCol = dCol[direction] + minesCol;
+                    int newRow = directionByRow[direction] + minesRow;
+                    int newCol = directionByCol[direction] + minesCol;
                     if ((newRow >= 0) && (newRow < matrix.GetLength(0)) &&
                         (newCol >= 0) && (newCol < matrix.GetLength(1)) &&
                         (matrix[newRow, newCol] == "*"))
@@ -134,7 +139,7 @@ namespace MinesweeperGame
             return isKilled;
         }
 
-        internal static bool IsWinner(string[,] matrix, int minesCount)
+        public static bool IsWinner(string[,] matrix, int minesCount)
         {
             bool isWinner = false;
             int counter = 0;
@@ -142,7 +147,7 @@ namespace MinesweeperGame
             {
                 for (int j = 0; j < matrix.GetLength(1); j++)
                 {
-                    if ((matrix[i, j] != "") && (matrix[i, j] != "*"))
+                    if ((matrix[i, j] != string.Empty) && (matrix[i, j] != "*"))
                     {
                         counter++;
                     }
@@ -157,8 +162,7 @@ namespace MinesweeperGame
             return isWinner;
         }
 
-        internal static void StartGame(out string[,] mines, out int row,
-            out int col, out bool isBoomed, out int minesCounter, out Random randomMines, out int revealedCellsCounter)
+        public static void StartGame(out string[,] mines, out int row, out int col, out bool isBoomed, out int minesCounter, out Random randomMines, out int revealedCellsCounter)
         {
             randomMines = new Random();
             row = 0;
@@ -166,18 +170,18 @@ namespace MinesweeperGame
             minesCounter = 0;
             revealedCellsCounter = 0;
             isBoomed = false;
-            mines = new string[InitializerExtensions.MINES_FIELD_ROWS, InitializerExtensions.MINES_FIELD_COLS];
+            mines = new string[InitializerExtensions.MinesFieldRows, InitializerExtensions.MinesFieldCols];
 
             for (int i = 0; i < mines.GetLength(0); i++)
             {
                 for (int j = 0; j < mines.GetLength(1); j++)
                 {
-                    mines[i, j] = "";
+                    mines[i, j] = string.Empty;
                 }
             }
         }
 
-        internal static void PrintInitialMessage()
+        public static void PrintInitialMessage()
         {
             string startMessage = @"Welcome to the game “Minesweeper”. Try to reveal all cells without mines. Use   'top' to view the scoreboard, 'restart' to start a new game and 'exit' to quit  the game.";
             Console.WriteLine(startMessage + "\n");

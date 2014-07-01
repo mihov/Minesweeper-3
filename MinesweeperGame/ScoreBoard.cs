@@ -38,25 +38,26 @@ namespace MinesweeperGame
         /// <param name="playerName">The player name</param>
         /// <param name="playerScore">The player current score</param>
         /// <exception cref="System.ArgumentNullException">Thrown when <paramref name="playerName"/> is null.</exception>
-        /// <exception cref="System.ArgumentException">Thrown when <paramref name="playerScore"/> less than zerol.</exception>
+        /// <exception cref="System.ArgumentException">Thrown when <paramref name="playerScore"/> less than zero.</exception>
         public void AddPlayer(string playerName, int playerScore)
         {
             if (playerName == null)
             {
                 throw new ArgumentNullException("playerName", "The player name cannot be null.");
             }
+
             if (playerScore < 0)
             {
-                throw new ArgumentException("playerScore", "The player score cannot ness than zero.");
+                throw new ArgumentException("playerScore", "The player score cannot be less than zero.");
             }
 
-            if (!scoreBoard.ContainsKey(playerScore))
+            if (!this.scoreBoard.ContainsKey(playerScore))
             {
-                scoreBoard.Add(playerScore, playerName);
+                this.scoreBoard.Add(playerScore, playerName);
             }
             else
             {
-                scoreBoard[playerScore].Add(playerName);
+                this.scoreBoard[playerScore].Add(playerName);
             }
         }
 
@@ -65,7 +66,7 @@ namespace MinesweeperGame
         /// </summary>
         public void PrintScoreBoard()
         {
-            bool FirstFive = false;
+            bool firstFive = false;
             int currentCounter = 1;
 
             Console.WriteLine();
@@ -88,16 +89,18 @@ namespace MinesweeperGame
                         }
                         else
                         {
-                            FirstFive = true;
+                            firstFive = true;
                             break;
                         }
                     }
-                    if (FirstFive)
+
+                    if (firstFive)
                     {
                         break;
                     }
                 }
             }
+
             Console.WriteLine();
         }
     }
