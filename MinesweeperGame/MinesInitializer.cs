@@ -20,6 +20,16 @@ namespace MinesweeperGame
         private ScoreBoard scoreBoard;
 
         /// <summary>
+        /// Starting a game play public method
+        /// Initializes new instance of score list
+        /// </summary>
+        public void PlayMines()
+        {
+            this.scoreBoard = new ScoreBoard();
+            this.StartPlayCycle();
+        }
+
+        /// <summary>
         /// Start current game playing cycle
         /// </summary>
         private void StartPlayCycle()
@@ -32,7 +42,6 @@ namespace MinesweeperGame
             int revealedCellsCounter;
             bool isBoomed;
 
-
             InitializerExtensions.StartGame(out mines, out row, out col, out isBoomed, out minesCounter, out randomMines, out revealedCellsCounter);
 
             InitializerExtensions.FillWithRandomMines(mines, randomMines);
@@ -42,15 +51,15 @@ namespace MinesweeperGame
             while (true)
             {
                 InitializerExtensions.Display(mines, isBoomed);
-                enterRowColInput(ref randomMines, ref mines, ref row, ref col, ref minesCounter, ref revealedCellsCounter, ref isBoomed);              
+                this.EnterRowColInput(ref randomMines, ref mines, ref row, ref col, ref minesCounter, ref revealedCellsCounter, ref isBoomed);              
             }
         }
 
         /// <summary>
         /// Called by <see cref="StartPlayCycle"/> method
-        /// Checks the current field cell, valud invalid, bomb or empty field
+        /// Checks the current field cell, valid or invalid, bomb or empty field
         /// </summary>
-        private void enterRowColInput(ref Random randomMines, ref string[,] mines, ref int row, ref int col, ref int minesCounter, ref int revealedCellsCounter, ref bool isBoomed)
+        private void EnterRowColInput(ref Random randomMines, ref string[,] mines, ref int row, ref int col, ref int minesCounter, ref int revealedCellsCounter, ref bool isBoomed)
         {
             Console.Write("Enter row and column: ");
             string line = Console.ReadLine();
@@ -69,16 +78,17 @@ namespace MinesweeperGame
                     {
                         isBoomed = true;
                         InitializerExtensions.Display(mines, isBoomed);
-                        Console.Write("\nBooom! You are killed by a mine! ");
+                        Console.Write("\nBoom! You are killed by a mine! ");
                         Console.WriteLine("You revealed {0} cells without mines.", revealedCellsCounter);
 
                         Console.Write("Please enter your name for the top scoreboard: ");
                         string currentPlayerName = Console.ReadLine();
-                        scoreBoard.AddPlayer(currentPlayerName, revealedCellsCounter);
+                        this.scoreBoard.AddPlayer(currentPlayerName, revealedCellsCounter);
 
                         Console.WriteLine();
-                        StartPlayCycle();
+                        this.StartPlayCycle();
                     }
+
                     bool winner = InitializerExtensions.IsWinner(mines, minesCounter);
                     if (winner)
                     {
@@ -86,11 +96,12 @@ namespace MinesweeperGame
 
                         Console.Write("Please enter your name for the top scoreboard: ");
                         string currentPlayerName = Console.ReadLine();
-                        scoreBoard.AddPlayer(currentPlayerName, revealedCellsCounter);
+                        this.scoreBoard.AddPlayer(currentPlayerName, revealedCellsCounter);
 
                         Console.WriteLine();
-                        StartPlayCycle();
+                        this.StartPlayCycle();
                     }
+
                     revealedCellsCounter++;
                 }
                 else
@@ -102,8 +113,8 @@ namespace MinesweeperGame
             {
                 if (line == "top")
                 {
-                    scoreBoard.PrintScoreBoard();
-                    enterRowColInput(ref randomMines, ref mines, ref row, ref col, ref minesCounter, ref revealedCellsCounter, ref isBoomed);
+                    this.scoreBoard.PrintScoreBoard();
+                    this.EnterRowColInput(ref randomMines, ref mines, ref row, ref col, ref minesCounter, ref revealedCellsCounter, ref isBoomed);
                 }
                 else if (line == "exit")
                 {
@@ -113,7 +124,7 @@ namespace MinesweeperGame
                 else if (line == "restart")
                 {
                     Console.WriteLine();
-                    StartPlayCycle();
+                    this.StartPlayCycle();
                 }
                 else
                 {
@@ -125,16 +136,6 @@ namespace MinesweeperGame
             {
                 Console.WriteLine("Invalid Command!");
             }
-        }
-
-        /// <summary>
-        /// Starting a game play public method
-        /// Initializes new instance of score list
-        /// </summary>
-        public void PlayMines()
-        {
-            scoreBoard = new ScoreBoard();
-            StartPlayCycle();
         }
     }
 }
