@@ -37,7 +37,7 @@ namespace MinesweeperGame
             bool validMove = false;
             try
             {
-                // TODO: Check line correctly
+                // TODO: Check line correctly row >= 0, col >= 0. Remove try...catch block.
                 string[] inputParams = line.Split();
                 int row = int.Parse(inputParams[0]);
                 int col = int.Parse(inputParams[1]);
