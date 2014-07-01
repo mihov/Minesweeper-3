@@ -14,15 +14,10 @@ namespace MinesweeperGame
     /// </summary>
     public class MinesInitializer
     {
-        #region Private Fields
         /// <summary>
         /// Represents a Results list instance
         /// </summary>
         private ScoreBoard scoreBoard;
-
-        #endregion Private Fields
-
-        #region Private Methods
 
         /// <summary>
         /// Start current game playing cycle
@@ -132,10 +127,6 @@ namespace MinesweeperGame
             }
         }
 
-        #endregion Private Methods
-
-        #region Public Methods
-
         /// <summary>
         /// Starting a game play public method
         /// Initializes new instance of score list
@@ -145,8 +136,5 @@ namespace MinesweeperGame
             scoreBoard = new ScoreBoard();
             StartPlayCycle();
         }
-
-        #endregion Public Methods
-
     }
 }

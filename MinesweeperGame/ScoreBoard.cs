@@ -4,6 +4,7 @@
 // </copyright>
 //
 // ********************************
+
 namespace MinesweeperGame
 {
     using System;
@@ -15,18 +16,12 @@ namespace MinesweeperGame
     /// </summary>
     public class ScoreBoard
     {
-        #region Private Fields
-
         /// <summary>
         /// The main container of the results rank list
         /// </summary>
         /// <param type="int">Score</param>
         /// <param type="string">Player name</param>
         private OrderedMultiDictionary<int, string> scoreBoard;
-
-        #endregion Private Fields
-
-        #region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ScoreBoard"/> class.
@@ -36,10 +31,6 @@ namespace MinesweeperGame
         {
             this.scoreBoard = new OrderedMultiDictionary<int, string>(true);
         }
-
-        #endregion Constructors
-
-        #region Public Methods
 
         /// <summary>
         /// Adds a player to the score list.
@@ -91,7 +82,6 @@ namespace MinesweeperGame
                     foreach (string person in this.scoreBoard[key])
                     {
                         if (currentCounter < 6)
-
                         {
                             Console.WriteLine("{0}. {1} --> {2} cells", currentCounter, person, key);
                             currentCounter++;
@@ -110,7 +100,5 @@ namespace MinesweeperGame
             }
             Console.WriteLine();
         }
-
-        #endregion Public Methods
     }
 }
