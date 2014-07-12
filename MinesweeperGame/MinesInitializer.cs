@@ -15,9 +15,35 @@ namespace MinesweeperGame
     public class MinesInitializer
     {
         /// <summary>
+        /// The only instance of the class.
+        /// </summary>
+        private static MinesInitializer onlyInstance;
+
+        /// <summary>
         /// Represents a Results list instance
         /// </summary>
         private ScoreBoard scoreBoard;
+
+        /// <summary>
+        /// Disable external creation of the class.
+        /// </summary>
+        private MinesInitializer()
+        { }
+
+        /// <summary>
+        /// Creates and returns the only instance of the class.
+        /// </summary>
+        /// <returns>Class single instance.</returns>
+        /// <remarks>Uses lazy loading.</remarks>
+        public static MinesInitializer Instance()
+        {
+            if (onlyInstance == null)
+            {
+                onlyInstance = new MinesInitializer();
+            }
+
+            return onlyInstance;
+        }
 
         /// <summary>
         /// Starting a game play public method

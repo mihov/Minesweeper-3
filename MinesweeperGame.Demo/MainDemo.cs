@@ -19,7 +19,7 @@ namespace MinesweeperGame.Demo
         /// </summary>
         public static void Main()
         {
-            MinesInitializer minesGame = new MinesInitializer();
+            MinesInitializer minesGame = MinesInitializer.Instance();
             minesGame.PlayMines();
         }
     }
