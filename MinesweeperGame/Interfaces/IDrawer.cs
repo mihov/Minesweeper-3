@@ -2,7 +2,7 @@
 
 namespace MinesweeperGame.Interfaces
 {
-    interface IDrawer
+    public interface IDrawer
     {
 
     }

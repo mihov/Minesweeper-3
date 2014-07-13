@@ -7,7 +7,7 @@
 namespace MinesweeperGame
 {
     using System;
-    using System.Text;
+    using MinesweeperGame.MineGenerator;
 
     /// <summary>
     /// Represents the main initializing class of the game
@@ -70,7 +70,10 @@ namespace MinesweeperGame
 
             InitializerExtensions.StartGame(out mines, out row, out col, out isBoomed, out minesCounter, out randomMines, out revealedCellsCounter);
 
-            InitializerExtensions.FillWithRandomMines(mines, randomMines);
+            //InitializerExtensions.FillWithRandomMines(mines, randomMines);
+            // TODO: use constants and move to factory.
+            MinesGenerator minesGenerator = new MinesGenerator();
+            mines = minesGenerator.FillWithRandomMines(5, 10, 15, randomMines);
 
             InitializerExtensions.PrintInitialMessage();
 

@@ -2,7 +2,7 @@
 
 namespace MinesweeperGame.Interfaces
 {
-    interface IScoreBoard
+    public interface IScoreBoard
     {
 
     }
