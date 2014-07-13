@@ -43,6 +43,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="InitializerExtensions.cs" />
+    <Compile Include="Interfaces\IDrawer.cs" />
+    <Compile Include="Interfaces\IMinesGenerator.cs" />
+    <Compile Include="Interfaces\IMinesweeperFactory.cs" />
+    <Compile Include="Interfaces\IScoreBoard.cs" />
     <Compile Include="MinesInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScoreBoard.cs" />
