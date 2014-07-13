@@ -10,7 +10,6 @@ namespace MinesweeperGame.Interfaces
         /// <summary>
         /// Deploys mines at random positions.
         /// </summary>
-        /// <param name="mines">Mines field where to deploy mines.</param>
         /// <param name="rows">Number of rows of the field.</param>
         /// <param name="columns">Number of columns of the field.</param>
         /// <param name="mineCount">Number of mines to deploy.</param>
