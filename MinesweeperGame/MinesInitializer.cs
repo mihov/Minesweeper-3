@@ -8,6 +8,7 @@ namespace MinesweeperGame
 {
     using System;
     using MinesweeperGame.MineGenerator;
+    using MinesweeperGame.ScoresBoard;
 
     /// <summary>
     /// Represents the main initializing class of the game
