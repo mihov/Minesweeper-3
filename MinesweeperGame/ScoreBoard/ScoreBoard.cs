@@ -10,8 +10,8 @@ namespace MinesweeperGame.ScoresBoard
     using System;
     using System.Linq;
     using System.Collections.Generic;
-    using Wintellect.PowerCollections;
     using MinesweeperGame.Interfaces;
+    using Wintellect.PowerCollections;
 
     /// <summary>
     /// Represents the results history of the current set of games.
