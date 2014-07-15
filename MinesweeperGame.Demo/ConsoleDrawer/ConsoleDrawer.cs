@@ -6,7 +6,7 @@ namespace MinesweeperGame.Demo.ConsoleDrawer
     /// <summary>
     /// Implements IDrawer for text console.
     /// </summary>
-    class ConsoleDrawer : IDrawer
+    public class ConsoleDrawer : IDrawer
     {
         /// <summary>
         /// Creates ConsoleDrawer instance.

@@ -9,6 +9,8 @@ namespace MinesweeperGame
     using System;
     using MinesweeperGame.MineGenerator;
     using MinesweeperGame.ScoresBoard;
+    using MinesweeperGame.Interfaces;
+    using MinesweeperGame.Demo.ConsoleDrawer;
 
     /// <summary>
     /// Represents the main initializing class of the game
@@ -24,6 +26,11 @@ namespace MinesweeperGame
         /// Represents a Results list instance
         /// </summary>
         private ScoreBoard scoreBoard;
+
+        /// <summary>
+        /// IDrawer to use.
+        /// </summary>
+        private IDrawer drawer;
 
         /// <summary>
         /// Disable external creation of the class.
@@ -76,11 +83,15 @@ namespace MinesweeperGame
             MinesGenerator minesGenerator = new MinesGenerator();
             mines = minesGenerator.FillWithRandomMines(5, 10, 15, randomMines);
 
-            PrintInitialMessage();
+            //PrintInitialMessage();
+            // TODO: move to factory.
+            drawer = new ConsoleDrawer();
+            this.PrintInitialMessage();
 
             while (true)
             {
-                InitializerExtensions.Display(mines, isBoomed);
+                //InitializerExtensions.Display(mines, isBoomed);
+                this.drawer.Draw(mines, isBoomed);
                 this.EnterRowColInput(ref randomMines, ref mines, ref row, ref col, ref minesCounter, ref revealedCellsCounter, ref isBoomed);              
             }
         }
@@ -107,7 +118,8 @@ namespace MinesweeperGame
                     if (hasBoomedMine)
                     {
                         isBoomed = true;
-                        InitializerExtensions.Display(mines, isBoomed);
+                        //InitializerExtensions.Display(mines, isBoomed);
+                        this.drawer.Draw(mines, isBoomed);
                         Console.Write("\nBoom! You are killed by a mine! ");
                         Console.WriteLine("You revealed {0} cells without mines.", revealedCellsCounter);
 
@@ -171,7 +183,8 @@ namespace MinesweeperGame
         private void PrintInitialMessage()
         {
             string startMessage = @"Welcome to the game “Minesweeper”. Try to reveal all cells without mines. Use   'top' to view the scoreboard, 'restart' to start a new game and 'exit' to quit  the game.";
-            Console.WriteLine(startMessage + "\n");
+            //Console.WriteLine(startMessage + "\n");
+            this.drawer.ShowWelcome(startMessage);
         }
     }
 }
