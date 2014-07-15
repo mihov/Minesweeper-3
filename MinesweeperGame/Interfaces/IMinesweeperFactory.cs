@@ -11,6 +11,12 @@ namespace MinesweeperGame.Interfaces
         IDrawer GetDrawer();
 
         /// <summary>
+        /// Returns the user command provider.
+        /// </summary>
+        /// <returns>IUserInput implementation.</returns>
+        IUserInput GetCommandProvider();
+
+        /// <summary>
         /// Returns random mines generator.
         /// </summary>
         /// <returns>IMinesGenerator implementation.</returns>
