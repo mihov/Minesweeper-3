@@ -7,11 +7,8 @@
 namespace MinesweeperGame
 {
     using System;
-    using MinesweeperGame.MineGenerator;
-    using MinesweeperGame.ScoresBoard;
+    using System.Collections.Generic;
     using MinesweeperGame.Interfaces;
-    using MinesweeperGame.Demo.ConsoleDrawer;
-    using MinesweeperGame.Demo.ConsoleInput;
 
     /// <summary>
     /// Represents the main initializing class of the game
@@ -33,7 +30,7 @@ namespace MinesweeperGame
         /// <summary>
         /// Represents a Results list instance
         /// </summary>
-        private ScoreBoard scoreBoard;
+        private IScoreBoard scoreBoard;
 
         /// <summary>
         /// IDrawer to use.
@@ -112,7 +109,8 @@ namespace MinesweeperGame
             this.random = random;
 
             // TODO: use the parameter.
-            this.scoreBoard = new ScoreBoard();
+            //this.scoreBoard = new ScoreBoard();
+            this.scoreBoard = scoreBoard;
             this.StartPlayCycle();
         }
 
@@ -218,7 +216,10 @@ namespace MinesweeperGame
             {
                 if (line == "top")
                 {
-                    this.scoreBoard.PrintScoreBoard();
+                    //this.scoreBoard.PrintScoreBoard();
+                    // TODO: use constant
+                    IList<KeyValuePair<int, IList<string>>> highScores = this.scoreBoard.GetHighScores(5);
+                    this.drawer.PrintScoreBoard(highScores);
                     this.EnterRowColInput(ref randomMines, ref mines, ref row, ref col, ref minesCounter, ref revealedCellsCounter, ref isBoomed);
                 }
                 else if (line == "exit")
