@@ -121,7 +121,7 @@ namespace MinesweeperGame
         /// </summary>
         private void StartPlayCycle()
         {
-            Random randomMines;
+            //Random randomMines;
             string[,] mines;
             int row;
             int col;
@@ -134,8 +134,8 @@ namespace MinesweeperGame
             //InitializerExtensions.FillWithRandomMines(mines, randomMines);
             // TODO: use constants and move to factory.
             MinesGenerator minesGenerator = new MinesGenerator();
-            randomMines = new Random();
-            mines = minesGenerator.FillWithRandomMines(5, 10, 15, randomMines);
+            //randomMines = new Random();
+            mines = minesGenerator.FillWithRandomMines(5, 10, 15, this.random);
 
             //PrintInitialMessage();
             // TODO: move to factory.
@@ -154,7 +154,7 @@ namespace MinesweeperGame
             {
                 //InitializerExtensions.Display(mines, isBoomed);
                 this.drawer.Draw(mines, isBoomed);
-                this.EnterRowColInput(ref randomMines, ref mines, ref row, ref col, ref minesCounter, ref revealedCellsCounter, ref isBoomed);
+                this.EnterRowColInput(ref this.random, ref mines, ref row, ref col, ref minesCounter, ref revealedCellsCounter, ref isBoomed);
             }
         }
 
