@@ -64,49 +64,6 @@ namespace MinesweeperGame.ScoresBoard
         }
 
         /// <summary>
-        /// Prints the score to the console
-        /// </summary>
-        public void PrintScoreBoard()
-        {
-            bool firstFive = false;
-            int currentCounter = 1;
-
-            Console.WriteLine();
-            if (this.scoreBoard.Values.Count == 0)
-            {
-                Console.WriteLine("Scoreboard empty!");
-            }
-            else
-            {
-                Console.WriteLine("Scoreboard:");
-
-                foreach (int key in this.scoreBoard.Keys.OrderByDescending(obj => obj))
-                {
-                    foreach (string person in this.scoreBoard[key])
-                    {
-                        if (currentCounter < 6)
-                        {
-                            Console.WriteLine("{0}. {1} --> {2} cells", currentCounter, person, key);
-                            currentCounter++;
-                        }
-                        else
-                        {
-                            firstFive = true;
-                            break;
-                        }
-                    }
-
-                    if (firstFive)
-                    {
-                        break;
-                    }
-                }
-            }
-
-            Console.WriteLine();
-        }
-
-        /// <summary>
         /// Gets the high score players as KeyValuePair collection where the key is score and the value is collection of players' names.
         /// </summary>
         /// <param name="count">Number of high scores to return.</param>
