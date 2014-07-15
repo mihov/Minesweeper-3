@@ -53,10 +53,10 @@ namespace MinesweeperGame
                 return false;
             }
 
-            //int row;
-            bool isRowParsed = int.TryParse(inputParams[0], out row);
-            //int col;
-            bool isColumnParsed = int.TryParse(inputParams[1], out column);
+            int newRow;
+            bool isRowParsed = int.TryParse(inputParams[0], out newRow);
+            int newColumn;
+            bool isColumnParsed = int.TryParse(inputParams[1], out newColumn);
             //if (isRowParsed && row >= 0 && 
             //    isColParsed && column >= 0)
             //{
@@ -65,7 +65,16 @@ namespace MinesweeperGame
 
             //return false;
 
-            return isRowParsed && isColumnParsed;
+            if (isRowParsed && isColumnParsed)
+            {
+                row = newRow;
+                column = newColumn;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         //public static void FillWithRandomMines(string[,] mines, Random randomMines)
