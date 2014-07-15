@@ -1,5 +1,5 @@
 ﻿// ********************************
-// <copyright file="InitializerExtensions.cs" company="Telerik Academy">
+// <copyright file="MediatorExtensions.cs" company="Telerik Academy">
 // Copyright (©) 2014 Telerik Academy. All rights reserved.
 // </copyright>
 //
@@ -12,13 +12,11 @@ namespace MinesweeperGame
     /// <summary>
     /// Represents the static methods, variables and constants which support the work of <see cref="MinesInitializer"/> class
     /// </summary>
-    public static class InitializerExtensions
+    internal static class MediatorExtensions
     {
-        // TODO change variables names
-        // TODO provide comments
-        private const int NumberOFMines = 15;
-        private const int MinesFieldRows = 5;
-        private const int MinesFieldCols = 10;
+        private const int NUMBER_OF_MINES = 15;
+        private const int MINES_FIELD_ROWS = 5;
+        private const int MINES_FIELD_COLS = 10;
 
         public static bool CheckForGameEnd(string line)
         {
@@ -80,7 +78,7 @@ namespace MinesweeperGame
         //public static void FillWithRandomMines(string[,] mines, Random randomMines)
         //{
         //    int minesCounter = 0;
-        //    while (minesCounter < NumberOFMines)
+        //    while (minesCounter < NUMBER_OF_MINES)
         //    {
         //        int randomRow = randomMines.Next(0, 5);
         //        int randomCol = randomMines.Next(0, 10);
@@ -196,7 +194,7 @@ namespace MinesweeperGame
         //    minesCounter = 0;
         //    revealedCellsCounter = 0;
         //    isBoomed = false;
-        //    mines = new string[InitializerExtensions.MinesFieldRows, InitializerExtensions.MinesFieldCols];
+        //    mines = new string[MediatorExtensions.MINES_FIELD_ROWS, MediatorExtensions.MINES_FIELD_COLS];
 
         //    for (int i = 0; i < mines.GetLength(0); i++)
         //    {

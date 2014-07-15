@@ -127,9 +127,9 @@ namespace MinesweeperGame
             int revealedCellsCounter;
             bool isBoomed;
 
-            //InitializerExtensions.StartGame(out mines, out row, out col, out isBoomed, out minesCounter, out randomMines, out revealedCellsCounter);
+            //MediatorExtensions.StartGame(out mines, out row, out col, out isBoomed, out minesCounter, out randomMines, out revealedCellsCounter);
 
-            //InitializerExtensions.FillWithRandomMines(mines, randomMines);
+            //MediatorExtensions.FillWithRandomMines(mines, randomMines);
             // TODO: use constants and move to factory.
             //randomMines = new Random();
             mines = minesGenerator.FillWithRandomMines(5, 10, 15, this.random);
@@ -144,7 +144,7 @@ namespace MinesweeperGame
             revealedCellsCounter = 0;
             while (true)
             {
-                //InitializerExtensions.Display(mines, isBoomed);
+                //MediatorExtensions.Display(mines, isBoomed);
                 this.drawer.Draw(mines, isBoomed);
                 this.EnterRowColInput(ref this.random, ref mines, ref row, ref col, ref minesCounter, ref revealedCellsCounter, ref isBoomed);
             }
@@ -161,7 +161,7 @@ namespace MinesweeperGame
             string line = this.userInput.GetCommand();
             line = line.Trim();
 
-            if (InitializerExtensions.IsMoveEntered(line, ref row, ref col))
+            if (MediatorExtensions.IsMoveEntered(line, ref row, ref col))
             {
                 //string[] inputParams = line.Split();
                 //row = int.Parse(inputParams[0]);
@@ -169,11 +169,11 @@ namespace MinesweeperGame
 
                 if ((row >= 0) && (row < mines.GetLength(0)) && (col >= 0) && (col < mines.GetLength(1)))
                 {
-                    bool hasBoomedMine = InitializerExtensions.HasExploded(mines, row, col);
+                    bool hasBoomedMine = MediatorExtensions.HasExploded(mines, row, col);
                     if (hasBoomedMine)
                     {
                         isBoomed = true;
-                        //InitializerExtensions.Display(mines, isBoomed);
+                        //MediatorExtensions.Display(mines, isBoomed);
                         this.drawer.Draw(mines, isBoomed);
                         //Console.Write("\nBoom! You are killed by a mine! ");
                         //Console.WriteLine("You revealed {0} cells without mines.", revealedCellsCounter);
@@ -192,7 +192,7 @@ namespace MinesweeperGame
                         this.StartPlayCycle();
                     }
 
-                    bool winner = InitializerExtensions.IsWinner(mines, minesCounter);
+                    bool winner = MediatorExtensions.IsWinner(mines, minesCounter);
                     if (winner)
                     {
                         //Console.WriteLine("Congratulations! You are the WINNER!\n");
@@ -218,7 +218,7 @@ namespace MinesweeperGame
                     this.drawer.Message("Enter valid Row/Col!\n");
                 }
             }
-            else if (InitializerExtensions.CheckForGameEnd(line))
+            else if (MediatorExtensions.CheckForGameEnd(line))
             {
                 if (line == "top")
                 {
