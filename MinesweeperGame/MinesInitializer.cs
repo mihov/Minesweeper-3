@@ -17,7 +17,12 @@ namespace MinesweeperGame
         /// <summary>
         /// The only instance of the class.
         /// </summary>
-        private static MinesInitializer onlyInstance;
+        private static volatile MinesInitializer onlyInstance;
+
+        /// <summary>
+        /// Object to ensure only one instance is created and only when the instance is needed.
+        /// </summary>
+        private static object syncLock = new object();
 
         /// <summary>
         /// Represents a Results list instance
@@ -39,7 +44,13 @@ namespace MinesweeperGame
         {
             if (onlyInstance == null)
             {
-                onlyInstance = new MinesInitializer();
+                lock (syncLock)
+                {
+                    if (onlyInstance == null)
+                    {
+                        onlyInstance = new MinesInitializer();
+                    }
+                }
             }
 
             return onlyInstance;
