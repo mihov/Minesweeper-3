@@ -10,14 +10,37 @@ namespace MinesweeperGame
     using System;
 
     /// <summary>
-    /// Represents the static methods, variables and constants which support the work of <see cref="MinesInitializer"/> class
+    /// Represents the static methods, variables and constants
+    /// Working behavior via mediator pattetn
+    /// Support the work of <see cref="MinesInitializer"/> class
     /// </summary>
     internal static class MediatorExtensions
     {
+        #region Constants
+        /// <summary>
+        /// Represents the number of mines in the game.
+        /// </summary>
         private const int NUMBER_OF_MINES = 15;
+
+        /// <summary>
+        /// Represents the number of rows in the field.
+        /// </summary>
         private const int MINES_FIELD_ROWS = 5;
+
+        /// <summary>
+        /// Represents the number of columns in the field.
+        /// </summary>
         private const int MINES_FIELD_COLS = 10;
 
+        #endregion Constants
+
+        #region Public Methods
+
+        /// <summary>
+        /// Checks if the game is over
+        /// <param name="line">String line to check.</param>
+        /// <returns>True, if the game is finished, false if not</returns>
+        /// </summary>
         public static bool CheckForGameEnd(string line)
         {
             if (line.Equals("top") || line.Equals("restart") || line.Equals("exit"))
@@ -55,13 +78,6 @@ namespace MinesweeperGame
             bool isRowParsed = int.TryParse(inputParams[0], out newRow);
             int newColumn;
             bool isColumnParsed = int.TryParse(inputParams[1], out newColumn);
-            //if (isRowParsed && row >= 0 && 
-            //    isColParsed && column >= 0)
-            //{
-            //    return true;
-            //}
-
-            //return false;
 
             if (isRowParsed && isColumnParsed)
             {
@@ -75,58 +91,14 @@ namespace MinesweeperGame
             }
         }
 
-        //public static void FillWithRandomMines(string[,] mines, Random randomMines)
-        //{
-        //    int minesCounter = 0;
-        //    while (minesCounter < NUMBER_OF_MINES)
-        //    {
-        //        int randomRow = randomMines.Next(0, 5);
-        //        int randomCol = randomMines.Next(0, 10);
-        //        if (mines[randomRow, randomCol] == string.Empty)
-        //        {
-        //            mines[randomRow, randomCol] += "*";
-        //            minesCounter++;
-        //        }
-        //    }
-        //}
 
-        //public static void Display(string[,] minesMatrix, bool boomed)
-        //{
-        //    Console.WriteLine();
-        //    Console.WriteLine("     0 1 2 3 4 5 6 7 8 9");
-        //    Console.WriteLine("   ---------------------");
-        //    for (int i = 0; i < minesMatrix.GetLength(0); i++)
-        //    {
-        //        Console.Write("{0} | ", i);
-        //        for (int j = 0; j < minesMatrix.GetLength(1); j++)
-        //        {
-        //            if (!boomed && ((minesMatrix[i, j] == string.Empty) || (minesMatrix[i, j] == "*")))
-        //            {
-        //                Console.Write(" ?");
-        //            }
-
-        //            if (!boomed && (minesMatrix[i, j] != string.Empty) && (minesMatrix[i, j] != "*"))
-        //            {
-        //                Console.Write(" {0}", minesMatrix[i, j]);
-        //            }
-
-        //            if (boomed && (minesMatrix[i, j] == string.Empty))
-        //            {
-        //                Console.Write(" -");
-        //            }
-
-        //            if (boomed && (minesMatrix[i, j] != string.Empty))
-        //            {
-        //                Console.Write(" {0}", minesMatrix[i, j]);
-        //            }
-        //        }
-
-        //        Console.WriteLine("|");
-        //    }
-
-        //    Console.WriteLine("   ---------------------");
-        //}
-
+        /// <summary>
+        /// Checks if the current cell of field matrix is a mine bomb
+        /// <param name="matrix">Game field matrix[row,col]</param>
+        /// <param name="minesRow">Current row position</param>
+        /// <param name="minesCol">Current column position</param>
+        /// <returns>True, if the current cell is mine bomb, false if not</returns>
+        /// </summary>
         public static bool HasExploded(string[,] matrix, int minesRow, int minesCol)
         {
             bool isKilled = false;
@@ -163,6 +135,12 @@ namespace MinesweeperGame
             return isKilled;
         }
 
+        /// <summary>
+        /// Checks if the the mines in the game had been finished
+        /// <param name="matrix">Game field matrix[row,col]</param>
+        /// <param name="minesCount">Mines in the game</param>
+        /// <returns>True, if all of the mines are opened, false if not</returns>
+        /// </summary>
         public static bool IsWinner(string[,] matrix, int minesCount)
         {
             bool isWinner = false;
@@ -186,23 +164,6 @@ namespace MinesweeperGame
             return isWinner;
         }
 
-        //public static void StartGame(out string[,] mines, out int row, out int col, out bool isBoomed, out int minesCounter, out Random randomMines, out int revealedCellsCounter)
-        //{
-        //    randomMines = new Random();
-        //    row = 0;
-        //    col = 0;
-        //    minesCounter = 0;
-        //    revealedCellsCounter = 0;
-        //    isBoomed = false;
-        //    mines = new string[MediatorExtensions.MINES_FIELD_ROWS, MediatorExtensions.MINES_FIELD_COLS];
-
-        //    for (int i = 0; i < mines.GetLength(0); i++)
-        //    {
-        //        for (int j = 0; j < mines.GetLength(1); j++)
-        //        {
-        //            mines[i, j] = string.Empty;
-        //        }
-        //    }
-        //}
+        #endregion Public Methods
     }
 }
