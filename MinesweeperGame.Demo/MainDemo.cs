@@ -22,7 +22,7 @@ namespace MinesweeperGame.Demo
         public static void Main()
         {
 
-            IMinesweeperFactory factory = new MinesweeperFactory.MinesweeperFactory();
+            IMinesweeperFactory factory = new MinesweeperFactory();
             IMinesGenerator minesGenerator = factory.GetMinesGenerator();
             IDrawer drawer = factory.GetDrawer();
             IUserInput userInput = factory.GetCommandProvider();

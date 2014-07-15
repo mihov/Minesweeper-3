@@ -5,7 +5,7 @@
 //
 // ********************************
 
-namespace MinesweeperGame.ScoresBoard
+namespace MinesweeperGame
 {
     using System;
     using System.Linq;

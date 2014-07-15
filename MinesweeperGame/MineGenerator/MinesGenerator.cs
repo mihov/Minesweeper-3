@@ -1,7 +1,7 @@
 ﻿using System;
 using MinesweeperGame.Interfaces;
 
-namespace MinesweeperGame.MineGenerator
+namespace MinesweeperGame
 {
     /// <summary>
     /// Generator of mines.

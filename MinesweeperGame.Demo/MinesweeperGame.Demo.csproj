@@ -45,13 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConsoleDrawer\ConsoleDrawer.cs" />
-    <Compile Include="ConsoleInput\ConsoleInput.cs" />
     <Compile Include="MainDemo.cs" />
-    <Compile Include="MineGenerator\MinesGenerator.cs" />
-    <Compile Include="MinesweeperFactory\MinesweeperFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScoreBoard\ScoreBoard.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

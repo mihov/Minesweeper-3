@@ -1,7 +1,7 @@
 ﻿using System;
 using MinesweeperGame.Interfaces;
 
-namespace MinesweeperGame.Demo.ConsoleInput
+namespace MinesweeperGame
 {
     /// <summary>
     /// Implements IUserInput for text console.

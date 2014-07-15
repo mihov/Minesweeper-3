@@ -1,24 +1,21 @@
 ﻿using System;
 using MinesweeperGame.Interfaces;
-using MinesweeperGame.MineGenerator;
-using MinesweeperGame.ScoresBoard;
 
-
-namespace MinesweeperGame.Demo.MinesweeperFactory
+namespace MinesweeperGame
 {
     /// <summary>
     /// IMinesweeperFactory implementation.
     /// </summary>
-    class MinesweeperFactory : IMinesweeperFactory
+    public class MinesweeperFactory : IMinesweeperFactory
     {
         public IDrawer GetDrawer()
         {
-            return new ConsoleDrawer.ConsoleDrawer();
+            return new ConsoleDrawer();
         }
 
         public IUserInput GetCommandProvider()
         {
-            return new ConsoleInput.ConsoleInput();
+            return new ConsoleInput();
         }
 
         public IMinesGenerator GetMinesGenerator()

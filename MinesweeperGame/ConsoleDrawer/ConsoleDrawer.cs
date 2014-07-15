@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using MinesweeperGame.Interfaces;
 
-namespace MinesweeperGame.Demo.ConsoleDrawer
+namespace MinesweeperGame
 {
     /// <summary>
     /// Implements IDrawer for text console.
