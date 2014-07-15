@@ -147,29 +147,32 @@ namespace MinesweeperGame
                         isBoomed = true;
                         //InitializerExtensions.Display(mines, isBoomed);
                         this.drawer.Draw(mines, isBoomed);
-                        Console.Write("\nBoom! You are killed by a mine! ");
-                        Console.WriteLine("You revealed {0} cells without mines.", revealedCellsCounter);
+                        //Console.Write("\nBoom! You are killed by a mine! ");
+                        //Console.WriteLine("You revealed {0} cells without mines.", revealedCellsCounter);
+                        this.drawer.Message("\nBoom! You are killed by a mine! ");
+                        this.drawer.Message(string.Format("You revealed {0} cells without mines.", revealedCellsCounter));
 
                         //Console.Write("Please enter your name for the top scoreboard: ");
                         //string currentPlayerName = Console.ReadLine();
                         string currentPlayerName = this.userInput.GetUserName();
                         this.scoreBoard.AddPlayer(currentPlayerName, revealedCellsCounter);
 
-                        Console.WriteLine();
+                        //Console.WriteLine();
                         this.StartPlayCycle();
                     }
 
                     bool winner = InitializerExtensions.IsWinner(mines, minesCounter);
                     if (winner)
                     {
-                        Console.WriteLine("Congratulations! You are the WINNER!\n");
+                        //Console.WriteLine("Congratulations! You are the WINNER!\n");
+                        this.drawer.Message("Congratulations! You are the WINNER!\n");
 
                         //Console.Write("Please enter your name for the top scoreboard: ");
                         //string currentPlayerName = Console.ReadLine();
                         string currentPlayerName = this.userInput.GetUserName();
                         this.scoreBoard.AddPlayer(currentPlayerName, revealedCellsCounter);
 
-                        Console.WriteLine();
+                        //Console.WriteLine();
                         this.StartPlayCycle();
                     }
 
@@ -177,7 +180,8 @@ namespace MinesweeperGame
                 }
                 else
                 {
-                    Console.WriteLine("Enter valid Row/Col!\n");
+                    //Console.WriteLine("Enter valid Row/Col!\n");
+                    this.drawer.Message("Enter valid Row/Col!\n");
                 }
             }
             else if (InitializerExtensions.CheckForGameEnd(line))
@@ -189,12 +193,13 @@ namespace MinesweeperGame
                 }
                 else if (line == "exit")
                 {
-                    Console.WriteLine("\nGood bye!\n");
+                    //Console.WriteLine("\nGood bye!\n");
+                    this.drawer.ShowGameEnd("\nGood bye!\n");
                     Environment.Exit(0);
                 }
                 else if (line == "restart")
                 {
-                    Console.WriteLine();
+                    //Console.WriteLine();
                     this.StartPlayCycle();
                 }
                 else
@@ -205,7 +210,8 @@ namespace MinesweeperGame
             }
             else
             {
-                Console.WriteLine("Invalid Command!");
+                //Console.WriteLine("Invalid Command!");
+                this.drawer.Message("Invalid Command!");
             }
         }
 
