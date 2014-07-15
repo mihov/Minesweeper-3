@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using MinesweeperGame.Interfaces;
 
 namespace MinesweeperGame.Demo.ConsoleDrawer
@@ -82,6 +83,36 @@ namespace MinesweeperGame.Demo.ConsoleDrawer
         public void Message(string message)
         {
             Console.WriteLine(message);
+        }
+
+        /// <summary>
+        /// Displays the score board.
+        /// </summary>
+        /// <param name="highScores">Scores to display.</param>
+        public void PrintScoreBoard(IList<KeyValuePair<int, IList<string>>> highScores)
+        {
+            Console.WriteLine();
+            if (highScores.Count == 0)
+            {
+                Console.WriteLine("Scoreboard empty!");
+            }
+            else
+            {
+                Console.WriteLine("Scoreboard:");
+
+                int index = 1;
+                foreach (var score in highScores)
+                {
+                    foreach (string person in score.Value)
+                    {
+                        Console.WriteLine("{0}. {1} --> {2} cells", index, person, score.Key);
+                    }
+
+                    index++;
+                }
+            }
+
+            Console.WriteLine();
         }
     }
 }
