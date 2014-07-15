@@ -5,16 +5,18 @@
 //
 // ********************************
 
-namespace MinesweeperGame
+namespace MinesweeperGame.ScoresBoard
 {
     using System;
     using System.Linq;
+    using System.Collections.Generic;
+    using MinesweeperGame.Interfaces;
     using Wintellect.PowerCollections;
 
     /// <summary>
     /// Represents the results history of the current set of games.
     /// </summary>
-    public class ScoreBoard
+    public class ScoreBoard : IScoreBoard
     {
         /// <summary>
         /// The main container of the results rank list
@@ -102,6 +104,33 @@ namespace MinesweeperGame
             }
 
             Console.WriteLine();
+        }
+
+        /// <summary>
+        /// Gets the high score players as KeyValuePair collection where the key is score and the value is collection of players' names.
+        /// </summary>
+        /// <param name="count">Number of high scores to return.</param>
+        /// <returns>Collection of the high score players.</returns>
+        /// <exception cref="System.ArgumentOutOfRangeException">Thrown when <paramref name="count"/> less than zero.</exception>
+        public IList<KeyValuePair<int, IList<string>>> GetHighScores(int count)
+        {
+            if (count < 0)
+            {
+                throw new ArgumentOutOfRangeException("count cannot be negative");
+            }
+
+            var highScores = this.scoreBoard.Keys.OrderByDescending(a => a).Take(count);
+            IList<KeyValuePair<int, IList<string>>> result = new List<KeyValuePair<int, IList<string>>>();
+            foreach (var score in highScores)
+            {
+                result.Add(new KeyValuePair<int, IList<string>>(score, new List<string>()));
+                foreach (var player in this.scoreBoard[score])
+                {
+                    result[result.Count - 1].Value.Add(player);
+                }
+            }
+
+            return result;
         }
     }
 }

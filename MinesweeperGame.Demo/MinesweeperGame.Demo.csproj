@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleDrawer\ConsoleDrawer.cs" />
+    <Compile Include="ConsoleInput\ConsoleInput.cs" />
     <Compile Include="MainDemo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

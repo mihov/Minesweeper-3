@@ -7,7 +7,11 @@
 namespace MinesweeperGame
 {
     using System;
-    using System.Text;
+    using MinesweeperGame.MineGenerator;
+    using MinesweeperGame.ScoresBoard;
+    using MinesweeperGame.Interfaces;
+    using MinesweeperGame.Demo.ConsoleDrawer;
+    using MinesweeperGame.Demo.ConsoleInput;
 
     /// <summary>
     /// Represents the main initializing class of the game
@@ -28,6 +32,16 @@ namespace MinesweeperGame
         /// Represents a Results list instance
         /// </summary>
         private ScoreBoard scoreBoard;
+
+        /// <summary>
+        /// IDrawer to use.
+        /// </summary>
+        private IDrawer drawer;
+
+        /// <summary>
+        /// IUserInput to use.
+        /// </summary>
+        private IUserInput userInput;
 
         /// <summary>
         /// Disable external creation of the class.
@@ -81,14 +95,24 @@ namespace MinesweeperGame
 
             InitializerExtensions.StartGame(out mines, out row, out col, out isBoomed, out minesCounter, out randomMines, out revealedCellsCounter);
 
-            InitializerExtensions.FillWithRandomMines(mines, randomMines);
+            //InitializerExtensions.FillWithRandomMines(mines, randomMines);
+            // TODO: use constants and move to factory.
+            MinesGenerator minesGenerator = new MinesGenerator();
+            mines = minesGenerator.FillWithRandomMines(5, 10, 15, randomMines);
 
-            InitializerExtensions.PrintInitialMessage();
+            //PrintInitialMessage();
+            // TODO: move to factory.
+            drawer = new ConsoleDrawer();
+            this.PrintInitialMessage();
+
+            // TODO: move to factory.
+            this.userInput = new ConsoleInput();
 
             while (true)
             {
-                InitializerExtensions.Display(mines, isBoomed);
-                this.EnterRowColInput(ref randomMines, ref mines, ref row, ref col, ref minesCounter, ref revealedCellsCounter, ref isBoomed);              
+                //InitializerExtensions.Display(mines, isBoomed);
+                this.drawer.Draw(mines, isBoomed);
+                this.EnterRowColInput(ref randomMines, ref mines, ref row, ref col, ref minesCounter, ref revealedCellsCounter, ref isBoomed);
             }
         }
 
@@ -98,8 +122,9 @@ namespace MinesweeperGame
         /// </summary>
         private void EnterRowColInput(ref Random randomMines, ref string[,] mines, ref int row, ref int col, ref int minesCounter, ref int revealedCellsCounter, ref bool isBoomed)
         {
-            Console.Write("Enter row and column: ");
-            string line = Console.ReadLine();
+            //Console.Write("Enter row and column: ");
+            //string line = Console.ReadLine();
+            string line = this.userInput.GetCommand();
             line = line.Trim();
 
             if (InitializerExtensions.IsMoveEntered(line))
@@ -114,12 +139,14 @@ namespace MinesweeperGame
                     if (hasBoomedMine)
                     {
                         isBoomed = true;
-                        InitializerExtensions.Display(mines, isBoomed);
+                        //InitializerExtensions.Display(mines, isBoomed);
+                        this.drawer.Draw(mines, isBoomed);
                         Console.Write("\nBoom! You are killed by a mine! ");
                         Console.WriteLine("You revealed {0} cells without mines.", revealedCellsCounter);
 
-                        Console.Write("Please enter your name for the top scoreboard: ");
-                        string currentPlayerName = Console.ReadLine();
+                        //Console.Write("Please enter your name for the top scoreboard: ");
+                        //string currentPlayerName = Console.ReadLine();
+                        string currentPlayerName = this.userInput.GetUserName();
                         this.scoreBoard.AddPlayer(currentPlayerName, revealedCellsCounter);
 
                         Console.WriteLine();
@@ -131,8 +158,9 @@ namespace MinesweeperGame
                     {
                         Console.WriteLine("Congratulations! You are the WINNER!\n");
 
-                        Console.Write("Please enter your name for the top scoreboard: ");
-                        string currentPlayerName = Console.ReadLine();
+                        //Console.Write("Please enter your name for the top scoreboard: ");
+                        //string currentPlayerName = Console.ReadLine();
+                        string currentPlayerName = this.userInput.GetUserName();
                         this.scoreBoard.AddPlayer(currentPlayerName, revealedCellsCounter);
 
                         Console.WriteLine();
@@ -173,6 +201,13 @@ namespace MinesweeperGame
             {
                 Console.WriteLine("Invalid Command!");
             }
+        }
+
+        private void PrintInitialMessage()
+        {
+            string startMessage = @"Welcome to the game “Minesweeper”. Try to reveal all cells without mines. Use   'top' to view the scoreboard, 'restart' to start a new game and 'exit' to quit  the game.";
+            //Console.WriteLine(startMessage + "\n");
+            this.drawer.ShowWelcome(startMessage);
         }
     }
 }
