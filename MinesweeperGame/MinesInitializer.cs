@@ -76,7 +76,7 @@ namespace MinesweeperGame
             MinesGenerator minesGenerator = new MinesGenerator();
             mines = minesGenerator.FillWithRandomMines(5, 10, 15, randomMines);
 
-            InitializerExtensions.PrintInitialMessage();
+            PrintInitialMessage();
 
             while (true)
             {
@@ -166,6 +166,12 @@ namespace MinesweeperGame
             {
                 Console.WriteLine("Invalid Command!");
             }
+        }
+
+        private void PrintInitialMessage()
+        {
+            string startMessage = @"Welcome to the game “Minesweeper”. Try to reveal all cells without mines. Use   'top' to view the scoreboard, 'restart' to start a new game and 'exit' to quit  the game.";
+            Console.WriteLine(startMessage + "\n");
         }
     }
 }
