@@ -58,20 +58,20 @@ namespace MinesweeperGame
             return false;
         }
 
-        public static void FillWithRandomMines(string[,] mines, Random randomMines)
-        {
-            int minesCounter = 0;
-            while (minesCounter < NumberOFMines)
-            {
-                int randomRow = randomMines.Next(0, 5);
-                int randomCol = randomMines.Next(0, 10);
-                if (mines[randomRow, randomCol] == string.Empty)
-                {
-                    mines[randomRow, randomCol] += "*";
-                    minesCounter++;
-                }
-            }
-        }
+        //public static void FillWithRandomMines(string[,] mines, Random randomMines)
+        //{
+        //    int minesCounter = 0;
+        //    while (minesCounter < NumberOFMines)
+        //    {
+        //        int randomRow = randomMines.Next(0, 5);
+        //        int randomCol = randomMines.Next(0, 10);
+        //        if (mines[randomRow, randomCol] == string.Empty)
+        //        {
+        //            mines[randomRow, randomCol] += "*";
+        //            minesCounter++;
+        //        }
+        //    }
+        //}
 
         //public static void Display(string[,] minesMatrix, bool boomed)
         //{
