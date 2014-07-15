@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MinesweeperGame.Demo">
+      <HintPath>..\MinesweeperGame.Demo\bin\Debug\MinesweeperGame.Demo.exe</HintPath>
+    </Reference>
     <Reference Include="PowerCollections">
       <HintPath>..\packages\XAct.Wintellect.PowerCollections.0.0.1\lib\net20\PowerCollections.dll</HintPath>
     </Reference>

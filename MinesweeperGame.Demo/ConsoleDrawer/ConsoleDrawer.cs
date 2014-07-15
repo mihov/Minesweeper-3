@@ -9,6 +9,12 @@ namespace MinesweeperGame.Demo.ConsoleDrawer
     class ConsoleDrawer : IDrawer
     {
         /// <summary>
+        /// Creates ConsoleDrawer instance.
+        /// </summary>
+        public ConsoleDrawer()
+        { }
+
+        /// <summary>
         /// Displays welcome message.
         /// </summary>
         /// <param name="message">Welcome contents.</param>
