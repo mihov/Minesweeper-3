@@ -9,7 +9,8 @@ namespace MinesweeperGame
     public class MinesGenerator : IMinesGenerator
     {
         public MinesGenerator()
-        { }
+        {
+        }
 
         /// <summary>
         /// Deploys mines at random positions.
@@ -59,10 +60,11 @@ namespace MinesweeperGame
                 randomCol = random.Next(0, columns);
                 if (minesField[randomRow, randomCol] == string.Empty)
                 {
-                    minesField[randomRow, randomCol] += "*";
+                    minesField[randomRow, randomCol] += MediatorExtensions.MinesSymbol;
                     minesCounter++;
                 }
-            } while (minesCounter < mineCount);
+            }
+            while (minesCounter < mineCount);
 
             return minesField;
         }

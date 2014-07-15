@@ -17,6 +17,12 @@ namespace MinesweeperGame
     internal static class MediatorExtensions
     {
         #region Constants
+
+        /// <summary>
+        /// Represents the mine symbol stored in matrix cells
+        /// </summary>
+        private const string MINES_SYMBOL = "*";
+
         /// <summary>
         /// Represents the number of mines in the game.
         /// </summary>
@@ -91,7 +97,6 @@ namespace MinesweeperGame
             }
         }
 
-
         /// <summary>
         /// Checks if the current cell of field matrix is a mine bomb
         /// <param name="matrix">Game field matrix[row,col]</param>
@@ -123,7 +128,7 @@ namespace MinesweeperGame
                     int newCol = directionByCol[direction] + minesCol;
                     if ((newRow >= 0) && (newRow < matrix.GetLength(0)) &&
                         (newCol >= 0) && (newCol < matrix.GetLength(1)) &&
-                        (matrix[newRow, newCol] == "*"))
+                        (matrix[newRow, newCol] == MINES_SYMBOL))
                     {
                         minesCounter++;
                     }
@@ -149,7 +154,7 @@ namespace MinesweeperGame
             {
                 for (int j = 0; j < matrix.GetLength(1); j++)
                 {
-                    if ((matrix[i, j] != string.Empty) && (matrix[i, j] != "*"))
+                    if ((matrix[i, j] != string.Empty) && (matrix[i, j] != MINES_SYMBOL))
                     {
                         counter++;
                     }
