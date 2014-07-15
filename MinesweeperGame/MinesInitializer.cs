@@ -133,7 +133,6 @@ namespace MinesweeperGame
             
             //InitializerExtensions.FillWithRandomMines(mines, randomMines);
             // TODO: use constants and move to factory.
-            MinesGenerator minesGenerator = new MinesGenerator();
             //randomMines = new Random();
             mines = minesGenerator.FillWithRandomMines(5, 10, 15, this.random);
 
