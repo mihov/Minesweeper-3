@@ -28,6 +28,8 @@ namespace MinesweeperGame
         /// </summary>
         private static object syncLock = new object();
 
+        private IMinesGenerator minesGenerator;
+
         /// <summary>
         /// Represents a Results list instance
         /// </summary>
@@ -42,6 +44,8 @@ namespace MinesweeperGame
         /// IUserInput to use.
         /// </summary>
         private IUserInput userInput;
+
+        private Random random;
 
         /// <summary>
         /// Disable external creation of the class.
@@ -74,8 +78,40 @@ namespace MinesweeperGame
         /// Starting a game play public method
         /// Initializes new instance of score list
         /// </summary>
-        public void PlayMines()
+        public void PlayMines(IMinesGenerator minesGenerator, IDrawer drawer, IUserInput userInput,
+            IScoreBoard scoreBoard, Random random)
         {
+            if (minesGenerator == null)
+            {
+                throw new ArgumentNullException("minesGenerator");
+            }
+
+            if (drawer == null)
+            {
+                throw new ArgumentNullException("drawer");
+            }
+
+            if (userInput == null)
+            {
+                throw new ArgumentNullException("userInput");
+            }
+
+            if (scoreBoard == null)
+            {
+                throw new ArgumentNullException("scoreBoard");
+            }
+
+            if (random == null)
+            {
+                throw new ArgumentNullException("random");
+            }
+
+            this.minesGenerator = minesGenerator;
+            this.drawer = drawer;
+            this.userInput = userInput;
+            this.random = random;
+
+            // TODO: use the parameter.
             this.scoreBoard = new ScoreBoard();
             this.StartPlayCycle();
         }
