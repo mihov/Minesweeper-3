@@ -93,11 +93,12 @@ namespace MinesweeperGame
             int revealedCellsCounter;
             bool isBoomed;
 
-            InitializerExtensions.StartGame(out mines, out row, out col, out isBoomed, out minesCounter, out randomMines, out revealedCellsCounter);
-
+            //InitializerExtensions.StartGame(out mines, out row, out col, out isBoomed, out minesCounter, out randomMines, out revealedCellsCounter);
+            
             //InitializerExtensions.FillWithRandomMines(mines, randomMines);
             // TODO: use constants and move to factory.
             MinesGenerator minesGenerator = new MinesGenerator();
+            randomMines = new Random();
             mines = minesGenerator.FillWithRandomMines(5, 10, 15, randomMines);
 
             //PrintInitialMessage();
@@ -108,6 +109,11 @@ namespace MinesweeperGame
             // TODO: move to factory.
             this.userInput = new ConsoleInput();
 
+            isBoomed = false;
+            row = 0;
+            col = 0;
+            minesCounter = 0;
+            revealedCellsCounter = 0;
             while (true)
             {
                 //InitializerExtensions.Display(mines, isBoomed);

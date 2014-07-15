@@ -169,24 +169,23 @@ namespace MinesweeperGame
             return isWinner;
         }
 
-        public static void StartGame(out string[,] mines, out int row, out int col, out bool isBoomed, out int minesCounter, out Random randomMines, out int revealedCellsCounter)
-        {
-            randomMines = new Random();
-            row = 0;
-            col = 0;
-            minesCounter = 0;
-            revealedCellsCounter = 0;
-            isBoomed = false;
-            mines = new string[InitializerExtensions.MinesFieldRows, InitializerExtensions.MinesFieldCols];
+        //public static void StartGame(out string[,] mines, out int row, out int col, out bool isBoomed, out int minesCounter, out Random randomMines, out int revealedCellsCounter)
+        //{
+        //    randomMines = new Random();
+        //    row = 0;
+        //    col = 0;
+        //    minesCounter = 0;
+        //    revealedCellsCounter = 0;
+        //    isBoomed = false;
+        //    mines = new string[InitializerExtensions.MinesFieldRows, InitializerExtensions.MinesFieldCols];
 
-            for (int i = 0; i < mines.GetLength(0); i++)
-            {
-                for (int j = 0; j < mines.GetLength(1); j++)
-                {
-                    mines[i, j] = string.Empty;
-                }
-            }
-        }
-
+        //    for (int i = 0; i < mines.GetLength(0); i++)
+        //    {
+        //        for (int j = 0; j < mines.GetLength(1); j++)
+        //        {
+        //            mines[i, j] = string.Empty;
+        //        }
+        //    }
+        //}
     }
 }
