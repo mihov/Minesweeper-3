@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MinesweeperGame.Interfaces
 {
@@ -32,5 +33,11 @@ namespace MinesweeperGame.Interfaces
         /// </summary>
         /// <param name="message">Message to display.</param>
         void Message(string message);
+
+        /// <summary>
+        /// Displays the score board.
+        /// </summary>
+        /// <param name="highScores">Scores to display.</param>
+        void PrintScoreBoard(IList<KeyValuePair<int, IList<string>>> highScores);
     }
 }
