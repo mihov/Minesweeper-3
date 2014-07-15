@@ -128,7 +128,7 @@ namespace MinesweeperGame
             bool isBoomed;
 
             //InitializerExtensions.StartGame(out mines, out row, out col, out isBoomed, out minesCounter, out randomMines, out revealedCellsCounter);
-            
+
             //InitializerExtensions.FillWithRandomMines(mines, randomMines);
             // TODO: use constants and move to factory.
             //randomMines = new Random();
@@ -183,7 +183,10 @@ namespace MinesweeperGame
                         //Console.Write("Please enter your name for the top scoreboard: ");
                         //string currentPlayerName = Console.ReadLine();
                         string currentPlayerName = this.userInput.GetUserName();
-                        this.scoreBoard.AddPlayer(currentPlayerName, revealedCellsCounter);
+                        if (!string.IsNullOrWhiteSpace(currentPlayerName))
+                        {
+                            this.scoreBoard.AddPlayer(currentPlayerName, revealedCellsCounter);
+                        }
 
                         //Console.WriteLine();
                         this.StartPlayCycle();
@@ -198,7 +201,10 @@ namespace MinesweeperGame
                         //Console.Write("Please enter your name for the top scoreboard: ");
                         //string currentPlayerName = Console.ReadLine();
                         string currentPlayerName = this.userInput.GetUserName();
-                        this.scoreBoard.AddPlayer(currentPlayerName, revealedCellsCounter);
+                        if (!string.IsNullOrWhiteSpace(currentPlayerName))
+                        {
+                            this.scoreBoard.AddPlayer(currentPlayerName, revealedCellsCounter);
+                        }
 
                         //Console.WriteLine();
                         this.StartPlayCycle();
