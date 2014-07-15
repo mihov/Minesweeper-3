@@ -133,11 +133,11 @@ namespace MinesweeperGame
             string line = this.userInput.GetCommand();
             line = line.Trim();
 
-            if (InitializerExtensions.IsMoveEntered(line))
+            if (InitializerExtensions.IsMoveEntered(line, ref row, ref col))
             {
-                string[] inputParams = line.Split();
-                row = int.Parse(inputParams[0]);
-                col = int.Parse(inputParams[1]);
+                //string[] inputParams = line.Split();
+                //row = int.Parse(inputParams[0]);
+                //col = int.Parse(inputParams[1]);
 
                 if ((row >= 0) && (row < mines.GetLength(0)) && (col >= 0) && (col < mines.GetLength(1)))
                 {

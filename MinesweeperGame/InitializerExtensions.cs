@@ -32,7 +32,15 @@ namespace MinesweeperGame
             }
         }
 
-        public static bool IsMoveEntered(string line)
+        /// <summary>
+        /// Tries to parse <paramref name="line"/> to <paramref name="row"/> and <paramref name="column"/>.
+        /// </summary>
+        /// <param name="line">String line to parse.</param>
+        /// <param name="row">New row.</param>
+        /// <param name="column">New column</param>
+        /// <returns>True, if parsing was successful and <paramref name="row"/> and 
+        /// <paramref name="column"/> are updated; False otherwise and ref parameters are unchanged.</returns>
+        public static bool IsMoveEntered(string line, ref int row, ref int column)
         {
             if (string.IsNullOrWhiteSpace(line))
             {
@@ -45,17 +53,19 @@ namespace MinesweeperGame
                 return false;
             }
 
-            int row;
+            //int row;
             bool isRowParsed = int.TryParse(inputParams[0], out row);
-            int col;
-            bool isColParsed = int.TryParse(inputParams[1], out col);
-            if (isRowParsed && row >= 0 &&
-                isColParsed && col >= 0)
-            {
-                return true;
-            }
+            //int col;
+            bool isColumnParsed = int.TryParse(inputParams[1], out column);
+            //if (isRowParsed && row >= 0 && 
+            //    isColParsed && column >= 0)
+            //{
+            //    return true;
+            //}
 
-            return false;
+            //return false;
+
+            return isRowParsed && isColumnParsed;
         }
 
         //public static void FillWithRandomMines(string[,] mines, Random randomMines)
