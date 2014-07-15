@@ -137,12 +137,7 @@ namespace MinesweeperGame
             mines = minesGenerator.FillWithRandomMines(5, 10, 15, this.random);
 
             //PrintInitialMessage();
-            // TODO: move to factory.
-            drawer = new ConsoleDrawer();
             this.PrintInitialMessage();
-
-            // TODO: move to factory.
-            this.userInput = new ConsoleInput();
 
             isBoomed = false;
             row = 0;
