@@ -43,9 +43,9 @@ namespace MinesweeperGame.ScoresBoard
         /// <exception cref="System.ArgumentException">Thrown when <paramref name="playerScore"/> less than zero.</exception>
         public void AddPlayer(string playerName, int playerScore)
         {
-            if (playerName == null)
+            if (string.IsNullOrWhiteSpace(playerName))
             {
-                throw new ArgumentNullException("playerName", "The player name cannot be null.");
+                throw new ArgumentNullException("playerName", "The player name cannot be null or empty.");
             }
 
             if (playerScore < 0)
