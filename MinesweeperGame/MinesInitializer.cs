@@ -16,6 +16,26 @@ namespace MinesweeperGame
     public class MinesInitializer
     {
         /// <summary>
+        /// Returned by command handlers.
+        /// </summary>
+        private enum CommandResult {
+            /// <summary>
+            /// Continue game.
+            /// </summary>
+            ContinueGame,
+
+            /// <summary>
+            /// Start new game.
+            /// </summary>
+            RestartGame,
+
+            /// <summary>
+            /// End application.
+            /// </summary>
+            EndApplication
+        }
+
+        /// <summary>
         /// The only instance of the class.
         /// </summary>
         private static volatile MinesInitializer onlyInstance;
