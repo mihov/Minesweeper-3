@@ -21,22 +21,22 @@ namespace MinesweeperGame
         /// <summary>
         /// Represents the mine symbol stored in matrix cells
         /// </summary>
-        private const string MINES_SYMBOL = "*";
+        public const string MINES_SYMBOL = "*";
 
         /// <summary>
         /// Represents the number of mines in the game.
         /// </summary>
-        private const int NUMBER_OF_MINES = 15;
+        public const int NUMBER_OF_MINES = 15;
 
         /// <summary>
         /// Represents the number of rows in the field.
         /// </summary>
-        private const int MINES_FIELD_ROWS = 5;
+        public const int MINES_FIELD_ROWS = 5;
 
         /// <summary>
         /// Represents the number of columns in the field.
         /// </summary>
-        private const int MINES_FIELD_COLS = 10;
+        public const int MINES_FIELD_COLS = 10;
 
         #endregion Constants
 
