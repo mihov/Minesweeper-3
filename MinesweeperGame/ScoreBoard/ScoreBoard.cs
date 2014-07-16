@@ -50,7 +50,7 @@ namespace MinesweeperGame
 
             if (playerScore < 0)
             {
-                throw new ArgumentException("playerScore", "The player score cannot be less than zero.");
+                throw new ArgumentOutOfRangeException("playerScore", "The player score cannot be less than zero.");
             }
 
             if (!this.scoreBoard.ContainsKey(playerScore))
@@ -71,11 +71,11 @@ namespace MinesweeperGame
         /// <exception cref="System.ArgumentOutOfRangeException">Thrown when <paramref name="count"/> less than zero.</exception>
         public IList<KeyValuePair<int, IList<string>>> GetHighScores(int count)
         {
-            if (count < 0)
+            if (count <= 0)
             {
-                throw new ArgumentOutOfRangeException("count cannot be negative");
+                throw new ArgumentOutOfRangeException("count cannot be negative or zero");
             }
-
+            
             var highScores = this.scoreBoard.Keys.OrderByDescending(a => a).Take(count);
             IList<KeyValuePair<int, IList<string>>> result = new List<KeyValuePair<int, IList<string>>>();
             foreach (var score in highScores)

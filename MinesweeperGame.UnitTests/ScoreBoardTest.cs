@@ -17,9 +17,43 @@ namespace MinesweeperGame.UnitTests
     public class ScoreBoardTest
     {
         [TestMethod]
-        public void TestMethod1()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddNullPlayersNameAndValidScore()
         {
-            // TODO -> to be implemented
+            var scoreBoard = new ScoreBoard();
+            string name = null;
+            int scores = 100;
+
+            scoreBoard.AddPlayer(name, scores);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void AddValidPlayersNameAndNegativeScore()
+        {
+            var scoreBoard = new ScoreBoard();
+            string name = "John";
+            int scores = -1;
+
+            scoreBoard.AddPlayer(name, scores);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void GetHighScoresWithZeroCount()
+        {
+            var scoreBoard = new ScoreBoard();
+            int count = 0;
+            scoreBoard.GetHighScores(count);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void GetHighScoresWithNegativeCount()
+        {
+            var scoreBoard = new ScoreBoard();
+            int count = -1;
+            scoreBoard.GetHighScores(count);
         }
     }
 }
