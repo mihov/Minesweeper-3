@@ -140,6 +140,7 @@ namespace MinesweeperGame
         /// <summary>
         /// Start current game playing cycle
         /// </summary>
+        /// <returns>Result of the command processing.</returns>
         private CommandResult StartPlayCycle()
         {
             string[,] mines;
@@ -171,8 +172,7 @@ namespace MinesweeperGame
         /// Called by <see cref="StartPlayCycle"/> method
         /// Gets and processes the user input.
         /// </summary>
-        /// <returns>True, if current game cycle should continue; False otherwise.</returns>
-        /// <remarks>The method sets endGame field if application should end.</remarks>
+        /// <returns>Result of the command processing.</returns>
         private CommandResult ProcessCommands(ref string[,] mines, ref int row, ref int col, ref int minesCounter, ref int revealedCellsCounter)
         {
             string line = this.userInput.GetCommand();
@@ -224,9 +224,7 @@ namespace MinesweeperGame
         /// <param name="col">New column</param>
         /// <param name="minesCounter">Mines total count</param>
         /// <param name="revealedCellsCounter">Revealed mines so far</param>
-        /// <returns>True, if move was performed or is illegal and game continues;
-        /// False, if mine was hit or all non-mines revealed and game ends.
-        /// </returns>
+        /// <returns>Result of the command processing.</returns>
         private CommandResult MoveTo(string[,] mines, int row, int col, int minesCounter, ref int revealedCellsCounter)
         {
             if ((row >= 0) && (row < mines.GetLength(0)) && (col >= 0) && (col < mines.GetLength(1)))
