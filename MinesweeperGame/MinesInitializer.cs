@@ -158,13 +158,13 @@ namespace MinesweeperGame
             col = 0;
             minesCounter = 0;
             revealedCellsCounter = 0;
-            bool continueGameCycle;
+            CommandResult commandResult;
 
             do
             {
                 this.drawer.Draw(mines);
-                continueGameCycle = this.ProcessCommands(ref mines, ref row, ref col, ref minesCounter, ref revealedCellsCounter);
-            } while (continueGameCycle);
+                commandResult = this.ProcessCommands(ref mines, ref row, ref col, ref minesCounter, ref revealedCellsCounter);
+            } while (commandResult == CommandResult.ContinueGame);
         }
 
         /// <summary>
@@ -173,15 +173,15 @@ namespace MinesweeperGame
         /// </summary>
         /// <returns>True, if current game cycle should continue; False otherwise.</returns>
         /// <remarks>The method sets endGame field if application should end.</remarks>
-        private bool ProcessCommands(ref string[,] mines, ref int row, ref int col, ref int minesCounter, ref int revealedCellsCounter)
+        private CommandResult ProcessCommands(ref string[,] mines, ref int row, ref int col, ref int minesCounter, ref int revealedCellsCounter)
         {
             string line = this.userInput.GetCommand();
             line = line.Trim();
-            bool continuePlay;
+            CommandResult commandResult;
 
             if (MediatorExtensions.IsMoveEntered(line, ref row, ref col))
             {
-                continuePlay = MoveTo(mines, row, col, minesCounter, ref revealedCellsCounter);
+                commandResult = MoveTo(mines, row, col, minesCounter, ref revealedCellsCounter);
             }
             else if (MediatorExtensions.IsValidCommand(line))
             {
@@ -190,17 +190,17 @@ namespace MinesweeperGame
                     // TODO: use constant
                     IList<KeyValuePair<int, IList<string>>> highScores = this.scoreBoard.GetHighScores(5);
                     this.drawer.PrintScoreBoard(highScores);
-                    continuePlay = true;
+                    commandResult = CommandResult.ContinueGame;
                 }
                 else if (line == "exit")
                 {
                     this.drawer.ShowGameEnd("\nGood bye!\n");
-                    continuePlay = false;
+                    commandResult = CommandResult.EndApplication;
                     this.endGame = true;
                 }
                 else if (line == "restart")
                 {
-                    continuePlay = false;
+                    commandResult = CommandResult.RestartGame;
                 }
                 else
                 {
@@ -211,10 +211,10 @@ namespace MinesweeperGame
             else
             {
                 this.drawer.Message("Invalid Command!");
-                continuePlay = false;
+                commandResult = CommandResult.ContinueGame;
             }
 
-            return continuePlay;
+            return commandResult;
         }
 
         /// <summary>
