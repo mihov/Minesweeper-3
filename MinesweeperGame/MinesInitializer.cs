@@ -107,10 +107,8 @@ namespace MinesweeperGame
             this.drawer = drawer;
             this.userInput = userInput;
             this.random = random;
-
-            // TODO: use the parameter.
-            //this.scoreBoard = new ScoreBoard();
             this.scoreBoard = scoreBoard;
+
             this.StartPlayCycle();
         }
 
@@ -119,7 +117,6 @@ namespace MinesweeperGame
         /// </summary>
         private void StartPlayCycle()
         {
-            //Random randomMines;
             string[,] mines;
             int row;
             int col;
@@ -127,14 +124,8 @@ namespace MinesweeperGame
             int revealedCellsCounter;
             bool isBoomed;
 
-            //MediatorExtensions.StartGame(out mines, out row, out col, out isBoomed, out minesCounter, out randomMines, out revealedCellsCounter);
-
-            //MediatorExtensions.FillWithRandomMines(mines, randomMines);
-            // TODO: use constants and move to factory.
-            //randomMines = new Random();
-            mines = minesGenerator.FillWithRandomMines(5, 10, 15, this.random);
-
-            //PrintInitialMessage();
+            mines = this.minesGenerator.FillWithRandomMines(MediatorExtensions.MINES_FIELD_ROWS,
+                MediatorExtensions.MINES_FIELD_COLS, MediatorExtensions.NUMBER_OF_MINES, this.random);
             this.PrintInitialMessage();
 
             isBoomed = false;
@@ -144,7 +135,6 @@ namespace MinesweeperGame
             revealedCellsCounter = 0;
             while (true)
             {
-                //MediatorExtensions.Display(mines, isBoomed);
                 this.drawer.Draw(mines, isBoomed);
                 this.EnterRowColInput(ref this.random, ref mines, ref row, ref col, ref minesCounter, ref revealedCellsCounter, ref isBoomed);
             }
@@ -156,57 +146,40 @@ namespace MinesweeperGame
         /// </summary>
         private void EnterRowColInput(ref Random randomMines, ref string[,] mines, ref int row, ref int col, ref int minesCounter, ref int revealedCellsCounter, ref bool isBoomed)
         {
-            //Console.Write("Enter row and column: ");
-            //string line = Console.ReadLine();
             string line = this.userInput.GetCommand();
             line = line.Trim();
 
             if (MediatorExtensions.IsMoveEntered(line, ref row, ref col))
             {
-                //string[] inputParams = line.Split();
-                //row = int.Parse(inputParams[0]);
-                //col = int.Parse(inputParams[1]);
-
                 if ((row >= 0) && (row < mines.GetLength(0)) && (col >= 0) && (col < mines.GetLength(1)))
                 {
                     bool hasBoomedMine = MediatorExtensions.HasExploded(mines, row, col);
                     if (hasBoomedMine)
                     {
                         isBoomed = true;
-                        //MediatorExtensions.Display(mines, isBoomed);
                         this.drawer.Draw(mines, isBoomed);
-                        //Console.Write("\nBoom! You are killed by a mine! ");
-                        //Console.WriteLine("You revealed {0} cells without mines.", revealedCellsCounter);
                         this.drawer.Message("\nBoom! You are killed by a mine! ");
                         this.drawer.Message(string.Format("You revealed {0} cells without mines.", revealedCellsCounter));
 
-                        //Console.Write("Please enter your name for the top scoreboard: ");
-                        //string currentPlayerName = Console.ReadLine();
                         string currentPlayerName = this.userInput.GetUserName();
                         if (!string.IsNullOrWhiteSpace(currentPlayerName))
                         {
                             this.scoreBoard.AddPlayer(currentPlayerName, revealedCellsCounter);
                         }
 
-                        //Console.WriteLine();
                         this.StartPlayCycle();
                     }
 
                     bool winner = MediatorExtensions.IsWinner(mines, minesCounter);
                     if (winner)
                     {
-                        //Console.WriteLine("Congratulations! You are the WINNER!\n");
                         this.drawer.Message("Congratulations! You are the WINNER!\n");
-
-                        //Console.Write("Please enter your name for the top scoreboard: ");
-                        //string currentPlayerName = Console.ReadLine();
                         string currentPlayerName = this.userInput.GetUserName();
                         if (!string.IsNullOrWhiteSpace(currentPlayerName))
                         {
                             this.scoreBoard.AddPlayer(currentPlayerName, revealedCellsCounter);
                         }
 
-                        //Console.WriteLine();
                         this.StartPlayCycle();
                     }
 
@@ -214,7 +187,6 @@ namespace MinesweeperGame
                 }
                 else
                 {
-                    //Console.WriteLine("Enter valid Row/Col!\n");
                     this.drawer.Message("Enter valid Row/Col!\n");
                 }
             }
@@ -222,7 +194,6 @@ namespace MinesweeperGame
             {
                 if (line == "top")
                 {
-                    //this.scoreBoard.PrintScoreBoard();
                     // TODO: use constant
                     IList<KeyValuePair<int, IList<string>>> highScores = this.scoreBoard.GetHighScores(5);
                     this.drawer.PrintScoreBoard(highScores);
@@ -230,13 +201,11 @@ namespace MinesweeperGame
                 }
                 else if (line == "exit")
                 {
-                    //Console.WriteLine("\nGood bye!\n");
                     this.drawer.ShowGameEnd("\nGood bye!\n");
                     Environment.Exit(0);
                 }
                 else if (line == "restart")
                 {
-                    //Console.WriteLine();
                     this.StartPlayCycle();
                 }
                 else
@@ -247,7 +216,6 @@ namespace MinesweeperGame
             }
             else
             {
-                //Console.WriteLine("Invalid Command!");
                 this.drawer.Message("Invalid Command!");
             }
         }
@@ -255,7 +223,6 @@ namespace MinesweeperGame
         private void PrintInitialMessage()
         {
             string startMessage = @"Welcome to the game “Minesweeper”. Try to reveal all cells without mines. Use   'top' to view the scoreboard, 'restart' to start a new game and 'exit' to quit  the game.";
-            //Console.WriteLine(startMessage + "\n");
             this.drawer.ShowWelcome(startMessage);
         }
     }
