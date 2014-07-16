@@ -60,7 +60,7 @@ namespace MinesweeperGame
                 randomCol = random.Next(0, columns);
                 if (minesField[randomRow, randomCol] == string.Empty)
                 {
-                    minesField[randomRow, randomCol] += MediatorExtensions.MinesSymbol;
+                    minesField[randomRow, randomCol] += MediatorExtensions.MINES_SYMBOL;
                     minesCounter++;
                 }
             }
