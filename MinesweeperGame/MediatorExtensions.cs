@@ -115,11 +115,6 @@ namespace MinesweeperGame
                 isKilled = true;
             }
 
-            if ((matrix[minesRow, minesCol] != string.Empty) && (matrix[minesRow, minesCol] != "*"))
-            {
-                Console.WriteLine("Illegal Move!");
-            }
-
             if (matrix[minesRow, minesCol] == string.Empty)
             {
                 for (int direction = 0; direction < 8; direction++)

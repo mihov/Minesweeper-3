@@ -25,6 +25,8 @@ namespace MinesweeperGame
         /// </summary>
         private static object syncLock = new object();
 
+        private bool endGame;
+
         private IMinesGenerator minesGenerator;
 
         /// <summary>
@@ -48,7 +50,9 @@ namespace MinesweeperGame
         /// Disable external creation of the class.
         /// </summary>
         private MinesInitializer()
-        { }
+        {
+            this.endGame = false;
+        }
 
         /// <summary>
         /// Creates and returns the only instance of the class.
@@ -109,7 +113,10 @@ namespace MinesweeperGame
             this.random = random;
             this.scoreBoard = scoreBoard;
 
-            this.StartPlayCycle();
+            do
+            {
+                this.StartPlayCycle();
+            } while (!this.endGame);
         }
 
         /// <summary>
@@ -122,73 +129,37 @@ namespace MinesweeperGame
             int col;
             int minesCounter;
             int revealedCellsCounter;
-            bool isBoomed;
 
             mines = this.minesGenerator.FillWithRandomMines(MediatorExtensions.MINES_FIELD_ROWS,
                 MediatorExtensions.MINES_FIELD_COLS, MediatorExtensions.NUMBER_OF_MINES, this.random);
             this.PrintInitialMessage();
 
-            isBoomed = false;
             row = 0;
             col = 0;
             minesCounter = 0;
             revealedCellsCounter = 0;
-            while (true)
+            bool continueGameCycle;
+
+            do
             {
-                this.drawer.Draw(mines, isBoomed);
-                this.EnterRowColInput(ref this.random, ref mines, ref row, ref col, ref minesCounter, ref revealedCellsCounter, ref isBoomed);
-            }
+                this.drawer.Draw(mines /*, isBoomed*/);
+                continueGameCycle = this.ProcessCommands(ref mines, ref row, ref col, ref minesCounter, ref revealedCellsCounter);
+            } while (continueGameCycle);
         }
 
         /// <summary>
         /// Called by <see cref="StartPlayCycle"/> method
         /// Checks the current field cell, valid or invalid, bomb or empty field
         /// </summary>
-        private void EnterRowColInput(ref Random randomMines, ref string[,] mines, ref int row, ref int col, ref int minesCounter, ref int revealedCellsCounter, ref bool isBoomed)
+        private bool ProcessCommands(ref string[,] mines, ref int row, ref int col, ref int minesCounter, ref int revealedCellsCounter)
         {
             string line = this.userInput.GetCommand();
             line = line.Trim();
+            bool continuePlay;
 
             if (MediatorExtensions.IsMoveEntered(line, ref row, ref col))
             {
-                if ((row >= 0) && (row < mines.GetLength(0)) && (col >= 0) && (col < mines.GetLength(1)))
-                {
-                    bool hasBoomedMine = MediatorExtensions.HasExploded(mines, row, col);
-                    if (hasBoomedMine)
-                    {
-                        isBoomed = true;
-                        this.drawer.Draw(mines, isBoomed);
-                        this.drawer.Message("\nBoom! You are killed by a mine! ");
-                        this.drawer.Message(string.Format("You revealed {0} cells without mines.", revealedCellsCounter));
-
-                        string currentPlayerName = this.userInput.GetUserName();
-                        if (!string.IsNullOrWhiteSpace(currentPlayerName))
-                        {
-                            this.scoreBoard.AddPlayer(currentPlayerName, revealedCellsCounter);
-                        }
-
-                        this.StartPlayCycle();
-                    }
-
-                    bool winner = MediatorExtensions.IsWinner(mines, minesCounter);
-                    if (winner)
-                    {
-                        this.drawer.Message("Congratulations! You are the WINNER!\n");
-                        string currentPlayerName = this.userInput.GetUserName();
-                        if (!string.IsNullOrWhiteSpace(currentPlayerName))
-                        {
-                            this.scoreBoard.AddPlayer(currentPlayerName, revealedCellsCounter);
-                        }
-
-                        this.StartPlayCycle();
-                    }
-
-                    revealedCellsCounter++;
-                }
-                else
-                {
-                    this.drawer.Message("Enter valid Row/Col!\n");
-                }
+                continuePlay = MoveTo(mines, row, col, minesCounter, ref revealedCellsCounter);
             }
             else if (MediatorExtensions.CheckForGameEnd(line))
             {
@@ -197,16 +168,17 @@ namespace MinesweeperGame
                     // TODO: use constant
                     IList<KeyValuePair<int, IList<string>>> highScores = this.scoreBoard.GetHighScores(5);
                     this.drawer.PrintScoreBoard(highScores);
-                    this.EnterRowColInput(ref randomMines, ref mines, ref row, ref col, ref minesCounter, ref revealedCellsCounter, ref isBoomed);
+                    continuePlay = true;
                 }
                 else if (line == "exit")
                 {
                     this.drawer.ShowGameEnd("\nGood bye!\n");
-                    Environment.Exit(0);
+                    continuePlay = false;
+                    this.endGame = true;
                 }
                 else if (line == "restart")
                 {
-                    this.StartPlayCycle();
+                    continuePlay = false;
                 }
                 else
                 {
@@ -217,7 +189,71 @@ namespace MinesweeperGame
             else
             {
                 this.drawer.Message("Invalid Command!");
+                continuePlay = false;
             }
+
+            return continuePlay;
+        }
+
+        /// <summary>
+        /// Tries to move to new position.
+        /// </summary>
+        /// <param name="mines"></param>
+        /// <param name="row"></param>
+        /// <param name="col"></param>
+        /// <param name="minesCounter"></param>
+        /// <param name="revealedCellsCounter"></param>
+        /// <returns>True, if move was performed or is illegal and game continues;
+        /// False, if mine was hit or all non-mines revealed and game ends.
+        /// </returns>
+        private bool MoveTo(string[,] mines, int row, int col, int minesCounter, ref int revealedCellsCounter)
+        {
+            if ((row >= 0) && (row < mines.GetLength(0)) && (col >= 0) && (col < mines.GetLength(1)))
+            {
+                if ((mines[row, col] != string.Empty) && (mines[row, col] != "*"))
+                {
+                    this.drawer.Message("Illegal Move!");
+                    return true;
+                }
+
+                bool hasBoomedMine = MediatorExtensions.HasExploded(mines, row, col);
+                if (hasBoomedMine)
+                {
+                    this.drawer.Draw(mines, hasBoomedMine);
+                    this.drawer.Message("\nBoom! You are killed by a mine! ");
+                    this.drawer.Message(string.Format("You revealed {0} cells without mines.", revealedCellsCounter));
+
+                    string currentPlayerName = this.userInput.GetUserName();
+                    if (!string.IsNullOrWhiteSpace(currentPlayerName))
+                    {
+                        this.scoreBoard.AddPlayer(currentPlayerName, revealedCellsCounter);
+                    }
+
+                    //this.StartPlayCycle();
+                    return false;
+                }
+
+                bool winner = MediatorExtensions.IsWinner(mines, minesCounter);
+                if (winner)
+                {
+                    this.drawer.Message("Congratulations! You are the WINNER!\n");
+                    string currentPlayerName = this.userInput.GetUserName();
+                    if (!string.IsNullOrWhiteSpace(currentPlayerName))
+                    {
+                        this.scoreBoard.AddPlayer(currentPlayerName, revealedCellsCounter);
+                    }
+
+                    return false;
+                }
+
+                revealedCellsCounter++;
+            }
+            else
+            {
+                this.drawer.Message("Enter valid Row/Col!\n");
+            }
+
+            return true;
         }
 
         private void PrintInitialMessage()

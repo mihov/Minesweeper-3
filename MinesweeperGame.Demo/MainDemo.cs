@@ -21,7 +21,6 @@ namespace MinesweeperGame.Demo
         /// </summary>
         public static void Main()
         {
-
             IMinesweeperFactory factory = new MinesweeperFactory();
             IMinesGenerator minesGenerator = factory.GetMinesGenerator();
             IDrawer drawer = factory.GetDrawer();
