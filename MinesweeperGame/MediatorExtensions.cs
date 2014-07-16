@@ -43,13 +43,13 @@ namespace MinesweeperGame
         #region Public Methods
 
         /// <summary>
-        /// Checks if the game is over
-        /// <param name="line">String line to check.</param>
-        /// <returns>True, if the game is finished, false if not</returns>
+        /// Checks if command is valid
+        /// <param name="command">Command to check.</param>
+        /// <returns>True, if command is valid; False otherwise</returns>
         /// </summary>
-        public static bool IsValidCommand(string line)
+        public static bool IsValidCommand(string command)
         {
-            if (line.Equals("top") || line.Equals("restart") || line.Equals("exit"))
+            if (command.Equals("top") || command.Equals("restart") || command.Equals("exit"))
             {
                 return true;
             }

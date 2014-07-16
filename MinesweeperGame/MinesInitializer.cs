@@ -142,15 +142,17 @@ namespace MinesweeperGame
 
             do
             {
-                this.drawer.Draw(mines /*, isBoomed*/);
+                this.drawer.Draw(mines);
                 continueGameCycle = this.ProcessCommands(ref mines, ref row, ref col, ref minesCounter, ref revealedCellsCounter);
             } while (continueGameCycle);
         }
 
         /// <summary>
         /// Called by <see cref="StartPlayCycle"/> method
-        /// Checks the current field cell, valid or invalid, bomb or empty field
+        /// Gets and processes the user input.
         /// </summary>
+        /// <returns>True, if current game cycle should continue; False otherwise.</returns>
+        /// <remarks>The method sets endGame field if application should end.</remarks>
         private bool ProcessCommands(ref string[,] mines, ref int row, ref int col, ref int minesCounter, ref int revealedCellsCounter)
         {
             string line = this.userInput.GetCommand();
