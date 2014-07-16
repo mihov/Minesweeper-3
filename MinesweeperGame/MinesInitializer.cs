@@ -161,7 +161,7 @@ namespace MinesweeperGame
             {
                 continuePlay = MoveTo(mines, row, col, minesCounter, ref revealedCellsCounter);
             }
-            else if (MediatorExtensions.CheckForGameEnd(line))
+            else if (MediatorExtensions.IsValidCommand(line))
             {
                 if (line == "top")
                 {
@@ -229,7 +229,6 @@ namespace MinesweeperGame
                         this.scoreBoard.AddPlayer(currentPlayerName, revealedCellsCounter);
                     }
 
-                    //this.StartPlayCycle();
                     return false;
                 }
 

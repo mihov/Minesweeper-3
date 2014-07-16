@@ -47,7 +47,7 @@ namespace MinesweeperGame
         /// <param name="line">String line to check.</param>
         /// <returns>True, if the game is finished, false if not</returns>
         /// </summary>
-        public static bool CheckForGameEnd(string line)
+        public static bool IsValidCommand(string line)
         {
             if (line.Equals("top") || line.Equals("restart") || line.Equals("exit"))
             {
