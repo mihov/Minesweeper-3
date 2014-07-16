@@ -25,6 +25,15 @@ namespace MinesweeperGame
         /// <param type="string">Player name</param>
         private OrderedMultiDictionary<int, string> scoreBoard;
 
+        public OrderedMultiDictionary<int, string> board 
+        {
+            get
+            {
+                return this.scoreBoard;
+            }
+            private set { }
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ScoreBoard"/> class.
         /// Initializes a new instance of the <see cref="scoreBoard"/> OrderedMultiDictionary.
