@@ -219,11 +219,11 @@ namespace MinesweeperGame
         /// <summary>
         /// Tries to move to new position.
         /// </summary>
-        /// <param name="mines"></param>
-        /// <param name="row"></param>
-        /// <param name="col"></param>
-        /// <param name="minesCounter"></param>
-        /// <param name="revealedCellsCounter"></param>
+        /// <param name="mines">Mines field</param>
+        /// <param name="row">New row</param>
+        /// <param name="col">New column</param>
+        /// <param name="minesCounter">Mines total count</param>
+        /// <param name="revealedCellsCounter">Revealed mines so far</param>
         /// <returns>True, if move was performed or is illegal and game continues;
         /// False, if mine was hit or all non-mines revealed and game ends.
         /// </returns>
