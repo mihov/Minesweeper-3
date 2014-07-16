@@ -228,14 +228,14 @@ namespace MinesweeperGame
         /// <returns>True, if move was performed or is illegal and game continues;
         /// False, if mine was hit or all non-mines revealed and game ends.
         /// </returns>
-        private bool MoveTo(string[,] mines, int row, int col, int minesCounter, ref int revealedCellsCounter)
+        private CommandResult MoveTo(string[,] mines, int row, int col, int minesCounter, ref int revealedCellsCounter)
         {
             if ((row >= 0) && (row < mines.GetLength(0)) && (col >= 0) && (col < mines.GetLength(1)))
             {
                 if ((mines[row, col] != string.Empty) && (mines[row, col] != "*"))
                 {
                     this.drawer.Message("Illegal Move!");
-                    return true;
+                    return CommandResult.ContinueGame;
                 }
 
                 bool hasBoomedMine = MediatorExtensions.HasExploded(mines, row, col);
@@ -251,7 +251,7 @@ namespace MinesweeperGame
                         this.scoreBoard.AddPlayer(currentPlayerName, revealedCellsCounter);
                     }
 
-                    return false;
+                    return CommandResult.RestartGame;
                 }
 
                 bool winner = MediatorExtensions.IsWinner(mines, minesCounter);
@@ -264,7 +264,7 @@ namespace MinesweeperGame
                         this.scoreBoard.AddPlayer(currentPlayerName, revealedCellsCounter);
                     }
 
-                    return false;
+                    return CommandResult.RestartGame;
                 }
 
                 revealedCellsCounter++;
@@ -274,7 +274,7 @@ namespace MinesweeperGame
                 this.drawer.Message("Enter valid Row/Col!\n");
             }
 
-            return true;
+            return CommandResult.ContinueGame;
         }
 
         private void PrintInitialMessage()
