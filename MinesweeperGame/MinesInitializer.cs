@@ -45,8 +45,6 @@ namespace MinesweeperGame
         /// </summary>
         private static object syncLock = new object();
 
-        private bool endGame;
-
         private IMinesGenerator minesGenerator;
 
         /// <summary>
@@ -71,7 +69,6 @@ namespace MinesweeperGame
         /// </summary>
         private MinesInitializer()
         {
-            this.endGame = false;
         }
 
         /// <summary>
@@ -133,16 +130,17 @@ namespace MinesweeperGame
             this.random = random;
             this.scoreBoard = scoreBoard;
 
+            CommandResult commandResult;
             do
             {
-                this.StartPlayCycle();
-            } while (!this.endGame);
+                commandResult = this.StartPlayCycle();
+            } while (commandResult != CommandResult.EndApplication);
         }
 
         /// <summary>
         /// Start current game playing cycle
         /// </summary>
-        private void StartPlayCycle()
+        private CommandResult StartPlayCycle()
         {
             string[,] mines;
             int row;
@@ -165,6 +163,8 @@ namespace MinesweeperGame
                 this.drawer.Draw(mines);
                 commandResult = this.ProcessCommands(ref mines, ref row, ref col, ref minesCounter, ref revealedCellsCounter);
             } while (commandResult == CommandResult.ContinueGame);
+
+            return commandResult;
         }
 
         /// <summary>
@@ -196,7 +196,6 @@ namespace MinesweeperGame
                 {
                     this.drawer.ShowGameEnd("\nGood bye!\n");
                     commandResult = CommandResult.EndApplication;
-                    this.endGame = true;
                 }
                 else if (line == "restart")
                 {
