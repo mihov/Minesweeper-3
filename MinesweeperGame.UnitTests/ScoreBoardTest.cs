@@ -20,40 +20,150 @@ namespace MinesweeperGame.UnitTests
         [ExpectedException(typeof(ArgumentNullException))]
         public void AddNullPlayersNameAndValidScore()
         {
-            var scoreBoard = new ScoreBoard();
+            var scoreBoardClass = new ScoreBoard();
             string name = null;
             int scores = 100;
 
-            scoreBoard.AddPlayer(name, scores);
+            scoreBoardClass.AddPlayer(name, scores);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void AddValidPlayersNameAndNegativeScore()
         {
-            var scoreBoard = new ScoreBoard();
+            var scoreBoardClass = new ScoreBoard();
             string name = "John";
             int scores = -1;
 
-            scoreBoard.AddPlayer(name, scores);
+            scoreBoardClass.AddPlayer(name, scores);
+        }
+
+        [TestMethod]
+        public void Add1PersonWithValidNameAndScore()
+        {
+            var scoreBoardClass = new ScoreBoard();
+            scoreBoardClass.AddPlayer("John", 10);
+
+            var boardWithScores = scoreBoardClass.board;
+            Assert.IsTrue(boardWithScores.Contains(10, "John"));
+        }
+
+        [TestMethod]
+        public void Add2PeopleWithDifferentNamesAndSameScores()
+        {
+            var scoreBoardClass = new ScoreBoard();
+            scoreBoardClass.AddPlayer("John", 10);
+            scoreBoardClass.AddPlayer("Pesho", 10);
+
+            var boardWithScores = scoreBoardClass.board;
+            Assert.IsTrue(boardWithScores.Keys.Count == 1);
+            Assert.IsTrue(boardWithScores.Values.Count == 2);
+        }
+
+        [TestMethod]
+        public void Add2PeopleWithSameNamesAndSameScores()
+        {
+            var scoreBoardClass = new ScoreBoard();
+            scoreBoardClass.AddPlayer("John", 10);
+            scoreBoardClass.AddPlayer("John", 10);
+
+            var boardWithScores = scoreBoardClass.board;
+            Assert.IsTrue(boardWithScores.Keys.Count == 1);
+            Assert.IsTrue(boardWithScores.Values.Count == 2);
+        }
+
+        [TestMethod]
+        public void Add2PeopleWithSameNamesAndDifferentScores()
+        {
+            var scoreBoardClass = new ScoreBoard();
+            scoreBoardClass.AddPlayer("John", 10);
+            scoreBoardClass.AddPlayer("John", 20);
+
+            var boardWithScores = scoreBoardClass.board;
+            Assert.IsTrue(boardWithScores.Keys.Count == 2);
+            Assert.IsTrue(boardWithScores.Values.Count == 2);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void GetHighScoresWithZeroCount()
         {
-            var scoreBoard = new ScoreBoard();
+            var scoreBoardClass = new ScoreBoard();
             int count = 0;
-            scoreBoard.GetHighScores(count);
+            scoreBoardClass.GetHighScores(count);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void GetHighScoresWithNegativeCount()
         {
-            var scoreBoard = new ScoreBoard();
+            var scoreBoardClass = new ScoreBoard();
             int count = -1;
-            scoreBoard.GetHighScores(count);
+            scoreBoardClass.GetHighScores(count);
+        }
+
+        [TestMethod]
+        public void GetHighScoresWith1Person()
+        {
+            var scoreBoardClass = new ScoreBoard();
+            scoreBoardClass.AddPlayer("John", 20);
+
+            var hightScores = scoreBoardClass.GetHighScores(scoreBoardClass.board.Count);
+
+            Assert.IsTrue(hightScores[0].Key == 20);
+            Assert.IsTrue(hightScores[0].Value[0] == "John");
+        }
+
+        [TestMethod]
+        public void GetHighScoresWith3PeopleWithDifferentNames()
+        {
+            var scoreBoardClass = new ScoreBoard();
+            scoreBoardClass.AddPlayer("John", 10);
+            scoreBoardClass.AddPlayer("Pesho", 20);
+            scoreBoardClass.AddPlayer("Gosho", 15);
+
+            var hightScores = scoreBoardClass.GetHighScores(scoreBoardClass.board.Count);
+
+            Assert.IsTrue(hightScores[0].Key == 20);
+            Assert.IsTrue(hightScores[0].Value[0] == "Pesho");
+            Assert.IsTrue(hightScores[1].Key == 15);
+            Assert.IsTrue(hightScores[1].Value[0] == "Gosho");
+            Assert.IsTrue(hightScores[2].Key == 10);
+            Assert.IsTrue(hightScores[2].Value[0] == "John");
+        }
+
+        [TestMethod]
+        public void GetHighScoresWith3PeopleWithSameNames()
+        {
+            var scoreBoardClass = new ScoreBoard();
+            scoreBoardClass.AddPlayer("John", 10);
+            scoreBoardClass.AddPlayer("John", 20);
+            scoreBoardClass.AddPlayer("John", 15);
+
+            var hightScores = scoreBoardClass.GetHighScores(scoreBoardClass.board.Count);
+
+            Assert.IsTrue(hightScores[0].Key == 20);
+            Assert.IsTrue(hightScores[0].Value[0] == "John");
+            Assert.IsTrue(hightScores[1].Key == 15);
+            Assert.IsTrue(hightScores[1].Value[0] == "John");
+            Assert.IsTrue(hightScores[2].Key == 10);
+            Assert.IsTrue(hightScores[2].Value[0] == "John");
+        }
+
+        [TestMethod]
+        public void GetHighScoresWith3PeopleWithSameScores()
+        {
+            var scoreBoardClass = new ScoreBoard();
+            scoreBoardClass.AddPlayer("John", 10);
+            scoreBoardClass.AddPlayer("Gosho", 10);
+            scoreBoardClass.AddPlayer("Pesho", 10);
+
+            var hightScores = scoreBoardClass.GetHighScores(scoreBoardClass.board.Count);
+
+            Assert.IsTrue(hightScores[0].Key == 10);
+            Assert.IsTrue(hightScores[0].Value[0] == "Gosho");
+            Assert.IsTrue(hightScores[0].Value[1] == "John");
+            Assert.IsTrue(hightScores[0].Value[2] == "Pesho");
         }
     }
 }
