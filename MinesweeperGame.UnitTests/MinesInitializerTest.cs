@@ -17,6 +17,7 @@ namespace MinesweeperGame.UnitTests
     [TestClass]
     public class MinesInitializerTest
     {
+        // TODO: Add more Unit tests
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException),
          "Null argument is not allowed")]
