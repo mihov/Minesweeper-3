@@ -11,7 +11,6 @@ namespace MinesweeperGame.Demo
     using MinesweeperGame;
     using MinesweeperGame.Interfaces;
 
-
     /// <summary>
     /// Used to start the Minesweeper #3 Game
     /// </summary>
@@ -22,15 +21,8 @@ namespace MinesweeperGame.Demo
         /// </summary>
         public static void Main()
         {
-            IMinesweeperFactory factory = new MinesweeperFactory();
-            IMinesGenerator minesGenerator = factory.GetMinesGenerator();
-            IDrawer drawer = factory.GetDrawer();
-            IUserInput userInput = factory.GetCommandProvider();
-            IScoreBoard scoreBoard = factory.GetScoreBoard();
-            Random random = new Random();
-
-            MinesInitializer minesGame = MinesInitializer.Instance();
-            minesGame.PlayMines(minesGenerator, drawer, userInput, scoreBoard, random);
+            GameFacade minesweeperGame = GameFacade.Instance;
+            minesweeperGame.Run();
         }
     }
 }
