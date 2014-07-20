@@ -25,6 +25,9 @@ namespace MinesweeperGame
         /// <param type="string">Player name</param>
         private OrderedMultiDictionary<int, string> scoreBoard;
 
+        /// <summary>
+        /// The main data persister of the game
+        /// </summary>
         private Repository dataRepository = new Repository();
 
         public OrderedMultiDictionary<int, string> board

@@ -48,7 +48,7 @@ namespace MinesweeperGame
         /// Represents local path to the xlm data storage file
         /// The current path is: MinesweeperGame.Demo/bin/debug
         /// </summary>
-        public static string MAIN_DATAFILE_PATH = "players.xml";
+        public static string MAIN_DATAFILE_PATH = "..\\..\\players.xml";
 
         #endregion Constants
 
