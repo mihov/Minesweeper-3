@@ -14,7 +14,7 @@ namespace MinesweeperGame
     /// Working behavior via mediator pattern
     /// Support the work of <see cref="MinesInitializer"/> class
     /// </summary>
-    internal static class MediatorExtensions
+    public static class MediatorExtensions
     {
         #region Constants
 
@@ -44,7 +44,18 @@ namespace MinesweeperGame
         /// </summary>
         public const int NUMBER_OF_SHOWED_SCORES = 5;
 
+        /// <summary>
+        /// Represents local path to the xlm data storage file
+        /// The current path is: MinesweeperGame.Demo/bin/debug
+        /// </summary>
+        public static string MAIN_DATAFILE_PATH = "players.xml";
+
         #endregion Constants
+
+        public static void Testt()
+        {
+            var t = Repository.GetPlayers(MediatorExtensions.MAIN_DATAFILE_PATH);
+        }
 
         #region Public Methods
 

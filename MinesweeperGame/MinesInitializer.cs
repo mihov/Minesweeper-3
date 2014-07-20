@@ -243,9 +243,10 @@ namespace MinesweeperGame
 
                     string currentPlayerName = this.userInput.GetUserName();
 
-                    // not alowing the user to skip entering his/her name
+                    // not allowing the user to skip entering his/her name
                     while (string.IsNullOrWhiteSpace(currentPlayerName))
                     {
+                        this.drawer.Message("\nPlese enter your user name to continue");
                         currentPlayerName = this.userInput.GetUserName();
                     }
                     this.scoreBoard.AddPlayer(currentPlayerName, revealedCellsCounter);

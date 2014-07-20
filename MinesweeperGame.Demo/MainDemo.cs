@@ -11,8 +11,9 @@ namespace MinesweeperGame.Demo
     using MinesweeperGame;
     using MinesweeperGame.Interfaces;
 
+
     /// <summary>
-    /// Used to start the Minesweeper 3 Game
+    /// Used to start the Minesweeper #3 Game
     /// </summary>
     public class MainDemo
     {
@@ -21,6 +22,8 @@ namespace MinesweeperGame.Demo
         /// </summary>
         public static void Main()
         {
+            MediatorExtensions.Testt();
+
             IMinesweeperFactory factory = new MinesweeperFactory();
             IMinesGenerator minesGenerator = factory.GetMinesGenerator();
             IDrawer drawer = factory.GetDrawer();
