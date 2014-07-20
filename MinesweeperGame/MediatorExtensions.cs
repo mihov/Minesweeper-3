@@ -11,7 +11,7 @@ namespace MinesweeperGame
 
     /// <summary>
     /// Represents the static methods, variables and constants
-    /// Working behavior via mediator pattetn
+    /// Working behavior via mediator pattern
     /// Support the work of <see cref="MinesInitializer"/> class
     /// </summary>
     internal static class MediatorExtensions
@@ -37,6 +37,12 @@ namespace MinesweeperGame
         /// Represents the number of columns in the field.
         /// </summary>
         public const int MINES_FIELD_COLS = 10;
+
+        /// <summary>
+        /// Represents the number of the highest scores shown in the game info
+        /// Used in MinesInitializer Class
+        /// </summary>
+        public const int NUMBER_OF_SHOWED_SCORES = 5;
 
         #endregion Constants
 

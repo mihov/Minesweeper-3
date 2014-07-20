@@ -187,8 +187,7 @@ namespace MinesweeperGame
             {
                 if (line == "top")
                 {
-                    // TODO: use constant
-                    IList<KeyValuePair<int, IList<string>>> highScores = this.scoreBoard.GetHighScores(5);
+                    IList<KeyValuePair<int, IList<string>>> highScores = this.scoreBoard.GetHighScores(MediatorExtensions.NUMBER_OF_SHOWED_SCORES);
                     this.drawer.PrintScoreBoard(highScores);
                     commandResult = CommandResult.ContinueGame;
                 }
@@ -243,10 +242,13 @@ namespace MinesweeperGame
                     this.drawer.Message(string.Format("You revealed {0} cells without mines.", revealedCellsCounter));
 
                     string currentPlayerName = this.userInput.GetUserName();
-                    if (!string.IsNullOrWhiteSpace(currentPlayerName))
+
+                    // not alowing the user to skip entering his/her name
+                    while (string.IsNullOrWhiteSpace(currentPlayerName))
                     {
-                        this.scoreBoard.AddPlayer(currentPlayerName, revealedCellsCounter);
+                        currentPlayerName = this.userInput.GetUserName();
                     }
+                    this.scoreBoard.AddPlayer(currentPlayerName, revealedCellsCounter);
 
                     return CommandResult.RestartGame;
                 }
