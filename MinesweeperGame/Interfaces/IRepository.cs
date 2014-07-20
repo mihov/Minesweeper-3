@@ -10,13 +10,13 @@ namespace MinesweeperGame.Interfaces
     public interface IRepository
     {
         /// <summary>
-        /// Gets the players from the storage file
+        /// Represents the interface method of getting the players from the storage file
         /// </summary>
         /// <param name="playerStoreDocumentPath">File path</param>
         OrderedMultiDictionary<int, string> GetPlayers(string playerStoreDocumentPath);
 
         /// <summary>
-        /// Adds a player in the DB file
+        /// Represents the interface method of adding a player in the DB file
         /// </summary>
         /// <param name="documenPath">File path</param>
         /// <param name="name">Player name</param>

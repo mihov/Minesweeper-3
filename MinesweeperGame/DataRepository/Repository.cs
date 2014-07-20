@@ -12,6 +12,11 @@ namespace MinesweeperGame
 {
     public class Repository : IRepository
     {
+        /// <summary>
+        /// Gets the players from the storage file
+        /// </summary>
+        /// <param name="playerStoreDocumentPath">File path</param>
+        /// <returns>OrderedMultiDictionary with the player data <int, string></returns>
         public OrderedMultiDictionary<int, string> GetPlayers(string playerStoreDocumentPath)
         {
             var savedPlayers = new OrderedMultiDictionary<int, string>(true);
@@ -35,6 +40,12 @@ namespace MinesweeperGame
             return savedPlayers;
         }
 
+        /// <summary>
+        /// Adds a player in the DB file
+        /// </summary>
+        /// <param name="documenPath">File path</param>
+        /// <param name="name">Player name</param>
+        /// <param name="points">Player points</param>
         public void AddPlayer(string documenPath, string name, int points)
         {
             var root = XDocument.Load(documenPath).Root;
