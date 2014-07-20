@@ -52,11 +52,6 @@ namespace MinesweeperGame
 
         #endregion Constants
 
-        public static void Testt()
-        {
-            var t = Repository.GetPlayers(MediatorExtensions.MAIN_DATAFILE_PATH);
-        }
-
         #region Public Methods
 
         /// <summary>

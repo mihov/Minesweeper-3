@@ -11,7 +11,7 @@ namespace MinesweeperGame
 {
     public class Repository
     {
-        public static OrderedMultiDictionary<int, string> GetPlayers(string playerStoreDocumentPath)
+        internal static OrderedMultiDictionary<int, string> GetPlayers(string playerStoreDocumentPath)
         {
             var savedPlayers = new OrderedMultiDictionary<int, string>(true);
             var playerDocumentRoot = XDocument.Load(playerStoreDocumentPath).Root;
@@ -32,6 +32,16 @@ namespace MinesweeperGame
             }
 
             return savedPlayers;
+        }
+
+        internal static void AddPlayer(string documenPath, string name, int points)
+        {
+            var root = XDocument.Load(documenPath).Root;
+            root.Add(new XElement("player",
+                new XElement("name", name),
+                new XElement("points", points)
+                ));
+            root.Document.Save(documenPath);
         }
     }
 }

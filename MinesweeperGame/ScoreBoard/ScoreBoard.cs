@@ -62,14 +62,16 @@ namespace MinesweeperGame
                 throw new ArgumentOutOfRangeException("playerScore", "The player score cannot be less than zero.");
             }
 
-            if (!this.scoreBoard.ContainsKey(playerScore))
-            {
-                this.scoreBoard.Add(playerScore, playerName);
-            }
-            else
-            {
-                this.scoreBoard[playerScore].Add(playerName);
-            }
+            Repository.AddPlayer(MediatorExtensions.MAIN_DATAFILE_PATH, playerName, playerScore);
+
+            //if (!this.scoreBoard.ContainsKey(playerScore))
+            //{
+            //    this.scoreBoard.Add(playerScore, playerName);
+            //}
+            //else
+            //{
+            //    this.scoreBoard[playerScore].Add(playerName);
+            //}
         }
 
         /// <summary>
@@ -84,6 +86,7 @@ namespace MinesweeperGame
             {
                 throw new ArgumentOutOfRangeException("count cannot be negative or zero");
             }
+            this.scoreBoard = Repository.GetPlayers(MediatorExtensions.MAIN_DATAFILE_PATH);
             
             var highScores = this.scoreBoard.Keys.OrderByDescending(a => a).Take(count);
             IList<KeyValuePair<int, IList<string>>> result = new List<KeyValuePair<int, IList<string>>>();

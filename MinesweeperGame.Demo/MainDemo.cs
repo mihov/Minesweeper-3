@@ -22,8 +22,6 @@ namespace MinesweeperGame.Demo
         /// </summary>
         public static void Main()
         {
-            MediatorExtensions.Testt();
-
             IMinesweeperFactory factory = new MinesweeperFactory();
             IMinesGenerator minesGenerator = factory.GetMinesGenerator();
             IDrawer drawer = factory.GetDrawer();
