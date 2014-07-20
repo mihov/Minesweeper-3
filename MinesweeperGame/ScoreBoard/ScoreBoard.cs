@@ -25,7 +25,9 @@ namespace MinesweeperGame
         /// <param type="string">Player name</param>
         private OrderedMultiDictionary<int, string> scoreBoard;
 
-        public OrderedMultiDictionary<int, string> board 
+        private Repository dataRepository = new Repository();
+
+        public OrderedMultiDictionary<int, string> board
         {
             get
             {
@@ -62,16 +64,7 @@ namespace MinesweeperGame
                 throw new ArgumentOutOfRangeException("playerScore", "The player score cannot be less than zero.");
             }
 
-            Repository.AddPlayer(MediatorExtensions.MAIN_DATAFILE_PATH, playerName, playerScore);
-
-            //if (!this.scoreBoard.ContainsKey(playerScore))
-            //{
-            //    this.scoreBoard.Add(playerScore, playerName);
-            //}
-            //else
-            //{
-            //    this.scoreBoard[playerScore].Add(playerName);
-            //}
+            dataRepository.AddPlayer(MediatorExtensions.MAIN_DATAFILE_PATH, playerName, playerScore);
         }
 
         /// <summary>
@@ -86,8 +79,8 @@ namespace MinesweeperGame
             {
                 throw new ArgumentOutOfRangeException("count cannot be negative or zero");
             }
-            this.scoreBoard = Repository.GetPlayers(MediatorExtensions.MAIN_DATAFILE_PATH);
-            
+            this.scoreBoard = dataRepository.GetPlayers(MediatorExtensions.MAIN_DATAFILE_PATH);
+
             var highScores = this.scoreBoard.Keys.OrderByDescending(a => a).Take(count);
             IList<KeyValuePair<int, IList<string>>> result = new List<KeyValuePair<int, IList<string>>>();
             foreach (var score in highScores)
