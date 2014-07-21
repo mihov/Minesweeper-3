@@ -1,23 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <players>
   <player>
-    <name>Fotio Myshnakov</name>
+    <name>Joan Sirakov</name>
+    <points>1</points>
+  </player>
+  <player>
+    <name>Stoyan Stoyanov</name>
     <points>2</points>
   </player>
   <player>
-    <name>Frisko Kondov</name>
+    <name>Petar Milchev</name>
     <points>3</points>
   </player>
- <player>
-    <name>Ceco Bymabalov</name>
+  <player>
+    <name>Tancho Mihov</name>
     <points>4</points>
   </player>
- <player>
-    <name>Ivanka Tymbalova</name>
-    <points>1</points>
+  <player>
+    <name>Plamen Stanev</name>
+    <points>5</points>
   </player>
- <player>
-    <name>Herovim Vasilev</name>
+  <player>
+    <name>Ilian Yordanov</name>
     <points>6</points>
+  </player>
+  <player>
+    <name>Ivelin Stanchev</name>
+    <points>7</points>
   </player>
 </players>

@@ -62,6 +62,7 @@
     <Compile Include="ScoreBoardTest.cs" />
     <Compile Include="MinesGeneratorTest.cs" />
     <Compile Include="MediatorExtensionsTest.cs" />
+    <Compile Include="RepositoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MinesweeperGame\MinesweeperGame.csproj">
