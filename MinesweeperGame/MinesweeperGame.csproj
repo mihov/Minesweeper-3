@@ -45,6 +45,7 @@
     <Compile Include="ConsoleDrawer\ConsoleDrawer.cs" />
     <Compile Include="ConsoleInput\ConsoleInput.cs" />
     <Compile Include="DataRepository\Repository.cs" />
+    <Compile Include="GameFacade.cs" />
     <Compile Include="Interfaces\IRepository.cs">
       <SubType>Code</SubType>
     </Compile>
