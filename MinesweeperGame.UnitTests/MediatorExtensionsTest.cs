@@ -6,6 +6,7 @@ namespace MinesweeperGame.UnitTests
 {
     /// <summary>
     /// Unit test for the class MediatorExtensions.cs
+    /// Full Tested
     /// </summary>
     [TestClass]
     public class MediatorExtensionsTest
@@ -26,6 +27,7 @@ namespace MinesweeperGame.UnitTests
                 Assert.AreEqual(false, MediatorExtensions.IsValidCommand(cmd));
             }
         }
+
         [TestMethod]
         public void TestIsMoveEntered()
         {
@@ -61,6 +63,50 @@ namespace MinesweeperGame.UnitTests
                 string currentString = Convert.ToString(tup.Item1 + "  " + tup.Item2);
                 Assert.AreEqual(false, MediatorExtensions.IsMoveEntered(currentString, ref refX, ref refY));
             }
+        }
+
+        [TestMethod]
+        public void TestHasExploded()
+        {
+            string[,] matrix = new string[7, 7]
+                {
+                    {" "," "," ","*","*","*"," "},
+                    {" ","*"," "," "," ","*"," "},
+                    {" ","*"," ","*","*","*"," "},
+                    {" ","*"," "," "," "," "," "},
+                    {" ","*"," ","*","*","*"," "},
+                    {" ","*","*","*","*","*"," "},
+                    {"*"," "," "," "," "," "," "},
+                };
+
+
+            var trueListOfXandYvalues = new List<Tuple<int, int>>
+            {
+                new Tuple<int, int>(1, 1),
+                new Tuple<int, int>(0, 3),
+                new Tuple<int, int>(0, 5)
+            };
+
+            foreach (var tup in trueListOfXandYvalues)
+            {
+                Assert.AreEqual(true, MediatorExtensions.HasExploded(matrix, tup.Item1, tup.Item2));
+            }
+        }
+
+        [TestMethod]
+        public void TestIsWinner()
+        {
+            string[,] matrix = new string[7, 7]
+                {
+                    {" "," "," ","*","*","*"," "},
+                    {" ","*"," "," "," ","*"," "},
+                    {" ","*"," ","*","*","*"," "},
+                    {" ","*"," "," "," "," "," "},
+                    {" ","*"," ","*","*","*"," "},
+                    {" ","*","*","*","*","*"," "},
+                    {"*"," "," "," "," "," "," "},
+                };
+            Assert.AreEqual(true, MediatorExtensions.IsWinner(matrix, 20));
         }
     }
 }
