@@ -1,23 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<players>
-  <player>
-    <name>Nik Pain</name>
-    <points>2</points>
-  </player>
-  <player>
-    <name>Hristo Ivanov</name>
-    <points>1</points>
-  </player>
-  <player>
-    <name>test</name>
-    <points>5</points>
-  </player>
-  <player>
-    <name>test</name>
-    <points>1</points>
-  </player>
-  <player>
-    <name>Hristo</name>
-    <points>5</points>
-  </player>
-</players>
+<players />

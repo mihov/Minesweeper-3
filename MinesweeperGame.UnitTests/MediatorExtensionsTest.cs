@@ -14,8 +14,8 @@ namespace MinesweeperGame.UnitTests
         [TestMethod]
         public void TestIsValidCommand()
         {
-            var trueCommands = new string[3] {"top", "restart", "exit"};
-            var falseCommands = new string[3] { "tOp", "rEstart", "eexit" };
+            var trueCommands = new string[4] { "top", "restart", "exit", "fulldelete" };
+            var falseCommands = new string[4] { "tOp", "rEstart", "eexit", "fulldeletee" };
 
             foreach (var cmd in trueCommands)
             {

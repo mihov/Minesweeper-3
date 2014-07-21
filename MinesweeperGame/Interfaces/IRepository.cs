@@ -22,5 +22,10 @@ namespace MinesweeperGame.Interfaces
         /// <param name="name">Player name</param>
         /// <param name="points">Player points</param>
         void AddPlayer(string documenPath, string name, int points);
+
+        /// <summary>
+        /// Deletes the players in the DB file
+        /// </summary>
+        void EmptyFile(string playerStoreDocumentPath);
     }
 }

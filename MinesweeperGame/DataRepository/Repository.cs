@@ -55,5 +55,30 @@ namespace MinesweeperGame
                 ));
             root.Document.Save(documenPath);
         }
+
+        /// <summary>
+        /// Deletes all players in the database file
+        /// </summary>
+        /// <param name="playerStoreDocumentPath">File path</param>
+        public void EmptyFile(string playerStoreDocumentPath)
+        {
+            var root = XDocument.Load(playerStoreDocumentPath).Root;
+
+            // todo fix the counter
+            for (int i = 0; i < 100; i++)
+            {
+                foreach (var storeChild in root.Elements("player"))
+                {
+                    storeChild.Remove();
+                    root.Document.Save(playerStoreDocumentPath);
+                }
+            }
+            root.Document.Save(playerStoreDocumentPath);
+
+            //XDocument xdoc = XDocument.Load(playerStoreDocumentPath);
+            //xdoc.Descendants("player")
+            //    .Where(x => (string)x.Element("Name") == name)
+            //    .Remove();
+        }
     }
 }

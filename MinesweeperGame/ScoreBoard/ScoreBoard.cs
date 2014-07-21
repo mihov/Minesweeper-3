@@ -97,5 +97,9 @@ namespace MinesweeperGame
 
             return result;
         }
+
+        public void FullDeleteList() {
+            dataRepository.EmptyFile(MediatorExtensions.MAIN_DATAFILE_PATH);
+        }
     }
 }

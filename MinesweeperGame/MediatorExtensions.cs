@@ -61,7 +61,7 @@ namespace MinesweeperGame
         /// </summary>
         public static bool IsValidCommand(string command)
         {
-            if (command.Equals("top") || command.Equals("restart") || command.Equals("exit"))
+            if (command.Equals("top") || command.Equals("restart") || command.Equals("exit") || command.Equals("fulldelete"))
             {
                 return true;
             }

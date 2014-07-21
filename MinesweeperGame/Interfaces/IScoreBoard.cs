@@ -21,5 +21,10 @@ namespace MinesweeperGame.Interfaces
         /// <param name="count">Number of high scores to return.</param>
         /// <returns>Collection of the high score players.</returns>
         IList<KeyValuePair<int, IList<string>>> GetHighScores(int count);
+
+        /// <summary>
+        /// Passed the command to IRepository to delete the database file
+        /// </summary>
+        void FullDeleteList();
     }
 }
