@@ -23,7 +23,7 @@
         public void TestInitialize()
         {
             this.factory = new MinesweeperFactory();
-            this.minesGenerator = new factory.GetMinesGenerator();
+            this.minesGenerator = factory.GetMinesGenerator();
             this.random = Mock.Create<Random>();
         }
 
