@@ -17,18 +17,40 @@ namespace MinesweeperGame.UnitTests
     [TestClass]
     public class MinesInitializerTest
     {
+        private MinesInitializer minesInit;
+        private IMinesGenerator minesGenerator;
+        private IMinesweeperFactory factory;
+        private IDrawer drawer;
+        private IUserInput userInput;
+        private IScoreBoard scoreBoard;
+        private Random random;
+
+        /// <summary>
+        /// Initializing test parameters before every test
+        /// </summary>
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            this.minesInit = MinesInitializer.Instance();
+            this.factory = new MinesweeperFactory();
+            this.minesGenerator = factory.GetMinesGenerator();
+            this.drawer = factory.GetDrawer();
+            this.userInput = factory.GetCommandProvider();
+            this.scoreBoard = factory.GetScoreBoard();
+            this.random = new Random();
+        }
+
         // TODO: Add more Unit tests
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException),
          "Null argument is not allowed")]
         public void TestPlayMinesMethodWithAllNullArguments()
         {
-            var minesInit = MinesInitializer.Instance();
-            IMinesGenerator minesGenerator = null;
-            IDrawer drawer = null;
-            IUserInput userInput = null;
-            IScoreBoard scoreBoard = null;
-            Random random = null;
+            this.minesGenerator = null;
+            this.drawer = null;
+            this.userInput = null;
+            this.scoreBoard = null;
+            this.random = null;
             minesInit.PlayMines(minesGenerator, drawer, userInput, scoreBoard, random);
         }
 
@@ -37,13 +59,7 @@ namespace MinesweeperGame.UnitTests
          "Null argument is not allowed")]
         public void TestPlayMinesMethodWithMinesGeneratorNull()
         {
-            var minesInit = MinesInitializer.Instance();
-            IMinesweeperFactory factory = new MinesweeperFactory();
             IMinesGenerator minesGenerator = null;
-            IDrawer drawer = factory.GetDrawer();
-            IUserInput userInput = factory.GetCommandProvider();
-            IScoreBoard scoreBoard = factory.GetScoreBoard();
-            Random random = new Random();
             minesInit.PlayMines(minesGenerator, drawer, userInput, scoreBoard, random);
         }
 
@@ -52,13 +68,7 @@ namespace MinesweeperGame.UnitTests
          "Null argument is not allowed")]
         public void TestPlayMinesMethodWithDrawerNull()
         {
-            var minesInit = MinesInitializer.Instance();
-            IMinesweeperFactory factory = new MinesweeperFactory();
-            IMinesGenerator minesGenerator = factory.GetMinesGenerator();
             IDrawer drawer = null;
-            IUserInput userInput = factory.GetCommandProvider();
-            IScoreBoard scoreBoard = factory.GetScoreBoard();
-            Random random = new Random();
             minesInit.PlayMines(minesGenerator, drawer, userInput, scoreBoard, random);
         }
 
@@ -67,13 +77,7 @@ namespace MinesweeperGame.UnitTests
          "Null argument is not allowed")]
         public void TestPlayMinesMethodWithUserInputNull()
         {
-            var minesInit = MinesInitializer.Instance();
-            IMinesweeperFactory factory = new MinesweeperFactory();
-            IMinesGenerator minesGenerator = factory.GetMinesGenerator();
-            IDrawer drawer = factory.GetDrawer();
             IUserInput userInput = null;
-            IScoreBoard scoreBoard = factory.GetScoreBoard();
-            Random random = new Random();
             minesInit.PlayMines(minesGenerator, drawer, userInput, scoreBoard, random);
         }
 
@@ -82,13 +86,7 @@ namespace MinesweeperGame.UnitTests
          "Null argument is not allowed")]
         public void TestPlayMinesMethodWithScoreBoardNull()
         {
-            var minesInit = MinesInitializer.Instance();
-            IMinesweeperFactory factory = new MinesweeperFactory();
-            IMinesGenerator minesGenerator = factory.GetMinesGenerator();
-            IDrawer drawer = factory.GetDrawer();
-            IUserInput userInput = factory.GetCommandProvider();
             IScoreBoard scoreBoard = null;
-            Random random = new Random();
             minesInit.PlayMines(minesGenerator, drawer, userInput, scoreBoard, random);
         }
     }
