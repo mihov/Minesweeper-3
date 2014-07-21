@@ -12,12 +12,24 @@
     [TestClass]
     public class MinesGeneratorTest
     {
+        private IMinesweeperFactory factory;
+        private IMinesGenerator minesGenerator;
+        private Random random;
+
+        /// <summary>
+        /// Initializing test parameters before every test
+        /// </summary>
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            this.factory = new MinesweeperFactory();
+            this.minesGenerator = new factory.GetMinesGenerator();
+            this.random = Mock.Create<Random>();
+        }
+
         [TestMethod]
         public void CheckIfSingleElementMinesFieldMatrixIsFiledWithMine()
         {
-            IMinesweeperFactory factory = new MinesweeperFactory();
-            IMinesGenerator minesGenerator = factory.GetMinesGenerator();
-            Random random = Mock.Create<Random>();
             string[,] minesField = minesGenerator.FillWithRandomMines(1, 1, 1, random);
             // TODO: Change "*" with MediatorExtensions.MINES_SYMBOL 
             // use this [assembly: InternalsVisibleTo("MyExample.ServiceLayer")] to access internal class
@@ -28,9 +40,6 @@
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void TestWithRowsSmallerThanOne()
         {
-            IMinesweeperFactory factory = new MinesweeperFactory();
-            IMinesGenerator minesGenerator = factory.GetMinesGenerator();
-            Random random = Mock.Create<Random>();
             minesGenerator.FillWithRandomMines(-1, 1, 1, random);
         }
 
@@ -38,9 +47,6 @@
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void TestWithColumnsSmallerThanOne()
         {
-            IMinesweeperFactory factory = new MinesweeperFactory();
-            IMinesGenerator minesGenerator = factory.GetMinesGenerator();
-            Random random = Mock.Create<Random>();
             minesGenerator.FillWithRandomMines(1, -1, 1, random);
         }
 
@@ -48,9 +54,6 @@
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void TestWithMineCountSmallerThanOne()
         {
-            IMinesweeperFactory factory = new MinesweeperFactory();
-            IMinesGenerator minesGenerator = factory.GetMinesGenerator();
-            Random random = Mock.Create<Random>();
             minesGenerator.FillWithRandomMines(1, 1, -1, random);
         }
 
@@ -58,8 +61,6 @@
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestWithNullRandom()
         {
-            IMinesweeperFactory factory = new MinesweeperFactory();
-            IMinesGenerator minesGenerator = factory.GetMinesGenerator();
             minesGenerator.FillWithRandomMines(1, 1, 1, null);
         }
     }
