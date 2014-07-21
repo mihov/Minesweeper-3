@@ -1,2 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<players />
+<players>
+  <player>
+    <name>Fotio Myshnakov</name>
+    <points>2</points>
+  </player>
+  <player>
+    <name>Frisko Kondov</name>
+    <points>3</points>
+  </player>
+ <player>
+    <name>Ceco Bymabalov</name>
+    <points>4</points>
+  </player>
+ <player>
+    <name>Ivanka Tymbalova</name>
+    <points>1</points>
+  </player>
+ <player>
+    <name>Herovim Vasilev</name>
+    <points>6</points>
+  </player>
+</players>
