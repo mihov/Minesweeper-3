@@ -63,5 +63,12 @@
         {
             minesGenerator.FillWithRandomMines(1, 1, 1, null);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void TestWithMinesMoreThanFieldPositions()
+        {
+            minesGenerator.FillWithRandomMines(1, 1, 2, random);
+        }
     }
 }

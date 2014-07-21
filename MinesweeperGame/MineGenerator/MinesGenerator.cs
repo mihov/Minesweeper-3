@@ -37,6 +37,11 @@ namespace MinesweeperGame
                 throw new ArgumentOutOfRangeException("mines cannot be less than one");
             }
 
+            if (mineCount > rows * columns)
+            {
+                throw new ArgumentOutOfRangeException("mines cannot be more than all field positions");
+            }
+
             if (random == null)
             {
                 throw new ArgumentNullException("random cannot be null");
