@@ -31,7 +31,7 @@ namespace MinesweeperGame.UnitTests
         [TestInitialize]
         public void TestInitialize()
         {
-            this.minesInit = MinesInitializer.Instance();
+            this.minesInit = MinesInitializer.Instance;
             this.factory = new MinesweeperFactory();
             this.minesGenerator = factory.GetMinesGenerator();
             this.drawer = factory.GetDrawer();
