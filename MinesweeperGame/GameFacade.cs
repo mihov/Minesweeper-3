@@ -73,7 +73,7 @@ namespace MinesweeperGame
         /// </summary>
         public void Run()
         {
-            MinesInitializer minesGame = MinesInitializer.Instance();
+            MinesInitializer minesGame = MinesInitializer.Instance;
             minesGame.PlayMines(this.minesGenerator, this.drawer, this.userInput, this.scoreBoard, this.random);
         }
     }

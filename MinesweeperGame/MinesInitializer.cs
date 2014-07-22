@@ -18,7 +18,8 @@ namespace MinesweeperGame
         /// <summary>
         /// Returned by command handlers.
         /// </summary>
-        private enum CommandResult {
+        private enum CommandResult
+        {
             /// <summary>
             /// Continue game.
             /// </summary>
@@ -80,20 +81,23 @@ namespace MinesweeperGame
         /// </summary>
         /// <returns>Class single instance.</returns>
         /// <remarks>Uses lazy loading.</remarks>
-        public static MinesInitializer Instance()
+        public static MinesInitializer Instance
         {
-            if (onlyInstance == null)
+            get
             {
-                lock (syncLock)
+                if (onlyInstance == null)
                 {
-                    if (onlyInstance == null)
+                    lock (syncLock)
                     {
-                        onlyInstance = new MinesInitializer();
+                        if (onlyInstance == null)
+                        {
+                            onlyInstance = new MinesInitializer();
+                        }
                     }
                 }
-            }
 
-            return onlyInstance;
+                return onlyInstance;
+            }
         }
 
         /// <summary>
@@ -165,14 +169,14 @@ namespace MinesweeperGame
 
             do
             {
-                this.drawer.Draw(mines);                          
+                this.drawer.Draw(mines);
                 commandResult = this.ProcessCommands(ref mines, ref row, ref col, ref minesCounter, ref revealedCellsCounter);
 
                 if (commandResult == CommandResult.FullDelete)
                 {
                     this.scoreBoard.FullDeleteList();
                 }
-            
+
             } while (commandResult == CommandResult.ContinueGame);
 
             return commandResult;
