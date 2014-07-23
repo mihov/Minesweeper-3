@@ -25,7 +25,7 @@ namespace MinesweeperGame
 
         public IScoreBoard GetScoreBoard()
         {
-            return new ScoreBoard();
+            return new ScoreBoard(MediatorExtensions.MAIN_DATAFILE_PATH);
         }
     }
 }

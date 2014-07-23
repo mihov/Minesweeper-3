@@ -26,6 +26,11 @@ namespace MinesweeperGame
         private OrderedMultiDictionary<int, string> scoreBoard;
 
         /// <summary>
+        /// Path to repisotory file.
+        /// </summary>
+        private string scoreFilePath;
+
+        /// <summary>
         /// The main data persister of the game
         /// </summary>
         private Repository dataRepository = new Repository();
@@ -41,11 +46,17 @@ namespace MinesweeperGame
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ScoreBoard"/> class.
-        /// Initializes a new instance of the <see cref="scoreBoard"/> OrderedMultiDictionary.
         /// </summary>
-        public ScoreBoard()
+        /// <param name="scoreFilePath">Path to repository file</param>
+        public ScoreBoard(string scoreFilePath)
         {
+            if (string.IsNullOrWhiteSpace(scoreFilePath))
+            {
+                throw new ArgumentNullException("scoreFilePath");
+            }
+
             this.scoreBoard = new OrderedMultiDictionary<int, string>(true);
+            this.scoreFilePath = scoreFilePath;
         }
 
         /// <summary>
@@ -67,7 +78,7 @@ namespace MinesweeperGame
                 throw new ArgumentOutOfRangeException("playerScore", "The player score cannot be less than zero.");
             }
 
-            dataRepository.AddPlayer(MediatorExtensions.MAIN_DATAFILE_PATH, playerName, playerScore);
+            dataRepository.AddPlayer(this.scoreFilePath, playerName, playerScore);
         }
 
         /// <summary>
@@ -82,7 +93,7 @@ namespace MinesweeperGame
             {
                 throw new ArgumentOutOfRangeException("count cannot be negative or zero");
             }
-            this.scoreBoard = dataRepository.GetPlayers(MediatorExtensions.MAIN_DATAFILE_PATH);
+            this.scoreBoard = dataRepository.GetPlayers(this.scoreFilePath);
 
             var highScores = this.scoreBoard.Keys.OrderByDescending(a => a).Take(count);
             IList<KeyValuePair<int, IList<string>>> result = new List<KeyValuePair<int, IList<string>>>();
@@ -99,7 +110,7 @@ namespace MinesweeperGame
         }
 
         public void FullDeleteList() {
-            dataRepository.EmptyFile(MediatorExtensions.MAIN_DATAFILE_PATH);
+            dataRepository.EmptyFile(this.scoreFilePath);
         }
     }
 }
