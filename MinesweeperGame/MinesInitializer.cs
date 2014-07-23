@@ -33,11 +33,7 @@ namespace MinesweeperGame
             /// <summary>
             /// End application.
             /// </summary>
-            EndApplication,
-            /// <summary>
-            /// End application.
-            /// </summary>
-            FullDelete
+            EndApplication
         }
 
         /// <summary>
@@ -171,12 +167,6 @@ namespace MinesweeperGame
             {
                 this.drawer.Draw(mines);
                 commandResult = this.ProcessCommands(ref mines, ref row, ref col, ref minesCounter, ref revealedCellsCounter);
-
-                if (commandResult == CommandResult.FullDelete)
-                {
-                    this.scoreBoard.FullDeleteList();
-                }
-
             } while (commandResult == CommandResult.ContinueGame);
 
             return commandResult;
@@ -216,7 +206,8 @@ namespace MinesweeperGame
                 }
                 else if (line == "fulldelete")
                 {
-                    commandResult = CommandResult.FullDelete;
+                    this.scoreBoard.FullDeleteList();
+                    commandResult = CommandResult.ContinueGame;
                 }
                 else
                 {
