@@ -12,6 +12,8 @@ namespace MinesweeperGame
 {
     public class Repository : IRepository
     {
+        private int currentPlayers = 0;
+
         /// <summary>
         /// Gets the players from the storage file
         /// </summary>
@@ -19,6 +21,7 @@ namespace MinesweeperGame
         /// <returns>OrderedMultiDictionary with the player data <int, string></returns>
         public OrderedMultiDictionary<int, string> GetPlayers(string playerStoreDocumentPath)
         {
+            this.currentPlayers = 0;
             var savedPlayers = new OrderedMultiDictionary<int, string>(true);
             var playerDocumentRoot = XDocument.Load(playerStoreDocumentPath).Root;
 
@@ -35,6 +38,7 @@ namespace MinesweeperGame
                 {
                     savedPlayers[playerScore].Add(playerName);
                 }
+                this.currentPlayers++;
             }
 
             return savedPlayers;
@@ -54,6 +58,7 @@ namespace MinesweeperGame
                 new XElement("points", points)
                 ));
             root.Document.Save(documenPath);
+            this.currentPlayers++;
         }
 
         /// <summary>
@@ -62,10 +67,14 @@ namespace MinesweeperGame
         /// <param name="playerStoreDocumentPath">File path</param>
         public void EmptyFile(string playerStoreDocumentPath)
         {
+            // gets the actual number of players
+            if (this.currentPlayers == 0)
+            {
+                var getPlayers = this.GetPlayers(playerStoreDocumentPath);
+            }
             var root = XDocument.Load(playerStoreDocumentPath).Root;
 
-            // todo fix the counter
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < currentPlayers; i++)
             {
                 foreach (var storeChild in root.Elements("player"))
                 {
@@ -74,7 +83,7 @@ namespace MinesweeperGame
                 }
             }
             root.Document.Save(playerStoreDocumentPath);
-
+            this.currentPlayers = 0;
             //XDocument xdoc = XDocument.Load(playerStoreDocumentPath);
             //xdoc.Descendants("player")
             //    .Where(x => (string)x.Element("Name") == name)
