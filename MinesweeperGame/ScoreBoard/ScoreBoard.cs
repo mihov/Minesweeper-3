@@ -39,6 +39,7 @@ namespace MinesweeperGame
         {
             get
             {
+                this.scoreBoard = dataRepository.GetPlayers(this.scoreFilePath);
                 return this.scoreBoard;
             }
             private set { }
