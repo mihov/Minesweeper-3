@@ -41,5 +41,43 @@ namespace MinesweeperGame.UnitTests
             var scoreBoard2 = dataRepository.GetPlayers(DATA_ROOT);
             Assert.AreEqual(playersList.Count, scoreBoard2.Count);
         }
+
+        [Timeout(1000)]
+        [TestMethod]
+        public void BigDataTest()
+        {
+            Repository dataRepository = new Repository();
+            var DATA_ROOT = "..\\..\\..\\MinesweeperGame.Demo\\players.xml";
+
+            var playersList = new List<Tuple<int, string>>
+            {
+                new Tuple<int, string>(1, "Joan Sirakov"),
+                new Tuple<int, string>(2, "Stoyan Stoyanov"),
+                new Tuple<int, string>(3, "Petar Milchev"),
+                new Tuple<int, string>(4, "Tancho Mihov"),
+                new Tuple<int, string>(5, "Plamen Stanev"),
+                new Tuple<int, string>(6, "Ilian Yordanov"),
+                new Tuple<int, string>(7, "Ivelin Stanchev")
+            };
+            var cycleLength = 10;
+            var totalLength = cycleLength * playersList.Count;
+
+            // remove all test and get all test
+            dataRepository.EmptyFile(DATA_ROOT);
+            var scoreBoard1 = dataRepository.GetPlayers(DATA_ROOT);
+            Assert.AreEqual(0, scoreBoard1.Count);
+
+
+            for (int i = 0; i < cycleLength; i++)
+            {
+                // add player test and get all test
+                foreach (var tup in playersList)
+                {
+                    dataRepository.AddPlayer(DATA_ROOT, tup.Item2, tup.Item1);
+                }
+            }
+            var scoreBoard2 = dataRepository.GetPlayers(DATA_ROOT);
+            Assert.AreEqual(totalLength, scoreBoard2.KeyValuePairs.Count);
+        }
     }
 }

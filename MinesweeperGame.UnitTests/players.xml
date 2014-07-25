@@ -5,31 +5,11 @@
     <points>10</points>
   </player>
   <player>
-    <name>Joan Sirakov</name>
-    <points>1</points>
+    <name>Gosho</name>
+    <points>10</points>
   </player>
   <player>
-    <name>Stoyan Stoyanov</name>
-    <points>2</points>
-  </player>
-  <player>
-    <name>Petar Milchev</name>
-    <points>3</points>
-  </player>
-  <player>
-    <name>Tancho Mihov</name>
-    <points>4</points>
-  </player>
-  <player>
-    <name>Plamen Stanev</name>
-    <points>5</points>
-  </player>
-  <player>
-    <name>Ilian Yordanov</name>
-    <points>6</points>
-  </player>
-  <player>
-    <name>Ivelin Stanchev</name>
-    <points>7</points>
+    <name>Pesho</name>
+    <points>10</points>
   </player>
 </players>
