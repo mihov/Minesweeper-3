@@ -18,22 +18,6 @@
   </player>
   <player>
     <name>John</name>
-    <points>20</points>
-  </player>
-  <player>
-    <name>John</name>
-    <points>10</points>
-  </player>
-  <player>
-    <name>Pesho</name>
-    <points>20</points>
-  </player>
-  <player>
-    <name>Gosho</name>
-    <points>15</points>
-  </player>
-  <player>
-    <name>John</name>
     <points>10</points>
   </player>
   <player>
@@ -54,6 +38,62 @@
   </player>
   <player>
     <name>Pesho</name>
+    <points>10</points>
+  </player>
+  <player>
+    <name>John</name>
+    <points>10</points>
+  </player>
+  <player>
+    <name>Pesho</name>
+    <points>10</points>
+  </player>
+  <player>
+    <name>John</name>
+    <points>10</points>
+  </player>
+  <player>
+    <name>Pesho</name>
+    <points>10</points>
+  </player>
+  <player>
+    <name>John</name>
+    <points>10</points>
+  </player>
+  <player>
+    <name>John</name>
+    <points>10</points>
+  </player>
+  <player>
+    <name>John</name>
+    <points>10</points>
+  </player>
+  <player>
+    <name>John</name>
+    <points>20</points>
+  </player>
+  <player>
+    <name>John</name>
+    <points>10</points>
+  </player>
+  <player>
+    <name>John</name>
+    <points>20</points>
+  </player>
+  <player>
+    <name>John</name>
+    <points>10</points>
+  </player>
+  <player>
+    <name>John</name>
+    <points>20</points>
+  </player>
+  <player>
+    <name>John</name>
+    <points>10</points>
+  </player>
+  <player>
+    <name>John</name>
     <points>10</points>
   </player>
 </players>

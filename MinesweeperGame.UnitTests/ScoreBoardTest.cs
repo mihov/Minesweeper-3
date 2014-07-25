@@ -17,7 +17,22 @@ namespace MinesweeperGame.UnitTests
     [TestClass]
     public class ScoreBoardTest
     {
+        public List<Tuple<int, string>> playersList = new List<Tuple<int, string>>
+            {
+                new Tuple<int, string>(1, "Joan Sirakov"),
+                new Tuple<int, string>(2, "Stoyan Stoyanov"),
+                new Tuple<int, string>(3, "Petar Milchev"),
+                new Tuple<int, string>(4, "Tancho Mihov"),
+                new Tuple<int, string>(5, "Plamen Stanev"),
+                new Tuple<int, string>(6, "Ilian Yordanov"),
+                new Tuple<int, string>(7, "Ivelin Stanchev")
+            };
+
         private const string FILE_PATH = @"..\..\players.xml";
+
+        public Repository dataRepository = new Repository();
+
+        private string DATA_ROOT = "..\\..\\..\\MinesweeperGame.Demo\\players.xml";
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
@@ -44,17 +59,28 @@ namespace MinesweeperGame.UnitTests
         [TestMethod]
         public void Add1PersonWithValidNameAndScore()
         {
+            // remove all test and get all test
+            dataRepository.EmptyFile(this.DATA_ROOT);
+      
             var scoreBoardClass = new ScoreBoard(FILE_PATH);
             scoreBoardClass.AddPlayer("John", 10);
 
+            foreach (var tup in this.playersList)
+            {
+                scoreBoardClass.AddPlayer(tup.Item2, tup.Item1);
+            }
+
             var scores = scoreBoardClass.GetHighScores(1);
-            bool result = (scores.Count == 1 ) && (scores[0].Key == 10) && (scores[0].Value[0] == "John");
+            bool result = (scores.Count == 1 ) && (scores[0].Key == 20) && (scores[0].Value[0] == "John");
             Assert.IsTrue(result);
         }
 
         [TestMethod]
         public void Add2PeopleWithDifferentNamesAndSameScores()
         {
+            // remove all test and get all test
+            dataRepository.EmptyFile(this.DATA_ROOT);
+
             var scoreBoardClass = new ScoreBoard(FILE_PATH);
             scoreBoardClass.AddPlayer("John", 10);
             scoreBoardClass.AddPlayer("Pesho", 10);
@@ -67,25 +93,31 @@ namespace MinesweeperGame.UnitTests
         [TestMethod]
         public void Add2PeopleWithSameNamesAndSameScores()
         {
-            var scoreBoardClass = GetScoreBoard();
+            // remove all test and get all test
+            dataRepository.EmptyFile(this.DATA_ROOT);
+
+            var scoreBoardClass = new ScoreBoard(this.DATA_ROOT);
             scoreBoardClass.AddPlayer("John", 10);
             scoreBoardClass.AddPlayer("John", 10);
 
-            var boardWithScores = scoreBoardClass.GetHighScores(2);
+            var boardWithScores = scoreBoardClass.GetHighScores(1);
             Assert.IsTrue(boardWithScores.Count == 1);
-            Assert.IsTrue(boardWithScores[0].Value.Count == 1);
+            Assert.IsTrue(boardWithScores[0].Value.Count == 2);
         }
 
         [TestMethod]
         public void Add2PeopleWithSameNamesAndDifferentScores()
         {
-            var scoreBoardClass = new ScoreBoard(FILE_PATH);
+            // remove all test and get all test
+            dataRepository.EmptyFile(this.DATA_ROOT);
+
+            var scoreBoardClass = new ScoreBoard(this.DATA_ROOT);
             scoreBoardClass.AddPlayer("John", 10);
             scoreBoardClass.AddPlayer("John", 20);
 
-            var boardWithScores = scoreBoardClass.board;
-            Assert.IsTrue(boardWithScores.Keys.Count == 2);
-            Assert.IsTrue(boardWithScores.Values.Count == 2);
+            var boardWithScores = scoreBoardClass.GetHighScores(1);
+            Assert.IsTrue(boardWithScores.Count == 1);
+            Assert.IsTrue(boardWithScores[0].Value.Count == 1);
         }
 
         [TestMethod]

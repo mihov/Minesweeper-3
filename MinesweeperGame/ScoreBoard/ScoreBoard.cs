@@ -95,6 +95,7 @@ namespace MinesweeperGame
             }
             this.scoreBoard = dataRepository.GetPlayers(this.scoreFilePath);
 
+
             var highScores = this.scoreBoard.Keys.OrderByDescending(a => a).Take(count);
             IList<KeyValuePair<int, IList<string>>> result = new List<KeyValuePair<int, IList<string>>>();
             foreach (var score in highScores)
