@@ -27,6 +27,7 @@
             this.random = Mock.Create<Random>();
         }
 
+        [Timeout(1000)]
         [TestMethod]
         public void CheckIfSingleElementMinesFieldMatrixIsFiledWithMine()
         {

@@ -127,22 +127,22 @@ namespace MinesweeperGame
                 isKilled = true;
             }
 
-            if (matrix[minesRow, minesCol] == string.Empty)
-            {
-                for (int direction = 0; direction < 8; direction++)
-                {
-                    int newRow = directionByRow[direction] + minesRow;
-                    int newCol = directionByCol[direction] + minesCol;
-                    if ((newRow >= 0) && (newRow < matrix.GetLength(0)) &&
-                        (newCol >= 0) && (newCol < matrix.GetLength(1)) &&
-                        (matrix[newRow, newCol] == MINES_SYMBOL))
-                    {
-                        minesCounter++;
-                    }
-                }
+            //if (matrix[minesRow, minesCol] == string.Empty)
+            //{
+            //    for (int direction = 0; direction < 8; direction++)
+            //    {
+            //        int newRow = directionByRow[direction] + minesRow;
+            //        int newCol = directionByCol[direction] + minesCol;
+            //        if ((newRow >= 0) && (newRow < matrix.GetLength(0)) &&
+            //            (newCol >= 0) && (newCol < matrix.GetLength(1)) &&
+            //            (matrix[newRow, newCol] == MINES_SYMBOL))
+            //        {
+            //            minesCounter++;
+            //        }
+            //    }
 
-                matrix[minesRow, minesCol] += Convert.ToString(minesCounter);
-            }
+            //    matrix[minesRow, minesCol] += Convert.ToString(minesCounter);
+            //}
 
             return isKilled;
         }

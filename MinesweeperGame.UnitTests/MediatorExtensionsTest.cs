@@ -66,7 +66,7 @@ namespace MinesweeperGame.UnitTests
         }
 
         [TestMethod]
-        public void TestHasExploded()
+        public void TestHasExplodedOne()
         {
             string[,] matrix = new string[7, 7]
                 {
@@ -84,12 +84,63 @@ namespace MinesweeperGame.UnitTests
             {
                 new Tuple<int, int>(1, 1),
                 new Tuple<int, int>(0, 3),
-                new Tuple<int, int>(0, 5)
+                new Tuple<int, int>(0, 5),
             };
 
             foreach (var tup in trueListOfXandYvalues)
             {
                 Assert.AreEqual(true, MediatorExtensions.HasExploded(matrix, tup.Item1, tup.Item2));
+            }
+
+            var falseListOfXandYvalues = new List<Tuple<int, int>>
+            {
+                new Tuple<int, int>(0, 0),
+                new Tuple<int, int>(0, 2),
+                new Tuple<int, int>(6, 6)
+            };
+
+            foreach (var tup in falseListOfXandYvalues)
+            {
+                Assert.AreEqual(false, MediatorExtensions.HasExploded(matrix, tup.Item1, tup.Item2));
+            }
+        }
+
+        [TestMethod]
+        public void TestHasExplodedTwo()
+        {
+            string[,] matrix = new string[3, 3]
+                {
+                    {" "," ","*"},
+                    {" ","*"," "},
+                    {" ","*"," "},
+                };
+
+
+            var trueListOfXandYvalues = new List<Tuple<int, int>>
+            {
+                new Tuple<int, int>(0, 2),
+                new Tuple<int, int>(1, 1),
+                new Tuple<int, int>(2, 1),
+            };
+
+            foreach (var tup in trueListOfXandYvalues)
+            {
+                Assert.AreEqual(true, MediatorExtensions.HasExploded(matrix, tup.Item1, tup.Item2));
+            }
+
+            var falseListOfXandYvalues = new List<Tuple<int, int>>
+            {
+                new Tuple<int, int>(0, 0),
+                new Tuple<int, int>(0, 1),
+                new Tuple<int, int>(1, 0),
+                new Tuple<int, int>(1, 2),
+                new Tuple<int, int>(2, 0),
+                new Tuple<int, int>(2, 2),
+            };
+
+            foreach (var tup in falseListOfXandYvalues)
+            {
+                Assert.AreEqual(false, MediatorExtensions.HasExploded(matrix, tup.Item1, tup.Item2));
             }
         }
 

@@ -11,6 +11,7 @@ namespace MinesweeperGame.UnitTests
     [TestClass]
     public class RepositoryTest
     {
+        [Timeout(1000)]
         [TestMethod]
         public void AllRepositoryMethodsTest()
         {
