@@ -10,6 +10,7 @@ namespace MinesweeperGame.UnitTests
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using MinesweeperGame;
     using MinesweeperGame.Interfaces;
+    using System.IO;
 
     /// <summary>
     /// Used to test the <see cref="MinesInitializer"/> class.
@@ -88,6 +89,35 @@ namespace MinesweeperGame.UnitTests
         {
             IScoreBoard scoreBoard = null;
             minesInit.PlayMines(minesGenerator, drawer, userInput, scoreBoard, random);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException),
+         "Null argument is not allowed")]
+        public void TestPlayMinesMethodWithRandomNull()
+        {
+            Random random = null;
+            minesInit.PlayMines(minesGenerator, drawer, userInput, scoreBoard, random);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException),
+        "Line input cannot be null (empty continue command)")]
+        public void TestPlayMinesMethodWithRegularValues()
+        {
+            var input = "";
+            // Arrange
+            using (var sw = new StringWriter())
+            {
+                using (var sr = new StringReader(input))
+                {
+                    Console.SetOut(sw);
+                    Console.SetIn(sr);
+
+                    // Act
+                    minesInit.PlayMines(minesGenerator, drawer, userInput, scoreBoard, random);
+                }
+            }
         }
     }
 }

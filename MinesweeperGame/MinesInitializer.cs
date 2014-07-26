@@ -180,6 +180,10 @@ namespace MinesweeperGame
         private CommandResult ProcessCommands(ref string[,] mines, ref int row, ref int col, ref int minesCounter, ref int revealedCellsCounter)
         {
             string line = this.userInput.GetCommand();
+            if (line == null)
+            {
+                throw new ArgumentNullException("line row is null");
+            }
             line = line.Trim();
             CommandResult commandResult;
 

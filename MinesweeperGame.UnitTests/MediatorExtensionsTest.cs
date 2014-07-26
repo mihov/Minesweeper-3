@@ -45,11 +45,13 @@ namespace MinesweeperGame.UnitTests
                 new Tuple<int, int>(minX + maxX / 2 , minY + maxY)
             };
 
-            var falseListOfXandYvalues = new List<Tuple<int, string>>
+            var falseListOfXandYvalues = new List<Tuple<string, string>>
             {
-                new Tuple<int, string>(minX - 1, "x"),
-                new Tuple<int, string>(maxX + 1, String.Empty),
-                new Tuple<int, string>(maxX + 1, String.Empty),
+                new Tuple<string, string>(Convert.ToString(minX - 1), "x"),
+                new Tuple<string, string>(Convert.ToString(maxX + 1), String.Empty),
+                new Tuple<string, string>(Convert.ToString(maxX + 1), String.Empty),
+                new Tuple<string, string>(String.Empty, String.Empty),
+                new Tuple<string, string>("n", "n"),
             };
 
             foreach (var tup in trueListOfXandYvalues)
