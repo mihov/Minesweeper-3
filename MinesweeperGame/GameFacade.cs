@@ -71,10 +71,20 @@ namespace MinesweeperGame
         /// <summary>
         /// Run the game.
         /// </summary>
-        public void Run()
+        /// <returns>True if the game started with no exceptions</returns>
+        /// <returns>False if the game start throws exception</returns>
+        public bool Run()
         {
-            MinesInitializer minesGame = MinesInitializer.Instance;
-            minesGame.PlayMines(this.minesGenerator, this.drawer, this.userInput, this.scoreBoard, this.random);
+            try
+            {
+                MinesInitializer minesGame = MinesInitializer.Instance;
+                minesGame.PlayMines(this.minesGenerator, this.drawer, this.userInput, this.scoreBoard, this.random);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }         
         }
     }
 }

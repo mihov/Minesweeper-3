@@ -22,7 +22,7 @@ namespace MinesweeperGame.Demo
         public static void Main()
         {
             GameFacade minesweeperGame = GameFacade.Instance;
-            minesweeperGame.Run();
+            var started = minesweeperGame.Run();
         }
     }
 }
