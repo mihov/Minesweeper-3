@@ -15,7 +15,7 @@ namespace MinesweeperGame.UnitTests
             var entrance = "Hi, Enter row and column: ";
 
             using (var sw = new StringWriter())
-            {               
+            {
                 Console.SetOut(sw);
 
                 // Act
@@ -23,7 +23,7 @@ namespace MinesweeperGame.UnitTests
 
                 // Assert
                 var result = sw.ToString();
-                Assert.AreEqual(result, entrance + "\n\r\n");            
+                Assert.AreEqual(result, entrance + "\n\r\n");
             }
         }
 
@@ -42,7 +42,7 @@ namespace MinesweeperGame.UnitTests
 
                 // Assert
                 var result = sw.ToString();
-                Assert.AreEqual(result, "\n" + entrance + "\n\r\n");              
+                Assert.AreEqual(result, "\n" + entrance + "\n\r\n");
             }
         }
 
@@ -71,11 +71,9 @@ namespace MinesweeperGame.UnitTests
             var concoleDrawer = new ConsoleDrawer();
 
             var DATA_ROOT = "..\\..\\..\\MinesweeperGame.Demo\\players.xml";
-            var scoreBoard = new ScoreBoard(DATA_ROOT);
             Repository dataRepository = new Repository();
-          
-            // remove all test and get all test
             dataRepository.EmptyFile(DATA_ROOT);
+            var scoreBoard = new ScoreBoard(DATA_ROOT);
             var expectedResult = "\r\nScoreboard empty!\r\n\r\n";
 
             IList<KeyValuePair<int, IList<string>>> highScores = scoreBoard.GetHighScores(MediatorExtensions.NUMBER_OF_SHOWED_SCORES);
@@ -100,13 +98,14 @@ namespace MinesweeperGame.UnitTests
             var concoleDrawer = new ConsoleDrawer();
 
             var DATA_ROOT = "..\\..\\..\\MinesweeperGame.Demo\\players.xml";
-            var scoreBoard = new ScoreBoard(DATA_ROOT);
+
             Repository dataRepository = new Repository();
 
             // remove all test and get all test
             dataRepository.EmptyFile(DATA_ROOT);
+            var scoreBoard = new ScoreBoard(DATA_ROOT);
             var expectedResult = "\r\nScoreboard:\r\n1. Ivelin Stanchev --> 7 cells\r\n2. Ilian Yordanov --> 6 cells\r\n3. Plamen Stanev --> 5 cells\r\n4. Tancho Mihov --> 4 cells\r\n5. Petar Milchev --> 3 cells\r\n\r\n";
-          
+
             var playersList = new List<Tuple<int, string>>
             {
                 new Tuple<int, string>(1, "Joan Sirakov"),
@@ -120,7 +119,7 @@ namespace MinesweeperGame.UnitTests
 
             foreach (var tup in playersList)
             {
-                dataRepository.AddPlayer(DATA_ROOT, tup.Item2, tup.Item1);
+                scoreBoard.AddPlayer(tup.Item2, tup.Item1);
             }
 
             IList<KeyValuePair<int, IList<string>>> highScores = scoreBoard.GetHighScores(MediatorExtensions.NUMBER_OF_SHOWED_SCORES);
