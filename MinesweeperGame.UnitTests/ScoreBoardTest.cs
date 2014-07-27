@@ -57,16 +57,8 @@ namespace MinesweeperGame.UnitTests
         [TestMethod]
         public void Add1PersonWithValidNameAndScore()
         {
-            // remove all test and get all test
-            dataRepository.EmptyFile(this.FILE_PATH);
-      
-            var scoreBoardClass = new ScoreBoard(this.FILE_PATH);
+            var scoreBoardClass = this.GetScoreBoard();
             scoreBoardClass.AddPlayer("John", 10);
-
-            foreach (var tup in this.playersList)
-            {
-                scoreBoardClass.AddPlayer(tup.Item2, tup.Item1);
-            }
 
             var scores = scoreBoardClass.GetHighScores(1);
             bool result = (scores.Count == 1 ) && (scores[0].Key == 10) && (scores[0].Value[0] == "John");
@@ -76,10 +68,7 @@ namespace MinesweeperGame.UnitTests
         [TestMethod]
         public void Add2PeopleWithDifferentNamesAndSameScores()
         {
-            // remove all test and get all test
-            dataRepository.EmptyFile(this.FILE_PATH);
-
-            var scoreBoardClass = new ScoreBoard(this.FILE_PATH);
+            var scoreBoardClass = this.GetScoreBoard();
             scoreBoardClass.AddPlayer("John", 10);
             scoreBoardClass.AddPlayer("Pesho", 10);
 
@@ -91,24 +80,18 @@ namespace MinesweeperGame.UnitTests
         [TestMethod]
         public void Add2PeopleWithSameNamesAndSameScores()
         {
-            // remove all test and get all test
-            dataRepository.EmptyFile(this.FILE_PATH);
-
-            var scoreBoardClass = new ScoreBoard(this.FILE_PATH);
+            var scoreBoardClass = this.GetScoreBoard();
             scoreBoardClass.AddPlayer("John", 10);
             scoreBoardClass.AddPlayer("John", 10);
 
             var boardWithScores = scoreBoardClass.GetHighScores(1);
             Assert.IsTrue(boardWithScores.Count == 1);
-            Assert.IsTrue(boardWithScores[0].Value.Count == 2);
+            Assert.IsTrue(boardWithScores[0].Value.Count == 1);
         }
 
         [TestMethod]
         public void Add2PeopleWithSameNamesAndDifferentScores()
         {
-            // remove all test and get all test
-            dataRepository.EmptyFile(this.FILE_PATH);
-
             var scoreBoardClass = new ScoreBoard(this.FILE_PATH);
             scoreBoardClass.AddPlayer("John", 10);
             scoreBoardClass.AddPlayer("John", 20);
@@ -131,7 +114,7 @@ namespace MinesweeperGame.UnitTests
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void GetHighScoresWithNegativeCount()
         {
-            var scoreBoardClass = new ScoreBoard(this.FILE_PATH);
+            var scoreBoardClass = this.GetScoreBoard();
             int count = -1;
             scoreBoardClass.GetHighScores(count);
         }
@@ -139,13 +122,10 @@ namespace MinesweeperGame.UnitTests
         [TestMethod]
         public void GetHighScoresWith1Person()
         {
-            // remove all test and get all test
-            dataRepository.EmptyFile(this.FILE_PATH);
-
-            var scoreBoardClass = new ScoreBoard(this.FILE_PATH);
+            var scoreBoardClass = this.GetScoreBoard();
             scoreBoardClass.AddPlayer("John", 20);
 
-            var hightScores = scoreBoardClass.GetHighScores(scoreBoardClass.board.Count);
+            var hightScores = scoreBoardClass.GetHighScores(100);
 
             Assert.IsTrue(hightScores[0].Key == 20);
             Assert.IsTrue(hightScores[0].Value[0] == "John");
@@ -154,15 +134,12 @@ namespace MinesweeperGame.UnitTests
         [TestMethod]
         public void GetHighScoresWith3PeopleWithDifferentNames()
         {
-            // remove all test and get all test
-            dataRepository.EmptyFile(this.FILE_PATH);
-
-            var scoreBoardClass = new ScoreBoard(this.FILE_PATH);
+            var scoreBoardClass = this.GetScoreBoard();
             scoreBoardClass.AddPlayer("John", 10);
             scoreBoardClass.AddPlayer("Pesho", 20);
             scoreBoardClass.AddPlayer("Gosho", 15);
 
-            var hightScores = scoreBoardClass.GetHighScores(scoreBoardClass.board.Count);
+            var hightScores = scoreBoardClass.GetHighScores(100);
 
             Assert.IsTrue(hightScores[0].Key == 20);
             Assert.IsTrue(hightScores[0].Value[0] == "Pesho");
@@ -175,15 +152,12 @@ namespace MinesweeperGame.UnitTests
         [TestMethod]
         public void GetHighScoresWith3PeopleWithSameNames()
         {
-            // remove all test and get all test
-            dataRepository.EmptyFile(this.FILE_PATH);
-
-            var scoreBoardClass = new ScoreBoard(this.FILE_PATH);
+            var scoreBoardClass = this.GetScoreBoard();
             scoreBoardClass.AddPlayer("John", 10);
             scoreBoardClass.AddPlayer("John", 20);
             scoreBoardClass.AddPlayer("John", 15);
 
-            var hightScores = scoreBoardClass.GetHighScores(scoreBoardClass.board.Count);
+            var hightScores = scoreBoardClass.GetHighScores(100);
 
             Assert.IsTrue(hightScores[0].Key == 20);
             Assert.IsTrue(hightScores[0].Value[0] == "John");
@@ -196,15 +170,12 @@ namespace MinesweeperGame.UnitTests
         [TestMethod]
         public void GetHighScoresWith3PeopleWithSameScores()
         {
-            // remove all test and get all test
-            dataRepository.EmptyFile(this.FILE_PATH);
-
-            var scoreBoardClass = new ScoreBoard(this.FILE_PATH);
+            var scoreBoardClass = this.GetScoreBoard();
             scoreBoardClass.AddPlayer("John", 10);
             scoreBoardClass.AddPlayer("Gosho", 10);
             scoreBoardClass.AddPlayer("Pesho", 10);
 
-            var hightScores = scoreBoardClass.GetHighScores(scoreBoardClass.board.Count);
+            var hightScores = scoreBoardClass.GetHighScores(100);
 
             Assert.IsTrue(hightScores[0].Key == 10);
             Assert.IsTrue(hightScores[0].Value[0] == "Gosho");
