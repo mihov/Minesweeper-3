@@ -11,12 +11,13 @@ namespace MinesweeperGame.UnitTests
     [TestClass]
     public class RepositoryTest
     {
+        private const string DATA_ROOT = @"..\..\players.xml";
+
         [Timeout(1000)]
         [TestMethod]
         public void AllRepositoryMethodsTest()
         {
             Repository dataRepository = new Repository();
-            var DATA_ROOT = "..\\..\\..\\MinesweeperGame.Demo\\players.xml";
 
             var playersList = new List<Tuple<int, string>>
             {
@@ -37,18 +38,19 @@ namespace MinesweeperGame.UnitTests
             // add player test and get all test
             foreach (var tup in playersList)
             {
-                dataRepository.AddPlayer(DATA_ROOT, tup.Item2, tup.Item1);
+                scoreBoard1.Add(tup.Item1, tup.Item2);
             }
+
+            dataRepository.StorePlayers(DATA_ROOT, scoreBoard1);
             var scoreBoard2 = dataRepository.GetPlayers(DATA_ROOT);
             Assert.AreEqual(playersList.Count, scoreBoard2.Count);
         }
 
-        [Timeout(1000)]
+        //[Timeout(1000)]
         [TestMethod]
         public void BigDataTest()
         {
             Repository dataRepository = new Repository();
-            var DATA_ROOT = "..\\..\\..\\MinesweeperGame.Demo\\players.xml";
 
             var playersList = new List<Tuple<int, string>>
             {
@@ -61,7 +63,6 @@ namespace MinesweeperGame.UnitTests
                 new Tuple<int, string>(7, "Ivelin Stanchev")
             };
             var cycleLength = 10;
-            var totalLength = cycleLength * playersList.Count;
 
             // remove all test and get all test
             dataRepository.EmptyFile(DATA_ROOT);
@@ -74,11 +75,13 @@ namespace MinesweeperGame.UnitTests
                 // add player test and get all test
                 foreach (var tup in playersList)
                 {
-                    dataRepository.AddPlayer(DATA_ROOT, tup.Item2, tup.Item1);
+                    scoreBoard1.Add(tup.Item1, tup.Item2);
                 }
             }
+
+            dataRepository.StorePlayers(DATA_ROOT, scoreBoard1);
             var scoreBoard2 = dataRepository.GetPlayers(DATA_ROOT);
-            Assert.AreEqual(totalLength, scoreBoard2.KeyValuePairs.Count);
+            Assert.AreEqual(playersList.Count, scoreBoard2.KeyValuePairs.Count);
         }
     }
 }
