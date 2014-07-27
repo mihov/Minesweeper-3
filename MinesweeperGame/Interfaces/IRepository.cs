@@ -16,12 +16,11 @@ namespace MinesweeperGame.Interfaces
         OrderedMultiDictionary<int, string> GetPlayers(string playerStoreDocumentPath);
 
         /// <summary>
-        /// Represents the interface method of adding a player in the DB file
+        /// Stores the scores to a file.
         /// </summary>
-        /// <param name="documenPath">File path</param>
-        /// <param name="name">Player name</param>
-        /// <param name="points">Player points</param>
-        void AddPlayer(string documenPath, string name, int points);
+        /// <param name="playerStoreDocumentPath">File path.</param>
+        /// <param name="scores">High scores.</param>
+        void StorePlayers(string playerStoreDocumentPath, OrderedMultiDictionary<int, string> scores);
 
         /// <summary>
         /// Deletes the players in the DB file
