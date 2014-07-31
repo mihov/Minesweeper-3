@@ -50,7 +50,7 @@ In order to ensure the high quality of the assigned project you need to fulfill 
 
 * **Each team member** should have contributions to the project and **commits in the source control repository in 3 different days**. We acknowledge that this requirement seems a bit unnatural, but we want to track **how the team collaborates over the time** and that the **project is developed incrementally**, not in the “last minute”.
 
-##Other Requirements
+###Other Requirements
 
 * Pack the project deliverables in a **single ZIP archive**. Be sure to avoid including large unused files in the archives (e.g. compilation binaries). Your archive should be up to 8 MB. Each team member should submit the same archive as a homework.
 
