@@ -20,11 +20,11 @@ In order to ensure the high quality of the assigned project you need to fulfill 
 
 **2. Implement design patterns** – redesign the project to fulfil 6 of the [Software Design patterns](http://en.wikipedia.org/wiki/Software_design_pattern)
 
-    * **Structural patterns** – implement at least 2 of the structural design patterns (adapter, aggregate, bridge, composite, decorator, extensibility, façade, etc…)
+ * **Structural patterns** – implement at least 2 of the structural design patterns (adapter, aggregate, bridge, composite, decorator, extensibility, façade, etc…)
 
-    * **Behavior patterns** – implement at least 2 of the behavioral design patterns (chain of responsibility, command, interpreter, iterator, mediator, observer, etc…)
+ * **Behavior patterns** – implement at least 2 of the behavioral design patterns (chain of responsibility, command, interpreter, iterator, mediator, observer, etc…)
 
-    * **Creational patterns** – implement at least 2 of the creational design patterns (abstract factory, builder, factory method, singleton, prototype, etc…)
+ * **Creational patterns** – implement at least 2 of the creational design patterns (abstract factory, builder, factory method, singleton, prototype, etc…)
 
 **3. Follow the SOLID and DRY principles** – Single responsibility, Open/close, Liskov substitution, Interface segregation, Dependency inversion, Don't repeat yourself
 
